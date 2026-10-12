@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<title>春淑秋冬賞楓跨年85日郊遊行・逐日行程</title>
+<style>
+  :root{
+    box-sizing:border-box;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+    --paper:#e2946b;
+    --paper-raised:#fffdf8;
+    --ink:#242220;
+    --ink-soft:#6b665e;
+    --line:#ddd6c6;
+    --stage-0:#f2c9a1;   /* 淺赤陶・初段 */
+    --stage-1:#e8a877;   /* 赤陶橘（跟底色錯開） */
+    --stage-2:#d4854f;   /* 中段過渡 */
+    --stage-3:#bb5c37;   /* 深赤陶（跟按鈕色錯開） */
+    --stage-4:#8a3c26;   /* 焦赤陶・最深段 */
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px);background:#e2946b;}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:"Noto Sans TC","Microsoft JhengHei UI","PingFang TC",sans-serif;
+    line-height:1.55;-webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:520px;margin:0 auto;padding:0 0 60px;}
+
+  /* ---- sticky masthead ---- */
+  .masthead{
+    position:sticky;top:env(safe-area-inset-top,0px);z-index:30;
+    background:var(--paper);color:var(--ink);
+    padding:16px 20px 12px;
+    border-bottom:1px solid var(--line);
+  }
+  .masthead::before, .masthead::after{
+    content:'';position:absolute;top:9px;width:13px;height:13px;
+    border-top:1px solid var(--stage-4);opacity:.55;
+  }
+  .masthead::before{left:9px;border-left:1px solid var(--stage-4);}
+  .masthead::after{right:9px;border-right:1px solid var(--stage-4);}
+  .masthead__leaf{
+    position:absolute;top:14px;right:22px;width:34px;height:34px;
+    color:var(--stage-4);opacity:.16;transform:rotate(12deg);pointer-events:none;
+  }
+
+  .masthead__toprow{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;}
+  .masthead__grid{
+    display:grid;grid-template-columns:1fr 128px;column-gap:10px;align-items:start;
+  }
+  .masthead__eyebrow{
+    grid-column:1;grid-row:1;
+    font-family:"Noto Serif TC",serif;font-style:italic;font-weight:500;
+    font-size:11px;color:var(--paper-raised);letter-spacing:.04em;
+    margin-top:4px;
+  }
+  .ticketinfo{
+    display:flex;gap:12px;flex:none;
+    padding-left:12px;border-left:1px dashed var(--ink-soft);
+  }
+  .ticketinfo__item{display:flex;flex-direction:column;align-items:flex-start;line-height:1.15;}
+  .ti-lbl{font-size:8px;letter-spacing:.09em;color:var(--ink-soft);text-transform:uppercase;}
+  .ti-val{font-family:"Noto Serif TC",serif;font-weight:700;font-size:13.5px;color:var(--ink);white-space:nowrap;}
+  .ti-val.accent{color:#cc6341;font-size:15px;}
+
+  .masthead__ticketcol{
+    grid-column:2;grid-row:1 / span 2;
+    display:flex;flex-direction:column;align-items:flex-end;gap:5px;
+  }
+
+  .masthead__titlewrap{
+    grid-column:1;grid-row:2;
+    display:flex;flex-direction:column;align-items:flex-start;margin-top:2px;
+  }
+  .masthead__title{
+    font-family:"Noto Serif TC",serif;font-weight:700;font-size:22px;
+    margin:0;color:var(--ink);text-align:left;white-space:nowrap;
+  }
+
+  .masthead__range{
+    font-size:10px;color:var(--paper-raised);white-space:nowrap;
+  }
+
+  .masthead__seam{
+    display:flex;align-items:center;margin:12px -20px 0;padding:0 20px;
+  }
+  .masthead__seam::before{
+    content:'';flex:1;height:0;border-top:1px dashed rgba(36,34,32,.3);
+  }
+
+
+  .badges-cap{
+    font-size:8px;letter-spacing:.06em;color:var(--ink-soft);
+    padding:10px 0 0;
+  }
+  .badges{display:flex;flex-wrap:wrap;gap:6px 14px;padding:5px 0 0;}
+  .badge{
+    font-size:12px;padding:0 0 4px;border-radius:0;
+    border:none;border-bottom:1.5px solid transparent;background:none;
+    color:var(--ink-soft);text-decoration:none;font-weight:500;
+  }
+  .badge:active{color:var(--ink);border-bottom-color:var(--ink-soft);}
+
+  .summary{
+    margin:10px 18px 0;padding:9px 12px;border-top:1px solid var(--line);
+    display:flex;justify-content:space-between;gap:8px;
+  }
+  .summary div{text-align:center;flex:1;}
+  .summary .num{display:block;font-family:"Noto Serif TC",serif;font-weight:700;font-size:14px;}
+  .summary .lbl{display:block;font-size:10px;color:var(--ink-soft);margin-top:1px;}
+  .summary .sep{width:1px;background:var(--line);}
+
+  .month-head{
+    margin:22px 18px 8px;font-family:"Noto Serif TC",serif;font-weight:700;
+    font-size:15px;color:var(--ink-soft);
+    scroll-margin-top:400px;
+  }
+
+  /* ---- day row ---- */
+  .day{
+    margin:0 12px 8px;border:1px solid var(--line);border-left-width:5px;
+    border-radius:8px;background:var(--paper-raised);overflow:hidden;
+    scroll-margin-top:400px;
+  }
+  .day.is-today{box-shadow:0 0 0 2px var(--ink) inset;}
+  .day.is-past{opacity:.5;background:var(--paper);}
+  .day--special{
+    background:#f3ede0;border-left-width:6px !important;
+    border-left-color:#cc6341 !important;border-color:#e3d3b0;
+  }
+  .day--special .day__loc{color:#cc6341;}
+  .day.is-past .day__loc, .day.is-past .day__date .d{color:var(--ink-soft);}
+  .day__row{
+    display:flex;align-items:center;gap:12px;padding:12px 14px;cursor:pointer;
+    user-select:none;
+  }
+  .day__date{flex:none;width:52px;text-align:center;}
+  .day__date .d{font-family:"Noto Serif TC",serif;font-weight:700;font-size:18px;display:block;line-height:1.1;}
+  .day__date--range{width:auto !important;}
+  .day__date--range .d{font-size:15px;white-space:nowrap;}
+  .day__date .w{font-size:10.5px;color:var(--ink-soft);}
+  .day__mid{flex:1;min-width:0;}
+  .day__loc{font-size:14px;font-weight:500;}
+  .day__preview{
+    font-size:12px;color:var(--ink-soft);white-space:nowrap;overflow:hidden;
+    text-overflow:ellipsis;margin-top:1px;
+  }
+  .day__star{flex:none;font-size:11px;color:var(--stage-3);}
+  .day__flight{flex:none;font-size:14px;}
+  .day__chev{flex:none;font-size:14px;color:var(--ink-soft);transition:transform .25s;}
+  .day.open .day__chev{transform:rotate(180deg);}
+  .day__panel{max-height:0;overflow:hidden;transition:max-height .3s ease;border-top:1px dashed var(--line);}
+  .day.open .day__panel{max-height:980px;}
+  .day__panel-inner{padding:14px;}
+  .flightbox{
+    margin-bottom:14px;padding:12px;border-radius:8px;
+    background:var(--ink);color:var(--paper-raised);
+  }
+  .flightbox .flabel{
+    font-size:12px;font-weight:700;margin-bottom:8px;
+    display:flex;align-items:center;gap:6px;
+  }
+  .flightbox textarea{
+    width:100%;min-height:52px;resize:vertical;font-family:inherit;font-size:13px;
+    background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.25);border-radius:6px;
+    padding:8px 9px;color:var(--paper-raised);
+  }
+  .flightbox textarea::placeholder{color:rgba(255,253,248,.5);}
+  .flightbox textarea:focus{outline:2px solid var(--stage-1);outline-offset:1px;}
+  .flightfixed{font-size:12.5px;line-height:1.6;}
+  .flightfixed .ff-route{font-weight:700;font-size:13px;margin-bottom:3px;opacity:.9;}
+  .flightfixed .ff-time{font-family:"Noto Serif TC",serif;font-weight:700;font-size:19px;margin-bottom:3px;}
+  .flightfixed .ff-row{display:flex;justify-content:space-between;font-size:11.5px;opacity:.85;}
+
+  .hotelbox{
+    margin-bottom:14px;padding:14px;border-radius:10px;
+    background:#f3ede0;border:1px solid var(--line);
+  }
+  .hotelbox .flabel{font-size:12.5px;font-weight:700;margin-bottom:8px;color:var(--ink-soft);}
+  .hb-name{font-family:"Noto Serif TC",serif;font-weight:700;font-size:16px;margin-bottom:6px;}
+  .hb-row{font-size:14px;line-height:1.7;}
+  .hb-row a{color:#cc6341;font-weight:700;text-decoration:underline;}
+  .hb-sub{font-size:12.5px;color:var(--ink-soft);margin:0 0 4px 20px;}
+  .hb-amenities{display:flex;gap:8px;margin:6px 0;flex-wrap:wrap;}
+  .hb-chip{font-size:12.5px;background:var(--paper-raised);border:1px solid var(--line);border-radius:99px;padding:4px 10px;}
+
+  .tr-step{
+    font-size:14px;line-height:1.6;padding:7px 0;
+    border-bottom:1px dashed var(--line);
+  }
+  .tr-step:last-child{border-bottom:none;padding-bottom:0;}
+  .tr-step:first-child{padding-top:0;}
+
+  .section-h{
+    font-size:11.5px;font-weight:700;letter-spacing:.1em;color:#cc6341;
+    margin:16px 0 8px;padding-top:14px;border-top:1px dashed var(--line);
+  }
+  .section-h--first{margin-top:0;padding-top:0;border-top:none;}
+
+  .weatherbox{
+    display:flex;align-items:center;gap:10px;margin-bottom:14px;
+    padding:5px 0 0;
+  }
+  .foliage-link, .weather-link{
+    display:inline-flex;align-items:center;gap:4px;margin:0 14px 12px 0;
+    font-size:12px;color:var(--ink-soft);text-decoration:none;
+    padding:0 0 3px;border:none;border-bottom:1px solid var(--line);background:none;
+  }
+  .foliage-link:active, .weather-link:active{color:var(--ink);border-bottom-color:var(--ink-soft);}
+  .day__suggest{font-size:13.5px;margin-bottom:14px;color:#3c3a34;}
+  .field{margin-bottom:10px;}
+  .field label{display:block;font-size:11px;color:var(--ink-soft);margin-bottom:4px;}
+  .field textarea{
+    width:100%;min-height:42px;resize:vertical;font-family:inherit;font-size:13px;
+    background:var(--paper);border:1px solid var(--line);border-radius:6px;
+    padding:7px 9px;color:var(--ink);
+  }
+  .field input[type=number]{
+    width:100%;font-family:inherit;font-size:13px;
+    background:var(--paper);border:1px solid var(--line);border-radius:6px;
+    padding:7px 9px;color:var(--ink);
+  }
+  .field textarea:focus, .field input:focus{outline:2px solid var(--ink);outline-offset:1px;}
+  .field textarea::placeholder, .field input::placeholder{color:#a8a296;}
+  .navbtn{
+    display:inline-flex;align-items:center;gap:4px;margin-top:5px;
+    font-size:12px;color:var(--ink-soft);text-decoration:none;
+    padding:0 0 3px;border:none;border-bottom:1px solid var(--line);background:none;
+  }
+  .navbtn:active{color:var(--ink);border-bottom-color:var(--ink-soft);}
+  .cost-row{display:flex;gap:10px;}
+  .cost-row .field{flex:1;}
+  .save-hint{font-size:10.5px;color:var(--ink-soft);height:13px;opacity:0;transition:opacity .3s;}
+  .save-hint.show{opacity:1;}
+
+  .footer-note{margin:32px 18px 0;font-size:11.5px;color:var(--ink-soft);padding-top:16px;border-top:1px solid var(--line);}
+
+  /* ---- sticky-extra blocks nested inside the masthead: strip the horizontal
+         spacing that assumed top-level page padding, keep vertical rhythm ---- */
+  .masthead .badges{padding:0;}
+  .masthead .summary{margin:8px 0 0;}
+  .masthead .ledger-dash{margin:8px 0 0;}
+  .sticky-extra{margin-bottom:0;}
+
+  /* ---- tabs: filled pill, sitting comfortably inside the masthead ---- */
+  .tabnav{
+    display:flex;justify-content:center;
+    margin:14px 0 2px;
+  }
+  .tabnav-pill{
+    display:flex;gap:2px;background:rgba(36,34,32,.06);border-radius:99px;
+    padding:3px;
+  }
+  .tab-btn{
+    padding:7px 20px;border-radius:99px;border:none;
+    background:none;color:var(--ink-soft);font-size:12.5px;font-weight:600;
+    font-family:inherit;cursor:pointer;
+  }
+  .tab-btn.active{background:#cc6341;color:var(--paper-raised);}
+  .tabview{display:none;}
+  .tabview.active{display:block;}
+
+  /* ---- ledger ---- */
+  .ledger-dash{
+    display:flex;gap:10px;margin:16px 18px 0;
+  }
+  .ledger-dash .card{
+    flex:1;padding:14px;border-radius:10px;background:var(--paper-raised);
+    border:1px solid var(--line);text-align:center;
+  }
+  .ledger-dash .card .num{font-family:"Noto Serif TC",serif;font-weight:700;font-size:19px;}
+  .ledger-dash .card .lbl{font-size:11px;color:var(--ink-soft);margin-top:3px;}
+
+  .scan-area{margin:14px 18px 0;}
+  .scan-btn{
+    display:flex;align-items:center;justify-content:center;gap:7px;width:100%;
+    padding:10px;border-radius:8px;border:1.5px solid #cc6341;
+    background:none;color:#cc6341;
+    font-size:13.5px;font-weight:700;font-family:inherit;cursor:pointer;
+  }
+  .scan-btn:active{background:rgba(204,99,65,.08);}
+  .scan-manual{
+    display:block;text-align:center;margin-top:6px;font-size:12px;
+    color:var(--ink-soft);text-decoration:underline;background:none;border:none;
+    font-family:inherit;cursor:pointer;width:100%;padding:5px;
+  }
+
+  .ledger-status{margin:12px 18px 0;font-size:13px;color:var(--ink-soft);text-align:center;}
+
+  .confirm-card{
+    margin:14px 18px 0;padding:14px;border-radius:10px;
+    background:var(--paper-raised);border:1px solid var(--line);
+  }
+  .confirm-card h3{font-family:"Noto Serif TC",serif;font-size:14px;margin:0 0 10px;}
+  .cfield{margin-bottom:9px;}
+  .cfield label{display:block;font-size:11px;color:var(--ink-soft);margin-bottom:3px;}
+  .cfield input, .cfield textarea, .cfield select{
+    width:100%;font-family:inherit;font-size:13px;color:var(--ink);
+    background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:6px 8px;
+  }
+  .cfield textarea{min-height:56px;resize:vertical;}
+  .confirm-actions{display:flex;gap:8px;margin-top:12px;}
+  .confirm-actions button{
+    flex:1;padding:8px;border-radius:7px;font-size:13px;font-weight:600;
+    font-family:inherit;cursor:pointer;border:none;
+  }
+  .btn-save{background:#cc6341;color:var(--paper-raised);}
+  .btn-cancel{background:var(--paper);border:1px solid var(--line) !important;color:var(--ink-soft);}
+
+  .receipt-list{margin:20px 18px 0;}
+  .lday{margin-bottom:8px;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--paper-raised);}
+  .lday__head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;}
+  .lday__date{font-size:11.5px;color:var(--ink-soft);}
+  .lday__loc{font-size:12.5px;font-weight:600;margin-left:6px;}
+  .lday__sub{font-family:"Noto Serif TC",serif;font-weight:700;font-size:13px;color:#cc6341;}
+  .lday__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;}
+  .lday__grid div{display:flex;flex-direction:column;gap:2px;}
+  .lday__grid label{font-size:9.5px;color:var(--ink-soft);}
+  .lday__grid input{
+    width:100%;font-family:inherit;font-size:12px;color:var(--ink);
+    background:var(--paper);border:1px solid var(--line);border-radius:5px;padding:5px 4px;
+  }
+  .receipt-list h3{font-family:"Noto Serif TC",serif;font-size:14px;color:var(--ink-soft);margin:0 0 10px;}
+  .receipt-item{
+    display:flex;justify-content:space-between;align-items:center;gap:10px;
+    padding:11px 13px;border:1px solid var(--line);border-radius:8px;
+    background:var(--paper-raised);margin-bottom:8px;
+  }
+  .receipt-item .ri-main{min-width:0;}
+  .receipt-item .ri-store{font-size:13.5px;font-weight:500;}
+  .receipt-item .ri-meta{font-size:11px;color:var(--ink-soft);margin-top:2px;}
+  .receipt-item .ri-amount{font-family:"Noto Serif TC",serif;font-weight:700;font-size:14px;flex:none;}
+  .receipt-item .ri-del{
+    flex:none;background:none;border:none;color:var(--ink-soft);font-size:16px;
+    cursor:pointer;padding:4px;
+  }
+  .empty-hint{margin:20px 18px 0;font-size:12.5px;color:var(--ink-soft);text-align:center;padding:20px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="masthead">
+    <svg class="masthead__leaf" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3">
+      <path d="M50 8 L58 33 L82 24 L64 46 L90 56 L63 58 L70 84 L50 63 L30 84 L37 58 L10 56 L36 46 L18 24 L42 33 Z"/>
+    </svg>
+    <div class="masthead__grid">
+      <div class="masthead__eyebrow">春淑、秋冬を巡るひとり旅</div>
+      <div class="masthead__ticketcol">
+        <div class="ticketinfo" id="dayCounter">
+          <div class="ticketinfo__item">
+            <span class="ti-lbl">本日</span>
+            <span class="ti-val" id="tiToday">–</span>
+          </div>
+          <div class="ticketinfo__item">
+            <span class="ti-lbl" id="tiLabel2">出発まで</span>
+            <span class="ti-val accent" id="tiValue2">–</span>
+          </div>
+        </div>
+        <div class="masthead__range">旅行期間：10/15 – 1/7</div>
+      </div>
+      <div class="masthead__titlewrap">
+        <h1 class="masthead__title">春淑秋冬賞楓跨年85日郊遊行</h1>
+      </div>
+    </div>
+
+    <div class="masthead__seam"></div>
+
+    <div class="tabnav">
+      <div class="tabnav-pill">
+        <button class="tab-btn active" data-tab="itinerary">行程</button>
+        <button class="tab-btn" data-tab="ledger">記帳</button>
+        <button class="tab-btn" data-tab="tickets">新幹線取票</button>
+      </div>
+    </div>
+
+    <div class="masthead__seam"></div>
+
+    <div id="sticky-itinerary-extra" class="sticky-extra">
+      <div class="badges-cap">旅行路線・旅のルート</div>
+      <div class="badges" id="badges">
+        <a class="badge" data-target="2026-10-15">青森</a>
+        <a class="badge" data-target="2026-10-17">奧入瀨</a>
+        <a class="badge" data-target="2026-10-18">十和田</a>
+        <a class="badge" data-target="2026-10-20">秋田</a>
+        <a class="badge" data-target="2026-10-22">田澤湖</a>
+        <a class="badge" data-target="2026-10-24">角館</a>
+        <a class="badge" data-target="2026-10-26">大宮</a>
+        <a class="badge" data-target="2026-10-29">松本</a>
+        <a class="badge" data-target="2026-11-02">長野</a>
+        <a class="badge" data-target="2026-11-08">伊那</a>
+        <a class="badge" data-target="2026-11-10">馬籠</a>
+        <a class="badge" data-target="2026-11-14">滋賀・京都</a>
+      </div>
+    </div>
+
+    <div id="sticky-ledger-extra" class="sticky-extra" style="display:none">
+      <div class="ledger-dash">
+        <div class="card"><span class="num" id="ledgerToday">¥0</span><span class="lbl">今日花費</span></div>
+        <div class="card"><span class="num" id="ledgerTotal">¥0</span><span class="lbl">旅程累計</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="view-itinerary" class="tabview active">
+
+  <div id="list"></div>
+
+  <div class="footer-note">
+    點每一天可以展開看當天建議行程，填住宿／交通／備註跟花費，內容會自動存檔。上面的地名標籤可以直接點過去、快速跳到那一段。金額預設是新台幣，也可以直接當日幣記，自己知道單位就好。京都長住期間的行程是空白的，可以自己排。
+  </div>
+
+  </div>
+
+  <div id="view-ledger" class="tabview">
+
+    <div class="scan-area">
+      <button class="scan-btn" id="scanBtn">📷　掃描收據</button>
+      <input type="file" id="receiptInput" accept="image/*" capture="environment" style="display:none">
+      <button class="scan-manual" id="manualBtn">或手動輸入一筆</button>
+    </div>
+
+    <div class="ledger-status" id="ledgerStatus"></div>
+
+    <div id="confirmArea"></div>
+
+    <div class="receipt-list">
+      <h3>消費紀錄</h3>
+      <div id="receiptListInner"></div>
+    </div>
+
+    <div class="receipt-list">
+      <h3>逐日花費</h3>
+      <div id="ledgerDays"></div>
+    </div>
+
+  </div>
+
+  <div id="view-tickets" class="tabview">
+    <div class="scan-area">
+      <button class="scan-btn" id="ticketAddBtn">📎　加入車票 QR code</button>
+      <input type="file" id="ticketInput" accept="image/*" multiple style="display:none">
+    </div>
+    <div class="ledger-status" id="ticketStatus"></div>
+    <div class="receipt-list">
+      <h3>所有車票（點圖片可以放大掃碼）</h3>
+      <div id="ticketListInner"></div>
+    </div>
+  </div>
+
+  <div id="ticketLightbox" style="display:none;position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.85);align-items:center;justify-content:center;">
+    <img id="ticketLightboxImg" style="max-width:92vw;max-height:80vh;background:#fff;border-radius:8px;">
+  </div>
+
+</div>
+
+<script>
+// ---- 儲存：用瀏覽器 localStorage（存在各自的手機/瀏覽器裡） ----
+const store = {
+  async get(k){ let v=null; try{ v=localStorage.getItem(k); }catch(e){} if(v===null) throw new Error('not found'); return {key:k,value:v}; },
+  async set(k,v){ localStorage.setItem(k,v); return {key:k,value:v}; },
+  async delete(k){ try{ localStorage.removeItem(k); }catch(e){} return {key:k,deleted:true}; },
+  async list(prefix){ const keys=[]; try{ for(let i=0;i<localStorage.length;i++){ const k=localStorage.key(i); if(k && k.indexOf(prefix||'')===0) keys.push(k); } }catch(e){} return {keys}; }
+};
+const WD = ['日','一','二','三','四','五','六'];
+
+const DAYS = [
+  {d:'2026-10-15', loc:'青森', star:false, flight:true, flightInfo:{route:'桃園 TPE → 青森 AOJ', no:'長榮 BR122', time:'09:55 – 14:20', dur:'直飛・3小時25分', pnr:'F8FZGM'}, hotel:{name:'日航 Hotel JAL City Aomori', phone:'017-732-2580', address:'桃園→青森，抵達後青森市區逛逛。', transportInfo:'青森空港線（青森駅行）→ 県庁通り［青森］｜交通IC可\n🚶 步行約2分鐘抵達飯店', transport:'青森駅徒歩6分', amenities:['早餐'], price:'26,993円（約NT$5,530）', priceTWD:5530}, s:'桃園→青森，抵達後青森市區逛逛。'},
+  {d:'2026-10-16', loc:'十和田・三澤', star:false, s:'十和田市現代美術館→青森屋。', transportInfo:'💴 11:49 青森站 → 13:12 三澤站｜青森鐵道「普通・八戶行」\n🚕 三澤站 → 青森屋｜計程車約5分鐘', hotel:{name:'青森屋 by 星野リゾート', phone:'050-3134-8094', address:'青森縣三澤市古間木山56', transport:'三澤站有接駁車（務必先預約）', amenities:['溫泉','早餐','晚餐']}},
+  {d:'2026-10-17', loc:'奧入瀨・十和田湖', star:true, s:'奧入瀨溪賞楓＋十和田湖，移往十和田湖畔住宿。', hotel:{name:'青森屋 by 星野リゾート', phone:'050-3134-8094', address:'青森縣三澤市古間木山56', transport:'接駁車記得預約', amenities:['溫泉','早餐','晚餐']}},
+  {d:'2026-10-18', loc:'十和田湖', star:false, s:'十和田湖周邊，遊覽船、休屋散策。 補充：蕪島神社、種差海岸、十和田美術館、十和田附近走逛', transportInfo:'🚗 豬排店老闆接駁', hotel:{name:'十和田莊 Hotel Towadaso', phone:'0176-75-2221', address:'青森県十和田市十和田湖畔休屋340', transport:'八戶駅西口搭JR巴士（需預約）→十和田湖巴士站徒歩5分', amenities:['溫泉','早餐','晚餐'], price:'33,088円（約NT$6,780）', priceTWD:6780}},
+  {d:'2026-10-19', loc:'十和田湖', star:false, s:'八甲田山搭乘纜車 補充：豬排店老闆伴遊', hotel:{name:'十和田莊 Hotel Towadaso', phone:'0176-75-2221', address:'青森県十和田市十和田湖畔休屋340', transport:'同上', amenities:['溫泉','早餐','晚餐'], price:'32,640円（約NT$6,690）', priceTWD:6690}},
+  {d:'2026-10-20', loc:'十和田湖→秋田', star:false, s:'秋田市區、千秋公園。 補充：豬排店老闆伴遊', transportInfo:'10:00 十和田湖（休屋）出發｜高速巴士「おいらせ22號」（免預約）\n12:20 抵達八戶站西口\n13:40 八戶站出發｜JR新幹線「隼號22號」（全車指定席）\n14:10 抵達盛岡站\n14:35 盛岡站出發｜JR新幹線「小町號23號」（全車指定席）\n16:08 抵達秋田站\n🚶 秋田站西口 → 飯店｜步行約5分鐘', hotel:{name:'大和 Daiwa Roynet Hotel Akita Ekimae', phone:'018-893-4577', address:'秋田縣秋田市中通2-3-20', transport:'秋田駅西口徒歩5分', amenities:['溫泉'], price:'31,500円（約NT$6,460）', priceTWD:6460}},
+  {d:'2026-10-21', loc:'秋田→男鹿一日遊', star:false, s:'11:15- 14:00 男鹿水族館 GAO 看北極熊桃太\n14:20-17:15 真山地區 | 生剝鬼館、男鹿真山傳承館 補充：豬排店老闆伴遊', transportInfo:'09:24 秋田站 → 10:16 男鹿站｜JR男鹿線（交通IC可）\n10:30 男鹿站 → 11:15 男鹿水族館GAO｜なまはげシャトル5號\n14:00 水族館GAO → 14:20 真山地區｜なまはげシャトル8號\n17:15 真山地區 → 17:40 男鹿站｜なまはげシャトル12號\n18:05 男鹿站 → 18:56 秋田站｜JR男鹿線（交通IC可）', noteInfo:'共乘計程車電話：0185-24-2100\n付現或刷卡', hotel:{name:'大和 Daiwa Roynet Hotel Akita Ekimae', phone:'018-893-4577', address:'秋田縣秋田市中通2-3-20', transport:'秋田駅西口徒歩5分', amenities:['溫泉']}},
+  {d:'2026-10-22', loc:'秋田→田澤湖', star:false, s:'秋田移至田澤湖 補充：可先打電話給鶴之湯預約明日乳頭溫泉鄉接駁；；電話：0187-46-2139', transportInfo:'11:07 秋田站 → 12:11 田澤湖站｜🔴 JR秋田新幹線「小町號18號」\n12:24 田澤湖站 → 13:01 杉谷地｜💳 羽後交通巴士「乳頭線」\n🚶 13:01 杉谷地 → 龜之井飯店田澤湖｜步行約2分鐘\n\n※若想先在田澤湖站附近用午餐，可改搭13:34發車的乳頭線（約每小時一班）。', noteInfo:'文芳13:50秋田機場回台', hotel:{name:'龜之井 Kamenoi Hotel 田沢湖', phone:'0187-46-2131', address:'秋田県仙北市田沢湖生保内駒ヶ岳2-32', transport:'田澤湖駅有免費接駁（需預約）', amenities:['溫泉','早餐','晚餐'], price:'36,996円（約NT$7,580）', priceTWD:7580}},
+  {d:'2026-10-23', loc:'田澤湖→乳頭鄉溫泉一日遊', star:false, s:'乳頭溫泉鄉散策、泡湯 補充：乳頭溫泉鄉最有名的 「鶴之湯」是擁有數百年歷史的山中秘湯，保留茅草屋與木造建築，最著名的是乳白色的露天溫泉，也是乳頭溫泉鄉最具代表性的景色。；；鶴之湯注意事項；- 日歸入浴時間：10:00～15:00；- 成人入浴費：約 700日圓；- 前往鶴之湯的店車需要事先聯絡；- 電話：0187-46-2139；；其他推薦溫泉：；蟹場溫泉｜森林露天池；休暇村乳頭溫泉鄉｜設施最舒服；妙乃湯｜有「金之湯、銀之湯」；日歸入浴：10:30～15:00，14:00停止受理', transportInfo:'09:20 杉谷地 → 09:30 妙乃湯溫泉／休暇村前｜💳 羽後交通巴士「乳頭線」\n🔴 鶴之湯接駁車｜須事先電話聯絡，並告知抵達アルパこまくさ的巴士時間', hotel:{name:'龜之井 Kamenoi Hotel 田沢湖', phone:'0187-46-2131', address:'秋田県仙北市田沢湖生保内駒ヶ岳2-32', transport:'乳頭鄉溫泉接駁需預約', amenities:['溫泉','早餐','晚餐']}},
+  {d:'2026-10-24', loc:'田澤湖→角館', star:false, s:'角館市區慢遊。', transportInfo:'12:04 杉谷地 → 12:43 田澤湖站｜💳 羽後交通巴士「乳頭線」\n13:11 田澤湖站 → 13:24 角館站｜🔴 JR秋田新幹線「小町號15號」\n🚕 角館站 → 住宿｜步行約10分鐘；有行李建議搭計程車', noteInfo:'1640', hotel:{name:'かくのだて温泉 町宿 ねこの鈴', phone:'（待補）', address:'（待補，角館站徒歩約10分鐘，建議搭計程車）', transport:'角館駅徒歩約10分鐘（建議搭計程車）', amenities:['溫泉','早餐'], price:''}},
+  {d:'2026-10-25', loc:'角館', star:false, s:'角館市區慢遊。', hotel:{name:'かくのだて温泉 町宿 ねこの鈴', phone:'（待補）', address:'（待補，鄰近有大眾浴場）', transport:'角館站徒歩約10分鐘', amenities:['溫泉','早餐']}},
+  {d:'2026-10-26', loc:'角館→大宮', star:false, s:'移動前往大宮（埼玉）。', transportInfo:'11:56 角館站 → 14:39 大宮站｜🔴 JR秋田新幹線「小町號18號」\n🚶 大宮站 → 飯店｜步行約7分鐘', noteInfo:'21460', hotel:{name:'光芒 Candeo Hotels Omiya', phone:'048-658-7300', address:'埼玉県さいたま市大宮区桜木町1-401-1', transport:'大宮駅西口徒歩6分', amenities:['溫泉'], price:'32,886円（約NT$6,740）', priceTWD:6740}},
+  {d:'2026-10-27', loc:'大宮', star:false, s:'大宮公園、冰川神社、盆栽村等。', hotel:{name:'光芒 Candeo Hotels Omiya', phone:'048-658-7300', address:'埼玉県さいたま市大宮区桜木町1-401-1', transport:'大宮駅西口徒歩6分', amenities:['溫泉']}},
+  {d:'2026-10-28', loc:'大宮', star:false, s:'移動前往松本（長野）。', hotel:{name:'光芒 Candeo Hotels Omiya', phone:'048-658-7300', address:'埼玉県さいたま市大宮区桜木町1-401-1', transport:'大宮駅西口徒歩6分', amenities:['溫泉']}},
+  {d:'2026-10-29', loc:'大宮→松本', star:false, s:'移動前往松本（長野）。', transportInfo:'12:13 大宮站 → 13:13 長野站｜🔴 JR北陸新幹線「白鷹561號」\n14:00 長野站 → 14:51 松本站｜🔴 JR特急「信濃16號」\n🚶 松本站 → 飯店｜步行約6分鐘', noteInfo:'6690+3370', hotel:{name:'松本M Hotel M Matsumoto', phone:'0263-87-4445', address:'長野県松本市深志1-3-11 コングロM6F', transport:'松本駅お城口徒歩3分', amenities:['溫泉'], price:'10,650円（約NT$2,180）', priceTWD:2180}},
+  {d:'2026-10-30', loc:'松本', star:false, s:'松本市區／淺間溫泉。', hotel:{name:'松本M Hotel M Matsumoto', phone:'0263-87-4445', address:'長野県松本市深志1-3-11 コングロM6F', transport:'松本駅お城口徒歩3分', amenities:['溫泉']}},
+  {d:'2026-10-31', loc:'松本', star:false, s:'上高地一日遊', transportInfo:'上高地交通方式 ¥3,100＋¥3,810\n去程\n08:01 松本站 → 08:31 新島島站｜💴 Alpico交通上高地線電車\n08:40 新島島站 → 09:45 上高地｜🔴 上高地線巴士(予約番号10022065431)\n\n回程\n16:00 上高地 → 16:55 新島島站｜🔴 上高地線巴士(予約番号10022065491)\n17:22 新島島站 → 17:51 松本站｜💴 Alpico交通上高地線電車', noteInfo:'有紙本預約證明', hotel:{name:'松本M Hotel M Matsumoto', phone:'0263-87-4445', address:'長野県松本市深志1-3-11 コングロM6F', transport:'松本駅お城口徒歩3分（中途換房間）', amenities:['溫泉'], price:'10,234円（約NT$2,100）', priceTWD:2100}},
+  {d:'2026-11-01', loc:'松本', star:false, s:'移動前往長野市（中途換房）。', hotel:{name:'松本M Hotel M Matsumoto', phone:'0263-87-4445', address:'長野県松本市深志1-3-11 コングロM6F', transport:'松本駅お城口徒歩3分', amenities:['溫泉']}},
+  {d:'2026-11-02', loc:'松本→長野', star:true, s:'移動前往長野市', transportInfo:'13:06 松本站 → 13:59 長野站｜🔴  JR特急「信濃9號」\n🚶 長野站 → Island Hotel｜步行約8分鐘', noteInfo:'3730', hotel:{name:'白馬天神の湯 Island Hotel', phone:'026-226-3388', address:'長野県長野市南千歳2-15-8', transport:'長野駅善光寺口徒歩5分', amenities:['溫泉'], price:'74,900円（約NT$15,350）', priceTWD:15350}},
+  {d:'2026-11-03', loc:'長野', star:false, s:'長野市區慢遊／小布施一日。', hotel:{name:'白馬天神の湯 Island Hotel', phone:'026-226-3388', address:'長野県長野市南千歳2-15-8', transport:'長野駅善光寺口徒歩5分', amenities:['溫泉']}},
+  {d:'2026-11-04', loc:'長野', star:false, s:'戶隱神社、鏡池、蕎麥麵。', hotel:{name:'白馬天神の湯 Island Hotel', phone:'026-226-3388', address:'長野県長野市南千歳2-15-8', transport:'長野駅善光寺口徒歩5分', amenities:['溫泉']}},
+  {d:'2026-11-05', loc:'長野', star:false, s:'善光寺＋長野市區。', hotel:{name:'白馬天神の湯 Island Hotel', phone:'026-226-3388', address:'長野県長野市南千歳2-15-8', transport:'長野駅善光寺口徒歩5分', amenities:['溫泉']}},
+  {d:'2026-11-06', loc:'長野', star:false, s:'長野周邊自由安排。', hotel:{name:'白馬天神の湯 Island Hotel', phone:'026-226-3388', address:'長野県長野市南千歳2-15-8', transport:'長野駅善光寺口徒歩5分', amenities:['溫泉']}},
+  {d:'2026-11-07', loc:'長野', star:false, s:'長野最後一天', hotel:{name:'白馬天神の湯 Island Hotel', phone:'026-226-3388', address:'長野県長野市南千歳2-15-8', transport:'長野駅善光寺口徒歩5分', amenities:['溫泉']}},
+  {d:'2026-11-08', loc:'長野→伊那', star:false, s:'伊那市區散策。', transportInfo:'12:00 長野站 → 13:01 鹽尻站｜JR特急「信濃12號」（建議先買特急券／劃位）\n13:11 鹽尻站 → 14:18 伊那市站｜💴 JR中央本線・飯田線普通車\n🚶 伊那市站 → Hotel Ina｜步行約3分鐘（250公尺）', hotel:{name:'Hotel Ina ホテル伊那', phone:'0265-96-7211', address:'長野県伊那市荒井3492-13', transport:'伊那市駅徒歩2分', amenities:['溫泉'], price:'8,640円（約NT$1,770）', priceTWD:1770}},
+  {d:'2026-11-09', loc:'伊那', star:false, s:'紅葉湖一日遊', transportInfo:'紅葉湖交通建議時間\n09:15左右 伊那市站 → 伊那松島站｜💴 JR飯田線，約15分鐘\n🚕 伊那松島站 → 紅葉湖｜預約計程車，約20分鐘\n☎ 當地計程車預約電話：0265-79-2455', hotel:{name:'Hotel Ina ホテル伊那', phone:'0265-96-7211', address:'長野県伊那市荒井3492-13', transport:'伊那市駅徒歩2分', amenities:['溫泉']}},
+  {d:'2026-11-10', loc:'伊那→馬籠', star:true, s:'中山道老街', transportInfo:'🚶 10:50左右 Hotel Ina → 伊那巴士總站｜步行約5分鐘\n🔴 11:00 伊那巴士總站 → 12:25 馬籠（神坂PA）｜名古屋方向高速巴士（預約制）\n🚕 神坂PA → 住宿｜轉乘計程車\n・近鐵東美計程車：0573-66-1221\n・東鐵計程車：0573-78-2135', hotel:{name:'馬籠ふるさと学校', phone:'0573-69-5006', address:'岐阜県中津川市馬籠4797-230', transport:'中津川駅搭北恵那交通巴士→馬籠巴士站徒歩7分', amenities:[], price:'19,800円（約NT$4,060）', priceTWD:4060}},
+  {d:'2026-11-11', loc:'馬籠', star:true, s:'馬籠＋妻籠中山道健走。', hotel:{name:'馬籠ふるさと学校', phone:'0573-69-5006', address:'岐阜県中津川市馬籠4797-230', transport:'代訂餐廳需3天前提出', amenities:[]}},
+  {d:'2026-11-12', loc:'馬籠', star:true, s:'馬籠周邊慢遊、休息。', hotel:{name:'馬籠ふるさと学校', phone:'0573-69-5006', address:'岐阜県中津川市馬籠4797-230', transport:'糧食建議在中津川先買好', amenities:[]}},
+  {d:'2026-11-13', loc:'馬籠→滋賀', star:false, s:'中津川駅搭JR前往滋賀，準備進京都圈長住。'},
+];
+
+// 11/10起 → 京都長住，慢旅行到隔年1/6（1/7出發回台）
+const KYOTO_IDEAS = ['嵐山・嵯峨野','伏見稻荷','宇治','奈良一日','大阪一日','貴船・鞍馬','京都御所周邊','東福寺','永觀堂','清水寺・二三年坂','北野天満宮','錦市場・河原町'];
+let kyotoCounter = 0;
+let cur = new Date('2026-11-14');
+const kyotoEnd = new Date('2027-01-06');
+while(cur <= kyotoEnd){
+  const iso = cur.toISOString().slice(0,10);
+  const isNewYearEve = iso === '2026-12-31';
+  const isNewYearDay = iso === '2027-01-01';
+  let s;
+  if(isNewYearEve) s = '除夕夜，八坂神社或知恩院可參加「をけら詣り」跨年活動。';
+  else if(isNewYearDay) s = '元旦，京都新年氣氛，各大寺社參拜人潮多，可從容安排。';
+  else s = `京都長住慢旅行，自由安排。可參考：${KYOTO_IDEAS[kyotoCounter % KYOTO_IDEAS.length]}。`;
+  const isMomijiWeek = iso >= '2026-11-20' && iso <= '2026-11-30';
+  DAYS.push({d:iso, loc: iso==='2026-11-14' ? '京都' : (isMomijiWeek ? '京都・賞楓' : '京都'), star:(iso==='2026-11-10')||isMomijiWeek||isNewYearEve||isNewYearDay, s});
+  if(!isNewYearEve && !isNewYearDay) kyotoCounter++;
+  cur.setUTCDate(cur.getUTCDate()+1);
+}
+
+DAYS.push({d:'2027-01-07', loc:'京都→台灣', star:false, flight:true, flightInfo:{route:'大阪關西 KIX → 桃園 TPE', no:'長榮 BR131', time:'12:55 – 15:05', dur:'直飛・3小時10分', pnr:'F8FZGM'}, s:'京都出發返台，結束旅程。'});
+
+// ---------- 座標對照（給天氣預報用） ----------
+const LOCCOORDS = {
+  '名古屋': [35.1815,136.9066],
+  '馬籠宿': [35.4939,137.5697],
+  '妻籠宿': [35.5194,137.6069],
+  '松本': [36.2380,137.9720],
+  '高山': [36.1461,137.2521],
+  '白川鄉': [36.2578,136.9066],
+  '高山→松本': [36.2380,137.9720],
+  '長野': [36.6513,138.1810],
+  '小布施': [36.6844,138.3325],
+  '戶隱': [36.7314,138.0348],
+  '地獄谷': [36.7378,138.4614],
+  '彈性緩衝': [36.6513,138.1810],
+  '上高地': [36.2500,137.6333],
+  '奧入瀨': [40.5667,140.9333],
+  '十和田湖': [40.4589,140.8814],
+  '弘前': [40.6031,140.4642],
+  '秋田': [39.7186,140.1024],
+  '男鹿半島': [39.8956,139.7261],
+  '角館': [39.5975,140.5646],
+  '京都': [35.0116,135.7681],
+  '京都・假日': [35.0116,135.7681],
+  '京都・上課': [35.0116,135.7681],
+  '京都・賞楓週': [35.0116,135.7681],
+  '關西→台北': [34.4347,135.2441],
+};
+const MOVE_DAY_COORDS = {
+  '2026-10-18': LOCCOORDS['奧入瀨'],
+  '2026-10-24': LOCCOORDS['秋田'],
+  '2026-10-29': LOCCOORDS['京都'],
+};
+function getCoords(day){
+  if(day.loc === '移動日') return MOVE_DAY_COORDS[day.d] || null;
+  return LOCCOORDS[day.loc] || null;
+}
+
+// ---------- 賞楓即時花況連結 ----------
+function getFoliageLink(loc){
+  if(loc.includes('上高地')) return 'https://tenki.jp/kouyou/3/23/35124.html';
+  if(loc.includes('奧入瀨') || loc.includes('十和田湖')) return 'https://weathernews.jp/koyo/spot/23107/';
+  if(loc.includes('京都')) return 'https://tenki.jp/kouyou/6/29/';
+  return null;
+}
+
+// ---------- 天氣：改用連結（避免網頁內抓取被瀏覽器安全機制擋掉，改用可靠的連結方式） ----------
+function getWeatherLink(day){
+  const coords = getCoords(day);
+  const query = coords ? `${day.loc} 天氣` : `${day.loc} 天氣`;
+  return `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+}
+
+// 把Excel裡分行的交通步驟，轉成一條一條清楚的卡片列；只有「時間 站名 → 時間 站名」這段加粗，｜後面的班次備註維持正常字重
+function renderSteps(text){
+  const lines = text.split('\n').map(s => s.trim()).filter(Boolean);
+  const moveRe = /\d{1,2}:\d{2}.*→.*\d{1,2}:\d{2}/;
+  return lines.map(line => {
+    const bar = line.indexOf('｜');
+    if(bar === -1){
+      return `<div class="tr-step">${moveRe.test(line) ? `<strong>${line}</strong>` : line}</div>`;
+    }
+    const head = line.slice(0, bar);
+    const rest = line.slice(bar);
+    return `<div class="tr-step">${moveRe.test(head) ? `<strong>${head}</strong>` : head}${rest}</div>`;
+  }).join('');
+}
+
+function stageColor(i, n){
+  const stops = ['--stage-0','--stage-1','--stage-2','--stage-3','--stage-4'];
+  const t = n<=1?0:i/(n-1);
+  const idx = Math.min(stops.length-1, Math.round(t*(stops.length-1)));
+  return `var(${stops[idx]})`;
+}
+
+const _n = new Date();
+const todayISO = _n.getFullYear()+'-'+String(_n.getMonth()+1).padStart(2,'0')+'-'+String(_n.getDate()).padStart(2,'0');
+const list = document.getElementById('list');
+let lastMonth = null;
+let prevStay = null;
+
+const MERGE_START = '2026-11-14';
+const MERGE_END = '2027-01-06';
+
+DAYS.forEach((day, i) => {
+  // 12/14–1/6 長住滋賀・京都，合併成一欄，中間的日子不另外畫卡片
+  if(day.d > MERGE_START && day.d <= MERGE_END) return;
+
+  const dt = new Date(day.d+'T00:00:00');
+  const month = dt.getMonth()+1;
+  if(month !== lastMonth){
+    lastMonth = month;
+    const h = document.createElement('div');
+    h.className = 'month-head';
+    h.id = 'm'+month;
+    h.textContent = month+'月';
+    list.appendChild(h);
+  }
+
+  if(day.d === MERGE_START){
+    const mergedToday = (todayISO >= MERGE_START && todayISO <= MERGE_END);
+    const mergedPast = todayISO > MERGE_END;
+    const mel = document.createElement('div');
+    mel.className = 'day day--special' + (mergedToday ? ' is-today' : '') + (mergedPast ? ' is-past' : '');
+    mel.id = 'day-'+MERGE_START;
+    mel.style.borderLeftColor = stageColor(i, DAYS.length);
+    mel.innerHTML = `
+      <div class="day__row">
+        <div class="day__date day__date--range"><span class="d">11/14–1/6</span></div>
+        <div class="day__mid">
+          <div class="day__loc">滋賀・京都</div>
+          <div class="day__preview">54天長住慢旅行，自由安排</div>
+        </div>
+        <span class="day__chev">⌄</span>
+      </div>
+      <div class="day__panel">
+        <div class="day__panel-inner">
+          <div class="section-h section-h--first">行程</div>
+          <div class="day__suggest">這段時間長住滋賀・京都，11/14到1/6共54天，行程比較彈性，可以自己安排想去的地方、慢慢晃。</div>
+          <div class="field">
+            <textarea data-field="myPlan" data-day="${MERGE_START}" placeholder="想補充的行程、時間、餐廳…"></textarea>
+          </div>
+          <div class="section-h">交通</div>
+          <div class="field">
+            <textarea data-field="transport" data-day="${MERGE_START}" placeholder="車次・時間・預約票券"></textarea>
+          </div>
+          <div class="section-h">住宿</div>
+          <div class="field">
+            <textarea data-field="accommodation" data-day="${MERGE_START}" placeholder="旅館名稱・地址・電話・訂房編號"></textarea>
+          </div>
+          <div class="field">
+            <label>住宿地址（用來導航）</label>
+            <input type="text" data-field="lodgingAddress" data-day="${MERGE_START}" placeholder="貼上地址或飯店名稱">
+            <a class="navbtn" data-navday="${MERGE_START}" href="#">📍 導航至住宿</a>
+          </div>
+          <div class="section-h">備註</div>
+          <div class="field">
+            <textarea data-field="notes" data-day="${MERGE_START}" placeholder="想去的地方、費用、提醒事項"></textarea>
+          </div>
+          <div class="save-hint" data-hint="${MERGE_START}">已儲存 ✓</div>
+        </div>
+      </div>
+    `;
+    mel.querySelector('.day__row').addEventListener('click', () => mel.classList.toggle('open'));
+    list.appendChild(mel);
+    return;
+  }
+
+  const color = stageColor(i, DAYS.length);
+  const isToday = day.d === todayISO;
+  const isPast = day.d < todayISO;
+  const curStay = day.hotel ? day.hotel.name : day.loc;
+  const isMoving = !day.flight && prevStay !== null && curStay !== prevStay;
+  prevStay = curStay;
+
+  const el = document.createElement('div');
+  el.className = 'day' + (isToday ? ' is-today' : '') + (isPast ? ' is-past' : '');
+  el.id = 'day-'+day.d;
+  el.style.borderLeftColor = color;
+  el.innerHTML = `
+    <div class="day__row">
+      <div class="day__date"><span class="d">${dt.getDate()}</span><span class="w">週${WD[dt.getDay()]}</span></div>
+      <div class="day__mid">
+        <div class="day__loc">${day.loc}</div>
+        <div class="day__preview">${day.s}</div>
+      </div>
+      ${day.star ? '<span class="day__star">★</span>' : ''}
+      ${day.flight ? '<span class="day__flight">✈️</span>' : ''}
+      ${isMoving ? '<span class="day__flight">🧳</span>' : ''}
+      <span class="day__chev">⌄</span>
+    </div>
+    <div class="day__panel">
+      <div class="day__panel-inner">
+
+        <div class="section-h section-h--first">行程</div>
+        <div class="weatherbox">
+          <a class="weather-link" href="${getWeatherLink(day)}" target="_blank" rel="noopener">🌤 查當天天氣</a>
+          ${getFoliageLink(day.loc) ? `<a class="foliage-link" href="${getFoliageLink(day.loc)}" target="_blank" rel="noopener">🍁 查即時賞楓花況</a>` : ''}
+        </div>
+        ${day.flight ? `
+        <div class="flightbox">
+          <div class="flabel">✈️ 航班資訊</div>
+          <div class="flightfixed">
+            <div class="ff-route">${day.flightInfo.route}</div>
+            <div class="ff-time">${day.flightInfo.time}</div>
+            <div class="ff-row"><span>${day.flightInfo.no}・${day.flightInfo.dur}</span><span>訂位代號 ${day.flightInfo.pnr}</span></div>
+          </div>
+        </div>` : ''}
+        <div class="day__suggest">${day.s}</div>
+        <div class="field">
+          <textarea data-field="myPlan" data-day="${day.d}" placeholder="想補充的行程、時間、餐廳…（點這裡直接打字）"></textarea>
+        </div>
+
+        <div class="section-h">交通</div>
+        ${day.transportInfo ? `
+        <div class="hotelbox">
+          ${renderSteps(day.transportInfo)}
+        </div>` : `
+        <div class="field">
+          <textarea data-field="transport" data-day="${day.d}" placeholder="車次・時間・預約票券"></textarea>
+        </div>`}
+        <div class="field">
+          <label>交通花費 (NT$)</label>
+          <input type="number" inputmode="numeric" data-field="costTransport" data-day="${day.d}" placeholder="0" value="${(day.noteInfo && /^\d+$/.test(day.noteInfo)) ? day.noteInfo : ''}">
+        </div>
+
+        <div class="section-h">住宿</div>
+        ${day.hotel ? `
+        <div class="hotelbox">
+          <div class="hb-name">${day.hotel.name}</div>
+          <div class="hb-row">📍 ${day.hotel.address}</div>
+          <div class="hb-sub">${day.hotel.transport}</div>
+          <div class="hb-row">📞 <a href="tel:${day.hotel.phone.replace(/-/g,'')}">${day.hotel.phone}</a>（點一下可直接撥打）</div>
+          ${day.hotel.amenities.length ? `<div class="hb-amenities">${day.hotel.amenities.map(a=>`<span class="hb-chip">${a==='溫泉'?'♨️':a==='早餐'?'🍳':'🍽'} ${a}</span>`).join('')}</div>` : ''}
+          ${day.hotel.price ? `<div class="hb-row">💰 房價：${day.hotel.price}</div>` : ''}
+          <a class="navbtn" href="https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(day.hotel.address)}" target="_blank" rel="noopener">📍 導航到這間飯店</a>
+        </div>` : `
+        <div class="field">
+          <textarea data-field="accommodation" data-day="${day.d}" placeholder="旅館名稱・地址・電話・訂房編號"></textarea>
+        </div>
+        <div class="field">
+          <label>住宿地址（用來導航）</label>
+          <input type="text" data-field="lodgingAddress" data-day="${day.d}" placeholder="貼上地址或飯店名稱">
+          <a class="navbtn" data-navday="${day.d}" href="#">📍 導航至住宿</a>
+        </div>`}
+
+        <div class="section-h">備註</div>
+        <div class="field">
+          <textarea data-field="notes" data-day="${day.d}" placeholder="想去的地方、費用、提醒事項">${(day.noteInfo && !/^\d+$/.test(day.noteInfo)) ? day.noteInfo : ''}</textarea>
+        </div>
+
+        <div class="save-hint" data-hint="${day.d}">已儲存 ✓</div>
+      </div>
+    </div>
+  `;
+  el.querySelector('.day__row').addEventListener('click', () => {
+    el.classList.toggle('open');
+  });
+  list.appendChild(el);
+});
+
+// ---------- badges: jump + auto-expand ----------
+document.querySelectorAll('#badges .badge').forEach(b => {
+  b.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.getElementById('day-'+b.dataset.target);
+    if(!target) return;
+    target.classList.add('open');
+    target.scrollIntoView({behavior:'smooth', block:'center'});
+  });
+});
+
+// ---------- 導航至住宿 ----------
+document.querySelectorAll('.navbtn[data-navday]').forEach(btn => {
+  btn.addEventListener('click', e => {
+    e.stopPropagation();
+    const day = btn.dataset.navday;
+    const input = document.querySelector(`input[data-field="lodgingAddress"][data-day="${day}"]`);
+    const addr = (input && input.value || '').trim();
+    if(!addr){
+      e.preventDefault();
+      const old = btn.textContent;
+      btn.textContent = '請先填上面的住宿地址';
+      setTimeout(()=>{ btn.textContent = old; }, 1800);
+      return;
+    }
+    btn.href = 'https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(addr);
+    btn.target = '_blank';
+    btn.rel = 'noopener';
+  });
+});
+
+// ---------- storage ----------
+const costState = {};
+
+function updateSummary(){
+  // 舊版住宿/交通小計卡已移除（改到記帳頁逐日呈現），保留 costState 給逐日花費使用
+}
+
+async function loadDay(id){
+  try{
+    const res = await store.get('day-details:'+id, false);
+    return res ? JSON.parse(res.value) : {};
+  }catch(e){ return {}; }
+}
+function showSaved(id){
+  const hint = document.querySelector(`.save-hint[data-hint="${id}"]`);
+  if(!hint) return;
+  hint.classList.add('show');
+  clearTimeout(hint._t);
+  hint._t = setTimeout(()=>hint.classList.remove('show'), 1400);
+}
+let timers = {};
+async function saveDay(id){
+  const fields = document.querySelectorAll(`[data-day="${id}"]`);
+  const data = {};
+  fields.forEach(f => data[f.dataset.field] = f.value);
+  costState[id] = { lodging: data.costLodging, transport: data.costTransport };
+  updateSummary();
+  updateLedgerDaySub(id, data);
+  try{
+    await store.set('day-details:'+id, JSON.stringify(data), false);
+    showSaved(id);
+  }catch(e){ console.error('save failed', e); }
+}
+
+// ---- 記帳頁：逐日花費（雜支／交通／住宿／餐飲） ----
+function updateLedgerDaySub(id, data){
+  const el = document.getElementById('lsub-'+id);
+  if(!el) return;
+  const sum = (Number(data.lgMisc)||0)+(Number(data.lgTransport)||0)+(Number(data.lgLodging)||0)+(Number(data.lgFood)||0);
+  el.textContent = '¥' + sum.toLocaleString('zh-Hant');
+}
+function renderLedgerDays(){
+  const box = document.getElementById('ledgerDays');
+  box.innerHTML = DAYS.map(day => `
+    <div class="lday">
+      <div class="lday__head">
+        <span><span class="lday__date">${day.d.slice(5).replace('-','/')}</span><span class="lday__loc">${day.loc}</span></span>
+        <span class="lday__sub" id="lsub-${day.d}">¥0</span>
+      </div>
+      <div class="lday__grid">
+        <div><label>雜支</label><input type="number" inputmode="numeric" data-field="lgMisc" data-day="${day.d}" placeholder="0"></div>
+        <div><label>交通</label><input type="number" inputmode="numeric" data-field="lgTransport" data-day="${day.d}" placeholder="0"></div>
+        <div><label>住宿</label><input type="number" inputmode="numeric" data-field="lgLodging" data-day="${day.d}" placeholder="0"></div>
+        <div><label>餐飲</label><input type="number" inputmode="numeric" data-field="lgFood" data-day="${day.d}" placeholder="0"></div>
+      </div>
+    </div>
+  `).join('');
+}
+renderLedgerDays();
+
+document.querySelectorAll('[data-day]').forEach(f => {
+  f.addEventListener('click', e => e.stopPropagation());
+  f.addEventListener('input', () => {
+    const id = f.dataset.day;
+    clearTimeout(timers[id]);
+    timers[id] = setTimeout(()=>saveDay(id), 700);
+  });
+});
+
+(async () => {
+  for(const day of DAYS){
+    const data = await loadDay(day.d);
+    Object.entries(data).forEach(([field, value]) => {
+      const el = document.querySelector(`[data-field="${field}"][data-day="${day.d}"]`);
+      if(el) el.value = value;
+    });
+    costState[day.d] = { lodging: data.costLodging, transport: data.costTransport };
+  }
+  updateSummary();
+})();
+
+window.addEventListener('load', () => {
+  const el = document.querySelector('.day.is-today');
+  if(el) setTimeout(()=>el.scrollIntoView({block:'center'}), 300);
+});
+
+// ---------- 即時計算今天日期＋旅程第幾天，合併成同一行 ----------
+function updateDayCounter(){
+  const now = new Date();
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const tripStart = new Date('2026-10-15T00:00:00');
+  const tripEnd = new Date('2027-01-07T00:00:00');
+  const totalDays = Math.round((tripEnd - tripStart)/86400000) + 1;
+
+  const WDfull = ['日','一','二','三','四','五','六'];
+  const dateStr = `${now.getMonth()+1}/${now.getDate()}（${WDfull[now.getDay()]}）`;
+  document.getElementById('tiToday').textContent = dateStr;
+
+  const lbl2 = document.getElementById('tiLabel2');
+  const val2 = document.getElementById('tiValue2');
+  if(today < tripStart){
+    const diff = Math.round((tripStart - today)/86400000);
+    lbl2.textContent = '出発まで';
+    val2.textContent = diff + '天後';
+  }else if(today <= tripEnd){
+    const dayNum = Math.round((today - tripStart)/86400000) + 1;
+    lbl2.textContent = '旅程';
+    val2.textContent = dayNum + '／' + totalDays;
+  }else{
+    lbl2.textContent = '旅程';
+    val2.textContent = '終了 🍁';
+  }
+}
+updateDayCounter();
+
+// 標示目前月份分頁
+// ============ 分頁切換 ============
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tabview').forEach(v => v.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('view-'+btn.dataset.tab).classList.add('active');
+    document.getElementById('sticky-itinerary-extra').style.display = btn.dataset.tab === 'itinerary' ? '' : 'none';
+    document.getElementById('sticky-ledger-extra').style.display = btn.dataset.tab === 'ledger' ? '' : 'none';
+    if(btn.dataset.tab === 'ledger') refreshLedger();
+    if(btn.dataset.tab === 'tickets') refreshTickets();
+  });
+});
+
+// ============ 記帳：收據辨識與記錄 ============
+function getRegionForDate(dateStr){
+  const match = DAYS.find(d => d.d === dateStr);
+  return match ? match.loc : '';
+}
+
+function fileToBase64(file){
+  return new Promise((resolve, reject) => {
+    const r = new FileReader();
+    r.onload = () => resolve(r.result.split(',')[1]);
+    r.onerror = reject;
+    r.readAsDataURL(file);
+  });
+}
+
+async function extractReceipt(file){
+  const sample = window.claude ? await claude.use('sample') : null;
+  if(!sample) throw new Error('unavailable');
+  const prompt = `這是一張日本收據的照片。請仔細判讀後，只回傳一個JSON物件。欄位辨識不到時請填空字串或0，不要省略任何欄位：
+{"store_zh":"店名，翻譯成繁體中文","store_ja":"店名原文（日文）","date":"收據上的日期，格式YYYY-MM-DD，辨識不到留空字串","total":總金額數字（不含符號，日圓）,"tax_type":"稅別，例如：內稅／外稅／免稅，辨識不到留空字串","payment_method":"付款方式，例如：現金／信用卡，辨識不到留空字串","items":[{"name_zh":"品項名稱，翻譯成繁體中文","price":價格數字}]}`;
+  return await sample.json(prompt, { images: file, cache: false });
+}
+
+// 沒有 Claude 功能的環境就把掃描按鈕藏起來，保留手動輸入
+(async () => {
+  try{
+    const s = window.claude ? await claude.use('sample') : null;
+    if(!s){ const b = document.getElementById('scanBtn'); if(b) b.style.display = 'none'; }
+  }catch(e){ const b = document.getElementById('scanBtn'); if(b) b.style.display = 'none'; }
+})();
+
+function itemsToText(items){
+  if(!items || !items.length) return '';
+  return items.map(it => `${it.name_zh || it.name || ''}　¥${it.price || 0}`).join('\n');
+}
+
+function showConfirmForm(extracted){
+  const _n2 = new Date(); const todayISO2 = _n2.getFullYear()+'-'+String(_n2.getMonth()+1).padStart(2,'0')+'-'+String(_n2.getDate()).padStart(2,'0');
+  const date = (extracted && extracted.date) || todayISO2;
+  const region = getRegionForDate(date) || getRegionForDate(todayISO2) || '';
+  const area = document.getElementById('confirmArea');
+  area.innerHTML = `
+    <div class="confirm-card">
+      <h3>確認收據內容</h3>
+      <div class="cfield"><label>店名</label><input id="cf-store" value="${(extracted && extracted.store_zh) || ''}"></div>
+      <div class="cfield"><label>日期</label><input id="cf-date" type="date" value="${date}"></div>
+      <div class="cfield"><label>地區</label><input id="cf-region" value="${region}" placeholder="例如：京都"></div>
+      <div class="cfield"><label>金額 (¥)</label><input id="cf-total" type="number" value="${(extracted && extracted.total) || ''}"></div>
+      <div class="cfield"><label>稅別</label><input id="cf-tax" value="${(extracted && extracted.tax_type) || ''}"></div>
+      <div class="cfield"><label>付款方式</label><input id="cf-payment" value="${(extracted && extracted.payment_method) || ''}"></div>
+      <div class="cfield"><label>品項</label><textarea id="cf-items" placeholder="品名　金額（一行一項）">${itemsToText(extracted && extracted.items)}</textarea></div>
+      <div class="confirm-actions">
+        <button class="btn-cancel" id="cf-cancel">取消</button>
+        <button class="btn-save" id="cf-save">儲存這筆</button>
+      </div>
+    </div>
+  `;
+  document.getElementById('cf-cancel').addEventListener('click', () => { area.innerHTML = ''; });
+  document.getElementById('cf-save').addEventListener('click', saveReceiptFromForm);
+}
+
+async function saveReceiptFromForm(){
+  const record = {
+    storeZh: document.getElementById('cf-store').value,
+    date: document.getElementById('cf-date').value,
+    region: document.getElementById('cf-region').value,
+    total: Number(document.getElementById('cf-total').value) || 0,
+    taxType: document.getElementById('cf-tax').value,
+    paymentMethod: document.getElementById('cf-payment').value,
+    itemsText: document.getElementById('cf-items').value,
+    savedAt: new Date().toISOString()
+  };
+  const id = Date.now() + '-' + Math.random().toString(36).slice(2,7);
+  try{
+    await store.set('receipt:'+id, JSON.stringify(record), false);
+    document.getElementById('confirmArea').innerHTML = '';
+    refreshLedger();
+  }catch(e){
+    document.getElementById('ledgerStatus').textContent = '儲存失敗，請再試一次。';
+  }
+}
+
+async function loadAllReceipts(){
+  try{
+    const listRes = await store.list('receipt:', false);
+    if(!listRes || !listRes.keys) return [];
+    const items = await Promise.all(listRes.keys.map(async k => {
+      try{
+        const r = await store.get(k, false);
+        return r ? { id: k, ...JSON.parse(r.value) } : null;
+      }catch(e){ return null; }
+    }));
+    return items.filter(Boolean).sort((a,b) => (b.savedAt||'').localeCompare(a.savedAt||''));
+  }catch(e){
+    return [];
+  }
+}
+
+async function deleteReceipt(id){
+  try{
+    await store.delete(id, false);
+    refreshLedger();
+  }catch(e){ /* ignore */ }
+}
+
+function renderReceiptList(receipts){
+  const el = document.getElementById('receiptListInner');
+  if(!receipts.length){
+    el.innerHTML = '<div class="empty-hint">還沒有記錄，掃第一張收據看看吧</div>';
+    return;
+  }
+  el.innerHTML = receipts.map(r => `
+    <div class="receipt-item">
+      <div class="ri-main">
+        <div class="ri-store">${r.storeZh || '（未命名）'}</div>
+        <div class="ri-meta">${r.date || ''}　${r.region || ''}</div>
+      </div>
+      <div class="ri-amount">¥${(r.total||0).toLocaleString('zh-Hant')}</div>
+      <button class="ri-del" data-del="${r.id}">✕</button>
+    </div>
+  `).join('');
+  el.querySelectorAll('[data-del]').forEach(btn => {
+    btn.addEventListener('click', () => deleteReceipt(btn.dataset.del));
+  });
+}
+
+async function refreshLedger(){
+  const receipts = await loadAllReceipts();
+  const _n2 = new Date(); const todayISO2 = _n2.getFullYear()+'-'+String(_n2.getMonth()+1).padStart(2,'0')+'-'+String(_n2.getDate()).padStart(2,'0');
+  const todayTotal = receipts.filter(r => r.date === todayISO2).reduce((s,r) => s + (r.total||0), 0);
+  const grandTotal = receipts.reduce((s,r) => s + (r.total||0), 0);
+  document.getElementById('ledgerToday').textContent = '¥' + todayTotal.toLocaleString('zh-Hant');
+  document.getElementById('ledgerTotal').textContent = '¥' + grandTotal.toLocaleString('zh-Hant');
+  renderReceiptList(receipts);
+}
+
+document.getElementById('scanBtn').addEventListener('click', () => {
+  document.getElementById('receiptInput').click();
+});
+document.getElementById('receiptInput').addEventListener('change', async (e) => {
+  const file = e.target.files[0];
+  if(!file) return;
+  const status = document.getElementById('ledgerStatus');
+  status.textContent = '辨識中…（日文收據可能要幾秒鐘）';
+  document.getElementById('confirmArea').innerHTML = '';
+  try{
+    const extracted = await extractReceipt(file);
+    status.textContent = '';
+    showConfirmForm(extracted);
+  }catch(err){
+    console.error(err);
+    status.textContent = '辨識失敗了，可以改用「手動輸入一筆」。';
+  }
+  e.target.value = '';
+});
+document.getElementById('manualBtn').addEventListener('click', () => {
+  document.getElementById('ledgerStatus').textContent = '';
+  showConfirmForm(null);
+});
+
+// ============ 車票 QR code ============
+async function loadAllTickets(){
+  try{
+    const listRes = await store.list('ticket:');
+    if(!listRes || !listRes.keys) return [];
+    const items = await Promise.all(listRes.keys.map(async k => {
+      try{ const r = await store.get(k); return r ? { id:k, ...JSON.parse(r.value) } : null; }
+      catch(e){ return null; }
+    }));
+    return items.filter(Boolean).sort((a,b) => (a.date||a.savedAt||'').localeCompare(b.date||b.savedAt||''));
+  }catch(e){ return []; }
+}
+async function renderTicketList(){
+  const tickets = await loadAllTickets();
+  const el = document.getElementById('ticketListInner');
+  if(!tickets.length){
+    el.innerHTML = '<div class="empty-hint">還沒有加入車票，點上面「加入車票 QR code」拍照或選圖片</div>';
+    return;
+  }
+  el.innerHTML = tickets.map(t => `
+    <div class="confirm-card" style="margin:0 0 10px;padding:12px;">
+      <div style="display:flex;gap:10px;">
+        <img class="ticket-thumb" data-img="${t.id}" src="${t.img}" style="width:84px;height:84px;object-fit:contain;background:#fff;border:1px solid var(--line);border-radius:6px;flex:none;cursor:pointer;">
+        <div style="flex:1;min-width:0;">
+          <div class="cfield" style="margin-bottom:6px;">
+            <label>乘車日</label>
+            <input type="date" class="ticket-date" data-id="${t.id}" value="${t.date||''}">
+          </div>
+          <div class="cfield" style="margin-bottom:0;">
+            <label>路線</label>
+            <input type="text" class="ticket-route" data-id="${t.id}" value="${(t.route||'').replace(/"/g,'&quot;')}" placeholder="例如：松本→長野 新幹線">
+          </div>
+          <div class="cfield" style="margin-bottom:0;margin-top:6px;">
+            <label>取票號碼</label>
+            <input type="text" class="ticket-code" data-id="${t.id}" value="${(t.code||'').replace(/"/g,'&quot;')}" placeholder="例如：予約番号10022065431">
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px;">
+        <span class="save-hint-mini" data-hintid="${t.id}" style="font-size:10.5px;color:var(--ink-soft);opacity:0;transition:opacity .3s;">已儲存 ✓</span>
+        <button class="ri-del" data-delticket="${t.id}">刪除車票 ✕</button>
+      </div>
+    </div>
+  `).join('');
+
+  el.querySelectorAll('.ticket-thumb').forEach(img => img.addEventListener('click', () => {
+    document.getElementById('ticketLightboxImg').src = img.src;
+    document.getElementById('ticketLightbox').style.display = 'flex';
+  }));
+
+  el.querySelectorAll('[data-delticket]').forEach(b => b.addEventListener('click', async () => {
+    await store.delete(b.dataset.delticket);
+    renderTicketList();
+  }));
+
+  async function saveTicketField(id, field, value){
+    const hint = el.querySelector(`.save-hint-mini[data-hintid="${id}"]`);
+    try{
+      const r = await store.get(id);
+      const data = JSON.parse(r.value);
+      data[field] = value;
+      await store.set(id, JSON.stringify(data));
+      if(hint){ hint.textContent = '已儲存 ✓'; hint.style.opacity = 1; setTimeout(()=>hint.style.opacity=0, 1200); }
+    }catch(e){
+      if(hint){ hint.textContent = '儲存失敗，請再試一次'; hint.style.opacity = 1; }
+      console.error('ticket field save failed', e);
+    }
+  }
+  el.querySelectorAll('.ticket-date').forEach(inp => {
+    inp.addEventListener('change', () => saveTicketField(inp.dataset.id, 'date', inp.value));
+  });
+  el.querySelectorAll('.ticket-route').forEach(inp => {
+    let t;
+    inp.addEventListener('click', e => e.stopPropagation());
+    inp.addEventListener('input', () => {
+      clearTimeout(t);
+      t = setTimeout(() => saveTicketField(inp.dataset.id, 'route', inp.value), 500);
+    });
+  });
+  el.querySelectorAll('.ticket-code').forEach(inp => {
+    let t;
+    inp.addEventListener('click', e => e.stopPropagation());
+    inp.addEventListener('input', () => {
+      clearTimeout(t);
+      t = setTimeout(() => saveTicketField(inp.dataset.id, 'code', inp.value), 500);
+    });
+  });
+}
+function refreshTickets(){ renderTicketList(); }
+
+document.getElementById('ticketLightbox').addEventListener('click', () => {
+  document.getElementById('ticketLightbox').style.display = 'none';
+});
+
+// 把照片縮小壓縮後再存，避免原始相機照片太大塞爆手機儲存空間、拖慢網頁
+function resizeImage(file, maxSize){
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    const reader = new FileReader();
+    reader.onload = () => { img.onload = () => {
+      let { width, height } = img;
+      if(width > height && width > maxSize){ height = Math.round(height * maxSize/width); width = maxSize; }
+      else if(height > maxSize){ width = Math.round(width * maxSize/height); height = maxSize; }
+      const canvas = document.createElement('canvas');
+      canvas.width = width; canvas.height = height;
+      canvas.getContext('2d').drawImage(img, 0, 0, width, height);
+      resolve(canvas.toDataURL('image/jpeg', 0.72));
+    };
+    img.onerror = reject;
+    img.src = reader.result; };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+document.getElementById('ticketAddBtn').addEventListener('click', () => {
+  document.getElementById('ticketInput').click();
+});
+document.getElementById('ticketInput').addEventListener('change', async (e) => {
+  const files = Array.from(e.target.files || []);
+  if(!files.length) return;
+  const status = document.getElementById('ticketStatus');
+  status.textContent = '加入中…';
+  let failCount = 0;
+  for(const file of files){
+    try{
+      const resized = await resizeImage(file, 1100);
+      const id = 'ticket:' + Date.now() + '-' + Math.random().toString(36).slice(2,7);
+      await store.set(id, JSON.stringify({ img: resized, date: '', route: '', code: '', savedAt: new Date().toISOString() }));
+    }catch(err){ console.error(err); failCount++; }
+  }
+  status.textContent = failCount ? `有 ${failCount} 張存失敗，可能是手機空間不足，可以先刪掉舊的車票再試一次` : '';
+  e.target.value = '';
+  renderTicketList();
+});
+</script>
+</body>
+</html>
