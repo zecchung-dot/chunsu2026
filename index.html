@@ -95,16 +95,17 @@
 
 
   .badges-cap{
-    font-size:8px;letter-spacing:.06em;color:var(--ink-soft);
+    font-size:11px;letter-spacing:.06em;color:var(--ink-soft);
     padding:10px 0 0;
   }
-  .badges{display:flex;flex-wrap:wrap;gap:6px 14px;padding:5px 0 0;}
+  .badges{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;padding:6px 0 0;}
   .badge{
-    font-size:12px;padding:0 0 4px;border-radius:0;
-    border:none;border-bottom:1.5px solid transparent;background:none;
-    color:var(--ink-soft);text-decoration:none;font-weight:500;
+    display:block;text-align:center;white-space:nowrap;
+    font-size:min(14px,3.9vw);padding:8px 0;border-radius:10px;
+    border:none;background:rgba(36,34,32,.08);
+    color:var(--ink);text-decoration:none;font-weight:600;cursor:pointer;
   }
-  .badge:active{color:var(--ink);border-bottom-color:var(--ink-soft);}
+  .badge:active{background:#cc6341;color:var(--paper-raised);}
 
   .summary{
     margin:10px 18px 0;padding:9px 12px;border-top:1px solid var(--line);
@@ -246,7 +247,7 @@
 
   /* ---- sticky-extra blocks nested inside the masthead: strip the horizontal
          spacing that assumed top-level page padding, keep vertical rhythm ---- */
-  .masthead .badges{padding:0;}
+  .masthead .badges{padding:6px 0 0;}
   .masthead .summary{margin:8px 0 0;}
   .masthead .ledger-dash{margin:8px 0 0;}
   .sticky-extra{margin-bottom:0;}
@@ -349,7 +350,7 @@
   .sub-pill{margin:14px 16px 14px !important;display:flex !important;flex-wrap:nowrap;gap:2px;}
   .sub-pill .tab-btn{flex:1 1 auto;padding:6px 2px;font-size:min(14px,3.8vw);font-weight:600;white-space:nowrap;text-align:center;}
 </style>
-<!-- 2026-10-14 v28 -->
+<!-- 2026-10-14 v29 -->
 </head>
 <body>
 <div class="wrap">
@@ -404,7 +405,7 @@
         <a class="badge" data-target="2026-11-02">長野</a>
         <a class="badge" data-target="2026-11-08">伊那</a>
         <a class="badge" data-target="2026-11-10">馬籠</a>
-        <a class="badge" data-target="2026-11-14">滋賀・京都</a>
+        <a class="badge" data-target="2026-11-14">京都</a>
       </div>
     </div>
 
