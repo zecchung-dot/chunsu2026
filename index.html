@@ -138,8 +138,9 @@
     display:flex;align-items:center;gap:12px;padding:12px 14px;cursor:pointer;
     user-select:none;
   }
-  .day__date{flex:none;width:70px;text-align:center;}
-  .day__date .d{font-family:"Noto Serif TC",serif;font-weight:700;font-size:22px;display:block;line-height:1.1;}
+  .day__date{flex:none;width:96px;text-align:left;}
+  .day__date .d{font-family:"Noto Serif TC",serif;font-weight:700;font-size:20px;display:block;line-height:1.1;white-space:nowrap;}
+  .day__date .wd{font-size:15px;font-weight:600;margin-left:1px;}
   .day__date--range{width:auto !important;}
   .day__date--range .d{font-size:18px;white-space:nowrap;}
   .day__date .w{font-size:13px;color:var(--ink-soft);}
@@ -340,7 +341,7 @@
   }
   .empty-hint{margin:20px 18px 0;font-size:12.5px;color:var(--ink-soft);text-align:center;padding:20px;}
 </style>
-<!-- 2026-10-14 大字卡片 -->
+<!-- 2026-10-14 日期一行 -->
 </head>
 <body>
 <div class="wrap">
@@ -474,7 +475,7 @@ const DAYS = [
   {d:'2026-10-16', loc:'入住青森屋', geo:'十和田・三澤', star:false, s:"青森市區→青森屋。\n\n可以去青森魚菜中心做「自選海鮮丼」", transportInfo:"💴 11:49 青森站 → 13:12 三澤站｜青森鐵道「普通・八戶行」\n🚕 三澤站 → 青森屋｜計程車約5分鐘", hotel:{name:'青森屋 by 星野リゾート', phone:'050-3134-8094', address:'青森縣三澤市古間木山56', transport:'三澤站有接駁車（務必先預約）', amenities:['溫泉','早餐','晚餐']}},
   {d:'2026-10-17', loc:'青森屋耍廢', geo:'奧入瀨・十和田湖', star:true, s:"", hotel:{name:'青森屋 by 星野リゾート', phone:'050-3134-8094', address:'青森縣三澤市古間木山56', transport:'接駁車記得預約', amenities:['溫泉','早餐','晚餐']}},
   {d:'2026-10-18', loc:'移動🚗十和田湖', geo:'十和田湖', star:false, s:"蕪島神社、種差海岸、十和田美術館、十和田附近走逛", transportInfo:"🚗 豬排店老闆接駁", hotel:{name:'十和田莊 Hotel Towadaso', phone:'0176-75-2221', address:'青森県十和田市十和田湖畔休屋340', transport:'八戶駅西口搭JR巴士（需預約）→十和田湖巴士站徒歩5分', amenities:['溫泉','早餐','晚餐'], price:'33,088円（約NT$6,780）', priceTWD:6780}},
-  {d:'2026-10-19', loc:'十和田湖一日遊', geo:'十和田湖', star:false, transportInfo:'🚗 豬排店老闆伴遊', s:"八甲田山搭乘纜車", hotel:{name:'十和田莊 Hotel Towadaso', phone:'0176-75-2221', address:'青森県十和田市十和田湖畔休屋340', transport:'同上', amenities:['溫泉','早餐','晚餐'], price:'32,640円（約NT$6,690）', priceTWD:6690}},
+  {d:'2026-10-19', loc:'十和田湖、奧入瀨溪一日遊', geo:'十和田湖', star:false, transportInfo:'🚗 豬排店老闆伴遊', s:"八甲田山搭乘纜車", hotel:{name:'十和田莊 Hotel Towadaso', phone:'0176-75-2221', address:'青森県十和田市十和田湖畔休屋340', transport:'同上', amenities:['溫泉','早餐','晚餐'], price:'32,640円（約NT$6,690）', priceTWD:6690}},
   {d:'2026-10-20', loc:'🚗十和田湖→秋田', geo:'十和田湖→秋田', star:false, s:"⭐ 千秋公園、久保田城御隅櫓\n秋田市民市場\n秋田縣立美術館\n秋田犬相關展示\n晚餐可吃米棒鍋、稻庭烏龍麵或比內地雞親子丼", transportInfo:"🚗 豬排店老闆伴遊\n10:00 十和田湖（休屋）出發｜高速巴士「おいらせ22號」（免預約）\n12:20 抵達八戶站西口\n13:40 八戶站出發｜JR新幹線「隼號22號」（全車指定席）\n14:10 抵達盛岡站\n14:35 盛岡站出發｜JR新幹線「小町號23號」（全車指定席）\n16:08 抵達秋田站\n🚶 秋田站西口 → 飯店｜步行約5分鐘", hotel:{name:'大和 Daiwa Roynet Hotel Akita Ekimae', phone:'018-893-4577', address:'秋田縣秋田市中通2-3-20', transport:'秋田駅西口徒歩5分', amenities:['溫泉'], price:'31,500円（約NT$6,460）', priceTWD:6460}},
   {d:'2026-10-21', loc:'男鹿一日遊', geo:'秋田→男鹿一日遊', star:false, s:"11:15- 14:00 男鹿水族館 GAO 看北極熊桃太\n14:20-17:15 真山地區 | 生剝鬼館、男鹿真山傳承館\n\n豬排店老闆伴遊", transportInfo:"09:24 秋田站 → 10:16 男鹿站｜JR男鹿線（交通IC可）\n10:30 男鹿站 → 11:15 男鹿水族館GAO｜なまはげシャトル5號\n14:00 水族館GAO → 14:20 真山地區｜なまはげシャトル8號\n17:15 真山地區 → 17:40 男鹿站｜なまはげシャトル12號\n18:05 男鹿站 → 18:56 秋田站｜JR男鹿線（交通IC可）", noteInfo:"共乘計程車電話：0185-24-2100\n付現或刷卡", hotel:{name:'大和 Daiwa Roynet Hotel Akita Ekimae', phone:'018-893-4577', address:'秋田縣秋田市中通2-3-20', transport:'秋田駅西口徒歩5分', amenities:['溫泉']}},
   {d:'2026-10-22', loc:'🚗秋田→田澤湖', geo:'秋田→田澤湖', star:false, s:"秋田移至田澤湖\n\n可先打電話給鶴之湯預約明日乳頭溫泉鄉接駁\n\n電話：0187-46-2139", transportInfo:"11:07 秋田站 → 12:11 田澤湖站｜🔴 JR秋田新幹線「小町號18號」\n12:24 田澤湖站 → 13:01 杉谷地｜💳 羽後交通巴士「乳頭線」\n🚶 13:01 杉谷地 → 龜之井飯店田澤湖｜步行約2分鐘\n\n※若想先在田澤湖站附近用午餐，可改搭13:34發車的乳頭線（約每小時一班）。", noteInfo:"文芳13:50秋田機場回台", hotel:{name:'龜之井 Kamenoi Hotel 田沢湖', phone:'0187-46-2131', address:'秋田県仙北市田沢湖生保内駒ヶ岳2-32', transport:'田澤湖駅有免費接駁（需預約）', amenities:['溫泉','早餐','晚餐'], price:'36,996円（約NT$7,580）', priceTWD:7580}},
@@ -663,7 +664,7 @@ DAYS.forEach((day, i) => {
   el.style.borderLeftColor = color;
   el.innerHTML = `
     <div class="day__row">
-      <div class="day__date"><span class="d">${dt.getMonth()+1}/${dt.getDate()}</span><span class="w">週${WD[dt.getDay()]}</span></div>
+      <div class="day__date"><span class="d">${dt.getMonth()+1}/${dt.getDate()}<span class="wd">(${WD[dt.getDay()]})</span></span></div>
       <div class="day__mid">
         <div class="day__loc">${day.loc}</div>
       </div>
