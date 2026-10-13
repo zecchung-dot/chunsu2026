@@ -24,7 +24,7 @@
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
   html{overflow-x:hidden;max-width:100%;-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px);background:#e2946b;}
   body{
-    overflow-x:hidden;max-width:100%;touch-action:pan-y pinch-zoom;
+    overflow-x:clip;max-width:100%;touch-action:pan-y pinch-zoom;
     margin:0;background:var(--paper);color:var(--ink);
     font-family:"Noto Sans TC","Microsoft JhengHei UI","PingFang TC",sans-serif;
     line-height:1.55;-webkit-font-smoothing:antialiased;
@@ -33,10 +33,14 @@
 
   /* ---- sticky masthead ---- */
   .masthead{
-    position:sticky;top:env(safe-area-inset-top,0px);z-index:30;
+    position:relative;
     background:var(--paper);color:var(--ink);
-    padding:16px 20px 12px;
-    border-bottom:1px solid var(--line);
+    padding:16px 20px 6px;
+  }
+  .navstick{
+    position:sticky;top:env(safe-area-inset-top,0px);z-index:30;
+    background:var(--paper);padding:6px 20px 8px;
+    box-shadow:0 4px 8px -4px rgba(90,40,15,.28);
   }
   .masthead::before, .masthead::after{
     content:'';position:absolute;top:9px;width:13px;height:13px;
@@ -247,7 +251,7 @@
 
   /* ---- sticky-extra blocks nested inside the masthead: strip the horizontal
          spacing that assumed top-level page padding, keep vertical rhythm ---- */
-  .masthead .badges{padding:6px 0 0;}
+  .navstick .badges{padding:6px 0 0;}
   .masthead .summary{margin:8px 0 0;}
   .masthead .ledger-dash{margin:8px 0 0;}
   .sticky-extra{margin-bottom:0;}
@@ -255,15 +259,15 @@
   /* ---- tabs: filled pill, sitting comfortably inside the masthead ---- */
   .tabnav{
     display:flex;justify-content:center;
-    margin:14px 0 2px;
+    margin:0;
   }
   .tabnav-pill{
     display:flex;gap:2px;background:rgba(36,34,32,.06);border-radius:99px;
-    padding:3px;
+    padding:2px;
   }
   .tab-btn{
-    padding:10px 18px;border-radius:99px;border:none;
-    background:none;color:var(--ink-soft);font-size:17px;font-weight:700;
+    padding:6px 18px;border-radius:99px;border:none;
+    background:none;color:var(--ink-soft);font-size:16px;font-weight:700;
     font-family:inherit;cursor:pointer;
   }
   .tab-btn.active{background:#cc6341;color:var(--paper-raised);}
@@ -401,10 +405,10 @@
   .empty-hint{margin:20px 18px 0;font-size:12.5px;color:var(--ink-soft);text-align:center;padding:20px;}
   #sticky-ledger-extra{display:none !important;}
   body.on-tickets .masthead{border-bottom:none !important;}
-  .sub-pill{margin:14px 16px 14px !important;display:flex !important;flex-wrap:nowrap;gap:2px;}
-  .sub-pill .tab-btn{flex:1 1 auto;padding:6px 2px;font-size:min(14px,3.8vw);font-weight:600;white-space:nowrap;text-align:center;}
+  .sub-pill{margin:6px 0 0 !important;display:flex !important;flex-wrap:nowrap;gap:2px;}
+  .sub-pill .tab-btn{flex:1 1 auto;padding:4px 2px;font-size:min(14px,3.8vw);font-weight:600;white-space:nowrap;text-align:center;}
 </style>
-<!-- 2026-10-14 v59 -->
+<!-- 2026-10-14 v60 -->
 </head>
 <body>
 <div class="wrap">
@@ -433,8 +437,9 @@
       <div class="masthead__range">旅行期間：2026/10/15 – 2027/01/07</div>
     </div>
 
-    <div class="masthead__seam"></div>
+  </div>
 
+  <div class="navstick" id="navstick">
     <div class="tabnav">
       <div class="tabnav-pill">
         <button class="tab-btn active" data-tab="itinerary">行程</button>
@@ -443,10 +448,7 @@
       </div>
     </div>
 
-    <div class="masthead__seam"></div>
-
     <div id="sticky-itinerary-extra" class="sticky-extra">
-      <div class="badges-cap">旅行路線・旅のルート</div>
       <div class="badges" id="badges">
         <a class="badge" data-target="2026-10-15">青森</a>
         <a class="badge" data-target="2026-10-17">奧入瀨</a>
@@ -469,6 +471,20 @@
         <div class="card"><span class="num" id="ledgerTotal">¥0</span><span class="lbl">旅程累計</span></div>
       </div>
     </div>
+      <div id="subnav-ledger" style="display:none">
+    <div class="tabnav-pill sub-pill" >
+      <button class="sub-btn lsub tab-btn active" data-lsub="daily" type="button">每日開銷</button>
+      <button class="sub-btn lsub tab-btn" data-lsub="pre" type="button">行前開銷</button>
+    </div>
+    </div>
+    <div id="subnav-tickets" style="display:none">
+    <div class="tabnav-pill sub-pill" >
+      <button class="sub-btn tab-btn active" data-sub="shinkansen" type="button">新幹線</button>
+      <button class="sub-btn tab-btn" data-sub="bus1" type="button">上高地去程</button>
+      <button class="sub-btn tab-btn" data-sub="bus2" type="button">上高地回程</button>
+      <button class="sub-btn tab-btn" data-sub="magome" type="button">馬籠巴士</button>
+    </div>
+    </div>
   </div>
 
   <div id="view-itinerary" class="tabview active">
@@ -483,10 +499,7 @@
 
   <div id="view-ledger" class="tabview">
 
-    <div class="tabnav-pill sub-pill" style="margin:14px 16px 14px;">
-      <button class="sub-btn lsub tab-btn active" data-lsub="daily" type="button">每日開銷</button>
-      <button class="sub-btn lsub tab-btn" data-lsub="pre" type="button">行前開銷</button>
-    </div>
+
     <div id="lsub-daily">
     <div style="display:none !important;" aria-hidden="true">
     <div class="scan-area">
@@ -563,12 +576,7 @@
     </div>
 
   <div id="view-tickets" class="tabview">
-    <div class="tabnav-pill sub-pill" style="margin:0 0 14px;">
-      <button class="sub-btn tab-btn active" data-sub="shinkansen" type="button">新幹線</button>
-      <button class="sub-btn tab-btn" data-sub="bus1" type="button">上高地去程</button>
-      <button class="sub-btn tab-btn" data-sub="bus2" type="button">上高地回程</button>
-      <button class="sub-btn tab-btn" data-sub="magome" type="button">馬籠巴士</button>
-    </div>
+
     <div id="sub-bus1" style="display:none;">
       <div class="receipt-list">
         <h3>上高地巴士（去程）</h3>
@@ -1427,6 +1435,8 @@ document.querySelectorAll('.tab-btn:not(.sub-btn)').forEach(btn => {
     document.getElementById('view-'+btn.dataset.tab).classList.add('active');
     document.body.classList.toggle('on-tickets', btn.dataset.tab === 'tickets');
     document.getElementById('sticky-itinerary-extra').style.display = btn.dataset.tab === 'itinerary' ? '' : 'none';
+    document.getElementById('subnav-ledger').style.display = btn.dataset.tab === 'ledger' ? '' : 'none';
+    document.getElementById('subnav-tickets').style.display = btn.dataset.tab === 'tickets' ? '' : 'none';
     document.getElementById('sticky-ledger-extra').style.display = (btn.dataset.tab === 'ledger' && document.querySelector('.lsub.active').dataset.lsub==='daily') ? '' : 'none';
     if(btn.dataset.tab === 'ledger') refreshLedger();
     if(btn.dataset.tab === 'tickets') { Promise.resolve(refreshTickets()).then(() => setTimeout(fitTicketHeads, 50)); }
@@ -1764,8 +1774,8 @@ document.querySelectorAll('.lsub').forEach(b => b.addEventListener('click', () =
   document.getElementById('lsub-pre').style.display = b.dataset.lsub === 'pre' ? '' : 'none';
   document.getElementById('sticky-ledger-extra').style.display = b.dataset.lsub === 'daily' ? '' : 'none';
 }));
-document.querySelectorAll('#view-tickets .sub-btn').forEach(b => b.addEventListener('click', () => {
-  document.querySelectorAll('#view-tickets .sub-btn').forEach(x => x.classList.remove('active'));
+document.querySelectorAll('#subnav-tickets .sub-btn').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('#subnav-tickets .sub-btn').forEach(x => x.classList.remove('active'));
   b.classList.add('active');
   document.getElementById('sub-shinkansen').style.display = b.dataset.sub === 'shinkansen' ? '' : 'none';
   ['bus1','bus2'].forEach(k => document.getElementById('sub-'+k).style.display = b.dataset.sub === k ? '' : 'none');
