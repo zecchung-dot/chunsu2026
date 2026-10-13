@@ -136,7 +136,7 @@
   .day--special .day__loc{color:#cc6341;}
   .day.is-past .day__loc, .day.is-past .day__date .d{color:var(--ink-soft);}
   .day__row{
-    display:flex;align-items:center;gap:12px;padding:12px 14px;cursor:pointer;
+    display:flex;align-items:center;gap:12px;padding:0 14px;height:76px;cursor:pointer;
     user-select:none;
   }
   .day__date{flex:none;width:auto;text-align:left;}
@@ -146,7 +146,7 @@
   .day__date--range .d{font-size:18px;white-space:nowrap;}
   .day__date .w{font-size:13px;color:var(--ink-soft);}
   .day__mid{flex:1;min-width:0;}
-  .day__loc{font-size:21px;font-weight:700;line-height:1.3;}
+  .day__loc{font-size:21px;font-weight:700;line-height:1.25;}
   .day__preview{
     font-size:12px;color:var(--ink-soft);white-space:nowrap;overflow:hidden;
     text-overflow:ellipsis;margin-top:1px;
@@ -342,7 +342,7 @@
   }
   .empty-hint{margin:20px 18px 0;font-size:12.5px;color:var(--ink-soft);text-align:center;padding:20px;}
 </style>
-<!-- 2026-10-14 v4 -->
+<!-- 2026-10-14 v5 -->
 </head>
 <body>
 <div class="wrap">
@@ -726,6 +726,23 @@ DAYS.forEach((day, i) => {
   });
   list.appendChild(el);
 });
+
+
+// ---------- 每張卡片同高：地點太長時自動縮小字體，最多兩行 ----------
+function fitLocs(){
+  document.querySelectorAll('.day__loc').forEach(el => {
+    const sizes = [21,18,16,15,14,13];
+    for(const s of sizes){
+      el.style.fontSize = s+'px';
+      const lines = el.scrollHeight / (s*1.25);
+      if((s === 21 && lines < 1.4) || (s !== 21 && lines < 2.4)) break;
+    }
+  });
+}
+fitLocs();
+window.addEventListener('resize', fitLocs);
+if(document.fonts && document.fonts.ready) document.fonts.ready.then(fitLocs);
+window.addEventListener('load', fitLocs);
 
 // ---------- badges: jump + auto-expand ----------
 document.querySelectorAll('#badges .badge').forEach(b => {
