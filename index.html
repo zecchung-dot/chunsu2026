@@ -332,7 +332,7 @@
   }
 
   /* ---- 每日開銷：記帳 ---- */
-  .sp-form{padding:10px;border-radius:10px;background:rgba(36,34,32,.07);}
+  .sp-form{padding:10px;border-radius:10px;background:#f8dcc0;}
   .sp-datebar{display:flex;align-items:stretch;gap:6px;margin-bottom:4px;}
   .sp-arrow{flex:0 0 26px;border:none;border-radius:7px;background:#7a3b26;color:#fff;font-size:20px;line-height:1;cursor:pointer;font-family:inherit;padding:0;}
   .sp-datebox{position:relative;flex:1;min-width:0;border-radius:7px;background:var(--paper-raised);padding:5px 4px;text-align:center;display:flex;align-items:center;justify-content:center;overflow:hidden;}
@@ -394,7 +394,7 @@
   .sub-pill{margin:14px 16px 14px !important;display:flex !important;flex-wrap:nowrap;gap:2px;}
   .sub-pill .tab-btn{flex:1 1 auto;padding:6px 2px;font-size:min(14px,3.8vw);font-weight:600;white-space:nowrap;text-align:center;}
 </style>
-<!-- 2026-10-14 v49 -->
+<!-- 2026-10-14 v50 -->
 </head>
 <body>
 <div class="wrap">
@@ -528,21 +528,21 @@
       <div class="receipt-list">
       <div id="psub-tr" style="display:;">
         <div class="confirm-card" style="margin:0 0 12px;padding:2px 14px 14px;">
-          <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0 6px;border-bottom:1px dashed var(--line);font-size:19px;font-weight:700;"><span>交通合計</span><span style="color:#cc6341;">NT$24,385</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin:12px 0 8px;padding:10px 12px;border-radius:8px;background:#7a3b26;color:#fff;font-size:18px;font-weight:700;"><span>交通合計</span><span style="color:#ffd9b8;">NT$24,385</span></div>
           
         <div style="display:flex;align-items:baseline;gap:8px;padding:12px 0;border-bottom:1px dashed var(--line);white-space:nowrap;font-size:min(16px,4.5vw);font-weight:700;"><span style="color:#cc6341;flex:0 0 auto;min-width:2.6em;">8/26</span><span style="flex:1 1 auto;min-width:0;">長榮來回機票</span><span style="flex:0 0 auto;">NT$24,385</span></div>
           </div>
       </div>
       <div id="psub-ho" style="display:none;">
         <div class="confirm-card" style="margin:0 0 12px;padding:2px 14px 14px;">
-          <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0 4px;font-size:19px;font-weight:700;"><span>住宿合計</span><span style="color:#cc6341;">NT$86,001</span></div>
-          <div style="font-size:12px;color:var(--ink-soft);margin:0 0 4px;padding-bottom:6px;border-bottom:1px dashed var(--line);">日圓合計 ¥409,523（以 1 日圓 ≒ 0.21 台幣換算）</div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin:12px 0 8px;padding:10px 12px;border-radius:8px;background:#7a3b26;color:#fff;font-size:18px;font-weight:700;"><span>住宿合計</span><span style="color:#ffd9b8;">NT$86,001</span></div>
+          <div style="font-size:12px;color:var(--ink-soft);margin:0 0 6px;padding-bottom:8px;border-bottom:1px dashed var(--line);">日圓合計 ¥409,523（以 1 日圓 ≒ 0.21 台幣換算）</div>
         <div style="display:flex;align-items:baseline;gap:8px;padding:12px 0;border-bottom:1px dashed var(--line);white-space:nowrap;font-size:min(16px,4.5vw);font-weight:700;"><span style="color:#cc6341;flex:0 0 auto;min-width:2.6em;">10/15</span><span style="flex:1 1 auto;min-width:0;">JAL City 青森 1晚</span><span style="flex:0 0 auto;">NT$5,669</span></div><div style="display:flex;align-items:baseline;gap:8px;padding:12px 0;border-bottom:1px dashed var(--line);white-space:nowrap;font-size:min(16px,4.5vw);font-weight:700;"><span style="color:#cc6341;flex:0 0 auto;min-width:2.6em;">10/16</span><span style="flex:1 1 auto;min-width:0;">青森屋 2晚</span><span style="flex:0 0 auto;">NT$15,036</span></div><div style="display:flex;align-items:baseline;gap:8px;padding:12px 0;border-bottom:1px dashed var(--line);white-space:nowrap;font-size:min(16px,4.5vw);font-weight:700;"><span style="color:#cc6341;flex:0 0 auto;min-width:2.6em;">10/18</span><span style="flex:1 1 auto;min-width:0;">十和田莊 2晚</span><span style="flex:0 0 auto;">NT$13,803</span></div><div style="display:flex;align-items:baseline;gap:8px;padding:12px 0;border-bottom:1px dashed var(--line);white-space:nowrap;font-size:min(16px,4.5vw);font-weight:700;"><span style="color:#cc6341;flex:0 0 auto;min-width:2.6em;">10/20</span><span style="flex:1 1 auto;min-width:0;">秋田Daiwa 1晚</span><span style="flex:0 0 auto;">NT$6,615</span></div><div style="display:flex;align-items:baseline;gap:8px;padding:12px 0;border-bottom:1px dashed var(--line);white-space:nowrap;font-size:min(16px,4.5vw);font-weight:700;"><span style="color:#cc6341;flex:0 0 auto;min-width:2.6em;">10/22</span><span style="flex:1 1 auto;min-width:0;">龜之井 2晚</span><span style="flex:0 0 auto;">NT$7,769</span></div><div style="display:flex;align-items:baseline;gap:8px;padding:12px 0;border-bottom:1px dashed var(--line);white-space:nowrap;font-size:min(16px,4.5vw);font-weight:700;"><span style="color:#cc6341;flex:0 0 auto;min-width:2.6em;">10/24</span><span style="flex:1 1 auto;min-width:0;">角館ねこの鈴 2晚</span><span style="flex:0 0 auto;">NT$4,116</span></div><div style="display:flex;align-items:baseline;gap:8px;padding:12px 0;border-bottom:1px dashed var(--line);white-space:nowrap;font-size:min(16px,4.5vw);font-weight:700;"><span style="color:#cc6341;flex:0 0 auto;min-width:2.6em;">10/26</span><span style="flex:1 1 auto;min-width:0;">大宮Candeo 3晚</span><span style="flex:0 0 auto;">NT$6,906</span></div><div style="display:flex;align-items:baseline;gap:8px;padding:12px 0;border-bottom:1px dashed var(--line);white-space:nowrap;font-size:min(16px,4.5vw);font-weight:700;"><span style="color:#cc6341;flex:0 0 auto;min-width:2.6em;">10/29</span><span style="flex:1 1 auto;min-width:0;">松本M Hotel 4晚</span><span style="flex:0 0 auto;">NT$4,386</span></div><div style="display:flex;align-items:baseline;gap:8px;padding:12px 0;border-bottom:1px dashed var(--line);white-space:nowrap;font-size:min(16px,4.5vw);font-weight:700;"><span style="color:#cc6341;flex:0 0 auto;min-width:2.6em;">11/2</span><span style="flex:1 1 auto;min-width:0;">白馬天神の湯 6晚</span><span style="flex:0 0 auto;">NT$15,729</span></div><div style="display:flex;align-items:baseline;gap:8px;padding:12px 0;border-bottom:1px dashed var(--line);white-space:nowrap;font-size:min(16px,4.5vw);font-weight:700;"><span style="color:#cc6341;flex:0 0 auto;min-width:2.6em;">11/8</span><span style="flex:1 1 auto;min-width:0;">伊那Hotel Ina 2晚</span><span style="flex:0 0 auto;">NT$1,814</span></div><div style="display:flex;align-items:baseline;gap:8px;padding:12px 0;border-bottom:1px dashed var(--line);white-space:nowrap;font-size:min(16px,4.5vw);font-weight:700;"><span style="color:#cc6341;flex:0 0 auto;min-width:2.6em;">11/10</span><span style="flex:1 1 auto;min-width:0;">馬籠學校 3晚</span><span style="flex:0 0 auto;">NT$4,158</span></div>
           </div>
       </div>
       <div id="psub-mi" style="display:none;">
         <div class="confirm-card" style="margin:0 0 12px;padding:2px 14px 14px;">
-          <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0 6px;border-bottom:1px dashed var(--line);font-size:19px;font-weight:700;"><span>雜支合計</span><span style="color:#cc6341;">NT$6,022</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin:12px 0 8px;padding:10px 12px;border-radius:8px;background:#7a3b26;color:#fff;font-size:18px;font-weight:700;"><span>雜支合計</span><span style="color:#ffd9b8;">NT$6,022</span></div>
           
         <div style="display:flex;align-items:baseline;gap:8px;padding:12px 0;border-bottom:1px dashed var(--line);white-space:nowrap;font-size:min(16px,4.5vw);font-weight:700;"><span style="color:#cc6341;flex:0 0 auto;min-width:2.6em;">10/3</span><span style="flex:1 1 auto;min-width:0;">90天 SIM 卡</span><span style="flex:0 0 auto;">NT$1,119</span></div><div style="display:flex;align-items:baseline;gap:8px;padding:12px 0;border-bottom:1px dashed var(--line);white-space:nowrap;font-size:min(16px,4.5vw);font-weight:700;"><span style="color:#cc6341;flex:0 0 auto;min-width:2.6em;">10/15</span><span style="flex:1 1 auto;min-width:0;">85天旅平險</span><span style="flex:0 0 auto;">NT$4,903</span></div>
           </div>
