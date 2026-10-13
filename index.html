@@ -405,10 +405,12 @@
   .empty-hint{margin:20px 18px 0;font-size:12.5px;color:var(--ink-soft);text-align:center;padding:20px;}
   #sticky-ledger-extra{display:none !important;}
   body.on-tickets .masthead{border-bottom:none !important;}
-  .sub-pill{margin:6px 0 0 !important;display:flex !important;flex-wrap:nowrap;gap:2px;}
-  .sub-pill .tab-btn{flex:1 1 auto;padding:4px 2px;font-size:min(14px,3.8vw);font-weight:600;white-space:nowrap;text-align:center;}
+  .sub-pill{margin:6px 0 0 !important;display:grid !important;grid-auto-flow:column;grid-auto-columns:1fr;gap:5px;background:none !important;border-radius:0 !important;padding:0 !important;}
+  .sub-pill .tab-btn{padding:5px 0;border-radius:7px;background:#7a3b26;color:#fff;font-size:min(13px,3.7vw);font-weight:400;letter-spacing:.02em;white-space:nowrap;text-align:center;}
+  .sub-pill .tab-btn.active{background:#cc6341;color:#fff;}
+  .sub-pill .tab-btn:active{background:#4a2216;}
 </style>
-<!-- 2026-10-14 v60 -->
+<!-- 2026-10-14 v61 -->
 </head>
 <body>
 <div class="wrap">
