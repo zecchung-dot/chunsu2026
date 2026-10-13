@@ -343,8 +343,8 @@
   .sp-line>.sp-chips,.sp-line>.sp-amtrow{flex:1;min-width:0;}
   .sp-line>.sp-pays{flex:0 0 auto;}
   .sp-pays .sp-chip{padding:6px 9px;}
-  .sp-info{display:flex;justify-content:space-between;gap:8px;font-size:14px;color:var(--ink);padding:2px 2px 0;white-space:nowrap;}
-  .sp-info b{color:#7a3b26;}
+  .sp-info{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:0 0 10px;padding:9px 12px;border-radius:8px;background:rgba(122,59,38,.16);border-left:4px solid #7a3b26;font-size:15px;color:var(--ink);white-space:nowrap;}
+  .sp-info b{color:#7a3b26;font-size:17px;}
   .sp-lbl{flex:0 0 2.6em;font-size:14px;color:var(--ink-soft);font-weight:600;}
   .sp-chips{display:grid;gap:4px;}
   .sp-cats{grid-template-columns:repeat(5,1fr);}
@@ -392,7 +392,7 @@
   .sub-pill{margin:14px 16px 14px !important;display:flex !important;flex-wrap:nowrap;gap:2px;}
   .sub-pill .tab-btn{flex:1 1 auto;padding:6px 2px;font-size:min(14px,3.8vw);font-weight:600;white-space:nowrap;text-align:center;}
 </style>
-<!-- 2026-10-14 v42 -->
+<!-- 2026-10-14 v44 -->
 </head>
 <body>
 <div class="wrap">
@@ -495,6 +495,7 @@
     </div>
 
     <div class="receipt-list" id="spendWrap">
+      <div class="sp-info" id="spInfo"></div>
       <div class="sp-form">
         <div class="sp-datebar">
           <button type="button" class="sp-arrow" id="spPrev" aria-label="前一天">‹</button>
@@ -504,7 +505,6 @@
           </div>
           <button type="button" class="sp-arrow" id="spNext" aria-label="後一天">›</button>
         </div>
-        <div class="sp-info" id="spInfo"></div>
         <div class="sp-line"><div class="sp-lbl">項目</div><div class="sp-chips sp-cats" id="spCats"></div></div>
         <div class="sp-line"><div class="sp-lbl">金額</div><div class="sp-amtrow"><span>¥</span><input type="number" inputmode="numeric" id="spAmt" placeholder="0"></div><div class="sp-chips sp-pays" id="spPays"></div></div>
         <button type="button" class="sp-add" id="spAdd">記一筆</button>
@@ -1265,16 +1265,16 @@ function spShowDate(){
   const el = document.getElementById('spDateText'); if(!el) return;
   el.innerHTML = '<b>'+spFmtMD(spDate)+'（'+spWk(spDate)+'）</b> '+spLoc(spDate);
   el.style.fontSize = '17px';
-  let sz = 17; while(el.scrollWidth > el.clientWidth + 1 && sz > 10){ sz -= 0.5; el.style.fontSize = sz+'px'; }
+  let sz = 17; while(el.scrollWidth > el.clientWidth && sz > 10){ sz -= 0.5; el.style.fontSize = sz+'px'; }
+  if(el.scrollWidth > el.clientWidth && sz > 10){ el.style.fontSize = (sz-0.5)+'px'; }
   spShowInfo();
   document.getElementById('spDate').value = spDate;
 }
 function spShowInfo(){
   const el = document.getElementById('spInfo'); if(!el) return;
   const n = Math.round((new Date(spDate+'T00:00:00') - new Date(SP_FIRST+'T00:00:00'))/86400000) + 1;
-  const tot = spend.filter(e=>e.d===spDate).reduce((t,e)=>t+e.amt,0);
-  const lbl = spDate === spToday() ? '今天' : '這天';
-  el.innerHTML = '<span>旅行第 <b>'+n+'</b> 天</span><span>'+lbl+'花了 <b>'+spYen(tot)+'</b></span>';
+  const tot = spend.reduce((t,e)=>t+e.amt,0);
+  el.innerHTML = '<span>旅行第 <b>'+n+'</b> 天</span><span>已經花費 <b>'+spYen(tot)+'</b></span>';
 }
 function spBuild(){
   const dt = document.getElementById('spDate'); dt.min = SP_FIRST; dt.max = SP_LAST;
