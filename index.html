@@ -332,7 +332,7 @@
   }
 
   /* ---- 每日開銷：記帳 ---- */
-  .sp-form{padding:10px 10px 10px 12px;border-radius:10px;background:#f8dcc0;border-left:4px solid #b5532f;}
+  .sp-form{padding:10px 10px 8px 12px;border-radius:10px;background:#f8dcc0;border-left:4px solid #b5532f;}
   .sp-datebar{display:flex;align-items:stretch;gap:6px;margin-bottom:4px;}
   .sp-arrow{flex:0 0 26px;border:none;border-radius:7px;background:#7a3b26;color:#fff;font-size:20px;line-height:1;cursor:pointer;font-family:inherit;padding:0;}
   .sp-datebox{position:relative;flex:1;min-width:0;border-radius:7px;background:var(--paper-raised);padding:5px 4px;text-align:center;display:flex;align-items:center;justify-content:center;overflow:hidden;}
@@ -358,7 +358,8 @@
   .sp-amtrow input{flex:1;min-width:0;border:none;background:none;font-size:18px;font-weight:600;font-family:inherit;color:var(--ink);padding:5px 0;outline:none;}
   .sp-add{width:100%;margin-top:12px;border:none;border-radius:7px;background:#cc6341;color:#fff;font-size:17px;font-weight:600;padding:9px 0;font-family:inherit;cursor:pointer;letter-spacing:.2em;}
   .sp-add:active{background:#a8432a;}
-  .sp-msg{min-height:18px;margin-top:6px;font-size:13px;color:#7a3b26;text-align:center;}
+  .sp-msg:empty{display:none;}
+  .sp-msg{margin-top:6px;font-size:13px;color:#7a3b26;text-align:center;}
   .sp-title{display:flex;align-items:center;gap:10px;margin:24px 0 10px;font-family:"Noto Serif TC",serif;font-size:19px;font-weight:700;color:#fff;letter-spacing:.25em;}
   .sp-title i{flex:1;border-top:1px dashed rgba(255,255,255,.55);}
   .sp-total{display:flex;align-items:stretch;margin:0 0 12px;border-radius:9px;overflow:hidden;background:#f8dcc0;}
@@ -403,7 +404,7 @@
   .sub-pill{margin:14px 16px 14px !important;display:flex !important;flex-wrap:nowrap;gap:2px;}
   .sub-pill .tab-btn{flex:1 1 auto;padding:6px 2px;font-size:min(14px,3.8vw);font-weight:600;white-space:nowrap;text-align:center;}
 </style>
-<!-- 2026-10-14 v57 -->
+<!-- 2026-10-14 v58 -->
 </head>
 <body>
 <div class="wrap">
@@ -507,6 +508,7 @@
 
     <div class="receipt-list" id="spendWrap">
       <div class="sp-info" id="spInfo"></div>
+      <div class="sp-title" style="margin-top:16px;"><span>今天花了多少錢？</span><i></i></div>
       <div class="sp-form">
         <div class="sp-datebar">
           <button type="button" class="sp-arrow" id="spPrev" aria-label="前一天">‹</button>
