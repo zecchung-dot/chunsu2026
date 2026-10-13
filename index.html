@@ -392,7 +392,7 @@
   .sub-pill{margin:14px 16px 14px !important;display:flex !important;flex-wrap:nowrap;gap:2px;}
   .sub-pill .tab-btn{flex:1 1 auto;padding:6px 2px;font-size:min(14px,3.8vw);font-weight:600;white-space:nowrap;text-align:center;}
 </style>
-<!-- 2026-10-14 v41 -->
+<!-- 2026-10-14 v42 -->
 </head>
 <body>
 <div class="wrap">
@@ -510,7 +510,7 @@
         <button type="button" class="sp-add" id="spAdd">記一筆</button>
         <div class="sp-msg" id="spMsg"></div>
       </div>
-      <h3 style="margin-top:22px;">每日花費</h3>
+      <h3 style="margin-top:22px;">記帳簿</h3>
       <div class="sp-total" id="spTotal"></div>
       <div id="spList"></div>
     </div>
@@ -1272,8 +1272,9 @@ function spShowDate(){
 function spShowInfo(){
   const el = document.getElementById('spInfo'); if(!el) return;
   const n = Math.round((new Date(spDate+'T00:00:00') - new Date(SP_FIRST+'T00:00:00'))/86400000) + 1;
-  const tot = spend.reduce((t,e)=>t+e.amt,0);
-  el.innerHTML = '<span>旅行第 <b>'+n+'</b> 天</span><span>已花 <b>'+spYen(tot)+'</b>（總計）</span>';
+  const tot = spend.filter(e=>e.d===spDate).reduce((t,e)=>t+e.amt,0);
+  const lbl = spDate === spToday() ? '今天' : '這天';
+  el.innerHTML = '<span>旅行第 <b>'+n+'</b> 天</span><span>'+lbl+'花了 <b>'+spYen(tot)+'</b></span>';
 }
 function spBuild(){
   const dt = document.getElementById('spDate'); dt.min = SP_FIRST; dt.max = SP_LAST;
