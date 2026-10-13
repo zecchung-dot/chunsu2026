@@ -22,8 +22,9 @@
     --stage-4:#8a3c26;   /* 焦赤陶・最深段 */
   }
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
-  html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px);background:#e2946b;}
+  html{overflow-x:hidden;max-width:100%;-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px);background:#e2946b;}
   body{
+    overflow-x:hidden;max-width:100%;touch-action:pan-y pinch-zoom;
     margin:0;background:var(--paper);color:var(--ink);
     font-family:"Noto Sans TC","Microsoft JhengHei UI","PingFang TC",sans-serif;
     line-height:1.55;-webkit-font-smoothing:antialiased;
@@ -44,13 +45,13 @@
   .masthead::before{left:9px;border-left:1px solid var(--stage-4);}
   .masthead::after{right:9px;border-right:1px solid var(--stage-4);}
   .masthead__leaf{
-    position:absolute;top:14px;right:22px;width:34px;height:34px;
+    display:none;position:absolute;top:14px;right:22px;width:34px;height:34px;
     color:var(--stage-4);opacity:.16;transform:rotate(12deg);pointer-events:none;
   }
 
   .masthead__toprow{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;}
   .masthead__grid{
-    display:grid;grid-template-columns:1fr 128px;column-gap:10px;align-items:start;
+    display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:10px;row-gap:4px;align-items:start;
   }
   .masthead__eyebrow{
     grid-column:1;grid-row:1;
@@ -59,8 +60,8 @@
     margin-top:4px;
   }
   .ticketinfo{
-    display:flex;gap:12px;flex:none;
-    padding-left:12px;border-left:1px dashed var(--ink-soft);
+    display:flex;gap:10px;flex:none;
+    padding-left:10px;border-left:1px dashed var(--ink-soft);
   }
   .ticketinfo__item{display:flex;flex-direction:column;align-items:flex-start;line-height:1.15;}
   .ti-lbl{font-size:8px;letter-spacing:.09em;color:var(--ink-soft);text-transform:uppercase;}
@@ -68,21 +69,21 @@
   .ti-val.accent{color:#cc6341;font-size:15px;}
 
   .masthead__ticketcol{
-    grid-column:2;grid-row:1 / span 2;
+    grid-column:2;grid-row:1;
     display:flex;flex-direction:column;align-items:flex-end;gap:5px;
   }
 
   .masthead__titlewrap{
-    grid-column:1;grid-row:2;
-    display:flex;flex-direction:column;align-items:flex-start;margin-top:2px;
+    grid-column:1 / -1;grid-row:2;
+    display:flex;flex-direction:column;align-items:flex-start;margin-top:2px;min-width:0;
   }
   .masthead__title{
-    font-family:"Noto Serif TC",serif;font-weight:700;font-size:22px;
-    margin:0;color:var(--ink);text-align:left;white-space:nowrap;
+    font-family:"Noto Serif TC",serif;font-weight:700;font-size:min(22px,6.1vw);
+    margin:0;color:var(--ink);text-align:left;white-space:nowrap;max-width:100%;
   }
 
   .masthead__range{
-    font-size:10px;color:var(--paper-raised);white-space:nowrap;
+    grid-column:1 / -1;grid-row:3;font-size:11px;color:var(--paper-raised);white-space:nowrap;
   }
 
   .masthead__seam{
@@ -138,7 +139,7 @@
     display:flex;align-items:center;gap:12px;padding:12px 14px;cursor:pointer;
     user-select:none;
   }
-  .day__date{flex:none;width:96px;text-align:left;}
+  .day__date{flex:none;width:auto;text-align:left;}
   .day__date .d{font-family:"Noto Serif TC",serif;font-weight:700;font-size:20px;display:block;line-height:1.1;white-space:nowrap;}
   .day__date .wd{font-size:15px;font-weight:600;margin-left:1px;}
   .day__date--range{width:auto !important;}
@@ -341,7 +342,7 @@
   }
   .empty-hint{margin:20px 18px 0;font-size:12.5px;color:var(--ink-soft);text-align:center;padding:20px;}
 </style>
-<!-- 2026-10-14 v3 -->
+<!-- 2026-10-14 v4 -->
 </head>
 <body>
 <div class="wrap">
@@ -363,11 +364,11 @@
             <span class="ti-val accent" id="tiValue2">–</span>
           </div>
         </div>
-        <div class="masthead__range">旅行期間：10/15 – 1/7</div>
       </div>
       <div class="masthead__titlewrap">
         <h1 class="masthead__title">春淑秋冬賞楓跨年85日郊遊行</h1>
       </div>
+      <div class="masthead__range">旅行期間：10/15 – 1/7</div>
     </div>
 
     <div class="masthead__seam"></div>
