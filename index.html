@@ -34,8 +34,8 @@
   /* ---- sticky masthead ---- */
   .masthead{
     position:relative;
-    background:#f6ede0;color:var(--ink);
-    padding:16px 20px 10px;
+    background:#f3c9a8;color:var(--ink);
+    padding:16px 20px 12px;margin:10px 12px 0;border-radius:18px;
   }
   .navstick{
     position:sticky;top:env(safe-area-inset-top,0px);z-index:30;
@@ -60,7 +60,7 @@
   .masthead__eyebrow{
     grid-column:1;grid-row:1;
     font-family:"Noto Serif TC",serif;font-style:italic;font-weight:500;
-    font-size:11px;color:#8a4a2e;letter-spacing:.04em;
+    font-size:min(11px,2.9vw);white-space:nowrap;color:#7a3b26;letter-spacing:.02em;
     margin-top:4px;
   }
   .ticketinfo{
@@ -87,7 +87,7 @@
   }
 
   .masthead__range{
-    grid-column:1 / -1;grid-row:3;font-size:11px;color:#6b665e;white-space:nowrap;
+    grid-column:1 / -1;grid-row:3;font-size:11px;color:#5a4a40;white-space:nowrap;
   }
 
   .masthead__seam{
@@ -410,7 +410,7 @@
   .sub-pill .tab-btn.active{background:#cc6341;color:#fff;}
   .sub-pill .tab-btn:active{background:#4a2216;}
 </style>
-<!-- 2026-10-14 v63 -->
+<!-- 2026-10-14 v64 -->
 </head>
 <body>
 <div class="wrap">
