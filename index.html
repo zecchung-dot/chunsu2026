@@ -340,7 +340,7 @@
   }
   .empty-hint{margin:20px 18px 0;font-size:12.5px;color:var(--ink-soft);text-align:center;padding:20px;}
 </style>
-<!-- 2026-10-13 移除補充行程/交通花費/備註輸入框 -->
+<!-- 2026-10-14 隱藏無內容區塊 -->
 </head>
 <body>
 <div class="wrap">
@@ -641,19 +641,6 @@ DAYS.forEach((day, i) => {
         <div class="day__panel-inner">
           <div class="section-h section-h--first">行程</div>
           <div class="day__suggest">這段時間長住滋賀・京都，11/14到1/6共54天，行程比較彈性，可以自己安排想去的地方、慢慢晃。</div>
-          <div class="section-h">交通</div>
-          <div class="field">
-            <textarea data-field="transport" data-day="${MERGE_START}" placeholder="車次・時間・預約票券"></textarea>
-          </div>
-          <div class="section-h">住宿</div>
-          <div class="field">
-            <textarea data-field="accommodation" data-day="${MERGE_START}" placeholder="旅館名稱・地址・電話・訂房編號"></textarea>
-          </div>
-          <div class="field">
-            <label>住宿地址（用來導航）</label>
-            <input type="text" data-field="lodgingAddress" data-day="${MERGE_START}" placeholder="貼上地址或飯店名稱">
-            <a class="navbtn" data-navday="${MERGE_START}" href="#">📍 導航至住宿</a>
-          </div>
           <div class="save-hint" data-hint="${MERGE_START}">已儲存 ✓</div>
         </div>
       </div>
@@ -705,17 +692,14 @@ DAYS.forEach((day, i) => {
         </div>` : ''}
         <div class="day__suggest">${day.s}</div>
 
-        <div class="section-h">交通</div>
         ${day.transportInfo ? `
+        <div class="section-h">交通</div>
         <div class="hotelbox">
           ${renderSteps(day.transportInfo)}
-        </div>` : `
-        <div class="field">
-          <textarea data-field="transport" data-day="${day.d}" placeholder="車次・時間・預約票券"></textarea>
-        </div>`}
+        </div>` : ''}
 
-        <div class="section-h">住宿</div>
         ${day.hotel ? `
+        <div class="section-h">住宿</div>
         <div class="hotelbox">
           <div class="hb-name">${day.hotel.name}</div>
           <div class="hb-row">📍 ${day.hotel.address}</div>
@@ -724,17 +708,9 @@ DAYS.forEach((day, i) => {
           ${day.hotel.amenities.length ? `<div class="hb-amenities">${day.hotel.amenities.map(a=>`<span class="hb-chip">${a==='溫泉'?'♨️':a==='早餐'?'🍳':'🍽'} ${a}</span>`).join('')}</div>` : ''}
           ${day.hotel.price ? `<div class="hb-row">💰 房價：${day.hotel.price}</div>` : ''}
           <a class="navbtn" href="https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(day.hotel.address)}" target="_blank" rel="noopener">📍 導航到這間飯店</a>
-        </div>` : `
-        <div class="field">
-          <textarea data-field="accommodation" data-day="${day.d}" placeholder="旅館名稱・地址・電話・訂房編號"></textarea>
-        </div>
-        <div class="field">
-          <label>住宿地址（用來導航）</label>
-          <input type="text" data-field="lodgingAddress" data-day="${day.d}" placeholder="貼上地址或飯店名稱">
-          <a class="navbtn" data-navday="${day.d}" href="#">📍 導航至住宿</a>
-        </div>`}
+        </div>` : ''}
 
-        ${day.noteInfo ? `
+        ${(day.noteInfo && !/^[\d+,\s]+$/.test(day.noteInfo)) ? `
         <div class="section-h">備註</div>
         <div class="hotelbox">
           ${renderSteps(day.noteInfo)}
