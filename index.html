@@ -343,8 +343,8 @@
   .sp-line>.sp-chips,.sp-line>.sp-amtrow{flex:1;min-width:0;}
   .sp-line>.sp-pays{flex:0 0 auto;}
   .sp-pays .sp-chip{padding:6px 9px;}
-  .sp-info{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:0 0 10px;padding:9px 12px;border-radius:8px;background:rgba(122,59,38,.16);border-left:4px solid #7a3b26;font-size:15px;color:var(--ink);white-space:nowrap;}
-  .sp-info b{color:#7a3b26;font-size:17px;}
+  .sp-info{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:0 0 10px;padding:9px 12px;border-radius:8px;background:#f8dcc0;border-left:4px solid #b5532f;font-size:15px;color:#5a2d1c;white-space:nowrap;}
+  .sp-info b{color:#a8432a;font-size:18px;}
   .sp-lbl{flex:0 0 2.6em;font-size:14px;color:var(--ink-soft);font-weight:600;}
   .sp-chips{display:grid;gap:4px;}
   .sp-cats{grid-template-columns:repeat(5,1fr);}
@@ -363,6 +363,8 @@
   .sp-dayhead .l{min-width:0;font-size:15px;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
   .sp-dayhead .l b{color:#ffd9b8;margin-right:6px;font-weight:700;}
   .sp-dayhead .r{flex:none;font-family:"Noto Serif TC",serif;font-weight:700;font-size:16px;color:#ffd9b8;}
+  .sp-dayhead .chev{font-style:normal;font-size:12px;margin-left:8px;display:inline-block;transition:transform .2s;}
+  .sp-day.open .chev{transform:rotate(180deg);}
   .sp-daybody{display:none;padding:0 12px 4px;}
   .sp-day.open .sp-daybody{display:block;}
   .sp-row{display:flex;align-items:center;gap:8px;padding:8px 0;border-top:1px dashed var(--line);font-size:15px;}
@@ -392,7 +394,7 @@
   .sub-pill{margin:14px 16px 14px !important;display:flex !important;flex-wrap:nowrap;gap:2px;}
   .sub-pill .tab-btn{flex:1 1 auto;padding:6px 2px;font-size:min(14px,3.8vw);font-weight:600;white-space:nowrap;text-align:center;}
 </style>
-<!-- 2026-10-14 v44 -->
+<!-- 2026-10-14 v46 -->
 </head>
 <body>
 <div class="wrap">
@@ -1296,10 +1298,11 @@ function spRenderList(){
     const list = spend.filter(e=>e.d===d);
     const tot = list.reduce((t,e)=>t+e.amt,0);
     return `<div class="sp-day${spOpen.has(d)?' open':''}" data-d="${d}">
-      <button type="button" class="sp-dayhead"><span class="l"><b>${spFmtMD(d)}（${spWk(d)}）</b>${spLoc(d)}</span><span class="r">${spYen(tot)}</span></button>
+      <button type="button" class="sp-dayhead"><span class="l"><b>${spFmtMD(d)}（${spWk(d)}）</b>${spLoc(d)}</span><span class="r">${spYen(tot)}<i class="chev">▾</i></span></button>
       <div class="sp-daybody">${list.map(e => `<div class="sp-row"><span class="c">${e.cat}</span><span class="p">${e.pay}</span><span class="a">${spYen(e.amt)}</span><button type="button" class="x" data-del="${e.id}">刪除</button></div>`).join('')}</div>
     </div>`;
   }).join('');
+  box.querySelectorAll('.sp-dayhead .l').forEach(l => { let z = 15; l.style.fontSize = z+'px'; while(l.scrollWidth > l.clientWidth && z > 10){ z -= 0.5; l.style.fontSize = z+'px'; } });
   box.querySelectorAll('.sp-dayhead').forEach(h => h.addEventListener('click', () => {
     const p = h.parentElement, d = p.dataset.d;
     if(spOpen.has(d)) spOpen.delete(d); else spOpen.add(d);
@@ -1316,6 +1319,7 @@ function spRenderList(){
   }));
 }
 function spOnShow(){
+  try{ spRenderList(); }catch(e){}
   if(!spTouched || spTouchedOn !== spToday()){ spTouched = false; spDate = spClamp(spToday()); }
   spShowDate();
 }
@@ -1339,7 +1343,6 @@ function spShift(n){
     if(!(amt > 0)){ msg.textContent = '請輸入金額'; return; }
     spend.push({ id: 'e'+Date.now().toString(36)+Math.random().toString(36).slice(2,5), d: spDate, cat: spCat, amt, pay: spPay });
     await spSave();
-    spOpen.add(spDate);
     msg.textContent = '已記入 '+spFmtMD(spDate)+'　'+spCat+'　'+spYen(amt)+'　'+spPay;
     inp.value = ''; spCat = ''; spBuild(); spRenderList();
   });
