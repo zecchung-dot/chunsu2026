@@ -348,7 +348,7 @@
   .sub-pill{margin:14px 16px 14px !important;display:flex !important;flex-wrap:nowrap;gap:2px;}
   .sub-pill .tab-btn{flex:1 1 auto;padding:10px 2px;font-size:min(15px,4vw);white-space:nowrap;text-align:center;}
 </style>
-<!-- 2026-10-14 v23 -->
+<!-- 2026-10-14 v24 -->
 </head>
 <body>
 <div class="wrap">
@@ -382,7 +382,7 @@
     <div class="tabnav">
       <div class="tabnav-pill">
         <button class="tab-btn active" data-tab="itinerary">行程</button>
-        <button class="tab-btn" data-tab="ledger">記帳</button>
+        <button class="tab-btn" data-tab="ledger">花費</button>
         <button class="tab-btn" data-tab="tickets">交通預約</button>
       </div>
     </div>
@@ -427,6 +427,11 @@
 
   <div id="view-ledger" class="tabview">
 
+    <div class="tabnav-pill sub-pill" style="margin:14px 16px 14px;">
+      <button class="sub-btn lsub tab-btn active" data-lsub="daily" type="button">每日開銷</button>
+      <button class="sub-btn lsub tab-btn" data-lsub="pre" type="button">行前開銷</button>
+    </div>
+    <div id="lsub-daily">
     <div class="scan-area">
       <button class="scan-btn" id="scanBtn">📷　掃描收據</button>
       <input type="file" id="receiptInput" accept="image/*" capture="environment" style="display:none">
@@ -447,7 +452,18 @@
       <div id="ledgerDays"></div>
     </div>
 
-  </div>
+    </div>
+    <div id="lsub-pre" style="display:none;">
+      <div class="receipt-list">
+        <h3>行前開銷（已刷卡）</h3>
+        <div class="confirm-card" style="margin:0 0 12px;padding:6px 14px 14px;">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;padding:11px 0;border-bottom:1px dashed var(--line);"><div style="min-width:0;"><div style="font-size:13px;color:#cc6341;font-weight:700;">8/26</div><div style="font-size:17px;font-weight:700;line-height:1.35;">長榮來回機票</div></div><div style="font-size:17px;font-weight:700;white-space:nowrap;">NT$24,385</div></div><div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;padding:11px 0;border-bottom:1px dashed var(--line);"><div style="min-width:0;"><div style="font-size:13px;color:#cc6341;font-weight:700;">10/3</div><div style="font-size:17px;font-weight:700;line-height:1.35;">90天 SIM 卡</div></div><div style="font-size:17px;font-weight:700;white-space:nowrap;">NT$1,119</div></div><div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;padding:11px 0;border-bottom:1px dashed var(--line);"><div style="min-width:0;"><div style="font-size:13px;color:#cc6341;font-weight:700;">10/15</div><div style="font-size:17px;font-weight:700;line-height:1.35;">日航 JAL City 青森　1晚</div><div style="font-size:14px;color:var(--ink-soft);margin-top:2px;">¥26,993</div></div><div style="font-size:17px;font-weight:700;white-space:nowrap;">NT$5,669</div></div><div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;padding:11px 0;border-bottom:1px dashed var(--line);"><div style="min-width:0;"><div style="font-size:13px;color:#cc6341;font-weight:700;">10/15</div><div style="font-size:17px;font-weight:700;line-height:1.35;">85天旅平險</div></div><div style="font-size:17px;font-weight:700;white-space:nowrap;">NT$4,903</div></div><div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;padding:11px 0;border-bottom:1px dashed var(--line);"><div style="min-width:0;"><div style="font-size:13px;color:#cc6341;font-weight:700;">10/16</div><div style="font-size:17px;font-weight:700;line-height:1.35;">青森屋　2晚</div><div style="font-size:14px;color:var(--ink-soft);margin-top:2px;">¥71,600</div></div><div style="font-size:17px;font-weight:700;white-space:nowrap;">NT$15,036</div></div><div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;padding:11px 0;border-bottom:1px dashed var(--line);"><div style="min-width:0;"><div style="font-size:13px;color:#cc6341;font-weight:700;">10/18</div><div style="font-size:17px;font-weight:700;line-height:1.35;">十和田莊　2晚</div><div style="font-size:14px;color:var(--ink-soft);margin-top:2px;">¥65,728</div></div><div style="font-size:17px;font-weight:700;white-space:nowrap;">NT$13,803</div></div><div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;padding:11px 0;border-bottom:1px dashed var(--line);"><div style="min-width:0;"><div style="font-size:13px;color:#cc6341;font-weight:700;">10/20</div><div style="font-size:17px;font-weight:700;line-height:1.35;">秋田 Daiwa Roynet　1晚</div><div style="font-size:14px;color:var(--ink-soft);margin-top:2px;">¥31,500</div></div><div style="font-size:17px;font-weight:700;white-space:nowrap;">NT$6,615</div></div><div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;padding:11px 0;border-bottom:1px dashed var(--line);"><div style="min-width:0;"><div style="font-size:13px;color:#cc6341;font-weight:700;">10/22</div><div style="font-size:17px;font-weight:700;line-height:1.35;">龜之井 Kamenoi　2晚</div><div style="font-size:14px;color:var(--ink-soft);margin-top:2px;">¥36,996</div></div><div style="font-size:17px;font-weight:700;white-space:nowrap;">NT$7,769</div></div><div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;padding:11px 0;border-bottom:1px dashed var(--line);"><div style="min-width:0;"><div style="font-size:13px;color:#cc6341;font-weight:700;">10/24</div><div style="font-size:17px;font-weight:700;line-height:1.35;">角館 町宿 ねこの鈴　2晚</div><div style="font-size:14px;color:var(--ink-soft);margin-top:2px;">¥19,600</div></div><div style="font-size:17px;font-weight:700;white-space:nowrap;">NT$4,116</div></div><div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;padding:11px 0;border-bottom:1px dashed var(--line);"><div style="min-width:0;"><div style="font-size:13px;color:#cc6341;font-weight:700;">10/26</div><div style="font-size:17px;font-weight:700;line-height:1.35;">大宮 Candeo　3晚</div><div style="font-size:14px;color:var(--ink-soft);margin-top:2px;">¥32,886</div></div><div style="font-size:17px;font-weight:700;white-space:nowrap;">NT$6,906</div></div><div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;padding:11px 0;border-bottom:1px dashed var(--line);"><div style="min-width:0;"><div style="font-size:13px;color:#cc6341;font-weight:700;">10/29</div><div style="font-size:17px;font-weight:700;line-height:1.35;">松本 M Hotel　4晚</div><div style="font-size:14px;color:var(--ink-soft);margin-top:2px;">¥20,884</div></div><div style="font-size:17px;font-weight:700;white-space:nowrap;">NT$4,386</div></div><div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;padding:11px 0;border-bottom:1px dashed var(--line);"><div style="min-width:0;"><div style="font-size:13px;color:#cc6341;font-weight:700;">11/2</div><div style="font-size:17px;font-weight:700;line-height:1.35;">白馬天神の湯　6晚</div><div style="font-size:14px;color:var(--ink-soft);margin-top:2px;">¥74,900</div></div><div style="font-size:17px;font-weight:700;white-space:nowrap;">NT$15,729</div></div><div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;padding:11px 0;border-bottom:1px dashed var(--line);"><div style="min-width:0;"><div style="font-size:13px;color:#cc6341;font-weight:700;">11/8</div><div style="font-size:17px;font-weight:700;line-height:1.35;">伊那 Hotel Ina　2晚</div><div style="font-size:14px;color:var(--ink-soft);margin-top:2px;">¥8,636</div></div><div style="font-size:17px;font-weight:700;white-space:nowrap;">NT$1,814</div></div><div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;padding:11px 0;border-bottom:1px dashed var(--line);"><div style="min-width:0;"><div style="font-size:13px;color:#cc6341;font-weight:700;">11/10</div><div style="font-size:17px;font-weight:700;line-height:1.35;">馬籠ふるさと学校　3晚</div><div style="font-size:14px;color:var(--ink-soft);margin-top:2px;">¥19,800</div></div><div style="font-size:17px;font-weight:700;white-space:nowrap;">NT$4,158</div></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding-top:14px;font-size:19px;font-weight:700;"><span>合計</span><span style="color:#cc6341;">NT$116,408</span></div>
+          <div style="font-size:12px;color:var(--ink-soft);margin-top:8px;line-height:1.5;">日圓以 1 日圓 ≒ 0.21 台幣換算；日圓合計 ¥409,523。</div>
+        </div>
+      </div>
+    </div>
+    </div>
 
   <div id="view-tickets" class="tabview">
     <div class="tabnav-pill sub-pill" style="margin:0 0 14px;">
@@ -1227,7 +1243,7 @@ document.querySelectorAll('.tab-btn:not(.sub-btn)').forEach(btn => {
     document.getElementById('view-'+btn.dataset.tab).classList.add('active');
     document.body.classList.toggle('on-tickets', btn.dataset.tab === 'tickets');
     document.getElementById('sticky-itinerary-extra').style.display = btn.dataset.tab === 'itinerary' ? '' : 'none';
-    document.getElementById('sticky-ledger-extra').style.display = btn.dataset.tab === 'ledger' ? '' : 'none';
+    document.getElementById('sticky-ledger-extra').style.display = (btn.dataset.tab === 'ledger' && document.querySelector('.lsub.active').dataset.lsub==='daily') ? '' : 'none';
     if(btn.dataset.tab === 'ledger') refreshLedger();
     if(btn.dataset.tab === 'tickets') { Promise.resolve(refreshTickets()).then(() => setTimeout(fitTicketHeads, 50)); }
   });
@@ -1551,8 +1567,15 @@ function resizeImage(file, maxSize){
   });
 }
 
-document.querySelectorAll('.sub-btn').forEach(b => b.addEventListener('click', () => {
-  document.querySelectorAll('.sub-btn').forEach(x => x.classList.remove('active'));
+document.querySelectorAll('.lsub').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('.lsub').forEach(x => x.classList.remove('active'));
+  b.classList.add('active');
+  document.getElementById('lsub-daily').style.display = b.dataset.lsub === 'daily' ? '' : 'none';
+  document.getElementById('lsub-pre').style.display = b.dataset.lsub === 'pre' ? '' : 'none';
+  document.getElementById('sticky-ledger-extra').style.display = b.dataset.lsub === 'daily' ? '' : 'none';
+}));
+document.querySelectorAll('#view-tickets .sub-btn').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('#view-tickets .sub-btn').forEach(x => x.classList.remove('active'));
   b.classList.add('active');
   document.getElementById('sub-shinkansen').style.display = b.dataset.sub === 'shinkansen' ? '' : 'none';
   ['bus1','bus2'].forEach(k => document.getElementById('sub-'+k).style.display = b.dataset.sub === k ? '' : 'none');
