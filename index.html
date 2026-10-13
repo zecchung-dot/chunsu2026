@@ -343,7 +343,9 @@
   .sp-line>.sp-chips,.sp-line>.sp-amtrow{flex:1;min-width:0;}
   .sp-line>.sp-pays{flex:0 0 auto;}
   .sp-pays .sp-chip{padding:6px 9px;}
-  .sp-info{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:0 0 10px;padding:9px 12px;border-radius:8px;background:#f8dcc0;border-left:4px solid #b5532f;font-size:15px;color:#5a2d1c;white-space:nowrap;}
+  .sp-info{margin:0 0 10px;padding:9px 12px;border-radius:8px;background:#f8dcc0;border-left:4px solid #b5532f;font-size:15px;color:#5a2d1c;white-space:nowrap;}
+  .sp-info .r1{display:flex;justify-content:space-between;align-items:center;gap:8px;}
+  .sp-info .r2{display:flex;justify-content:space-between;gap:8px;margin-top:5px;padding-top:5px;border-top:1px dashed rgba(122,59,38,.35);font-size:14px;}
   .sp-info b{color:#a8432a;font-size:18px;}
   .sp-lbl{flex:0 0 2.6em;font-size:14px;color:var(--ink-soft);font-weight:600;}
   .sp-chips{display:grid;gap:4px;}
@@ -357,7 +359,8 @@
   .sp-add{width:100%;margin-top:12px;border:none;border-radius:7px;background:#cc6341;color:#fff;font-size:17px;font-weight:600;padding:9px 0;font-family:inherit;cursor:pointer;letter-spacing:.2em;}
   .sp-add:active{background:#a8432a;}
   .sp-msg{min-height:18px;margin-top:6px;font-size:13px;color:#7a3b26;text-align:center;}
-  .sp-total{font-size:13px;color:var(--ink-soft);margin:-4px 0 10px;line-height:1.5;}
+  .sp-total{display:flex;flex-wrap:wrap;gap:2px 12px;font-size:14px;color:#fff;margin:-4px 0 10px;line-height:1.6;}
+  .sp-total .k{font-weight:700;width:100%;}
   .sp-day{margin-bottom:8px;border:1px solid var(--line);border-radius:8px;background:var(--paper-raised);overflow:hidden;}
   .sp-dayhead{width:100%;display:flex;justify-content:space-between;align-items:center;gap:8px;padding:9px 12px;border:none;background:#7a3b26;font-family:inherit;cursor:pointer;text-align:left;}
   .sp-dayhead .l{min-width:0;font-size:15px;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
@@ -394,7 +397,7 @@
   .sub-pill{margin:14px 16px 14px !important;display:flex !important;flex-wrap:nowrap;gap:2px;}
   .sub-pill .tab-btn{flex:1 1 auto;padding:6px 2px;font-size:min(14px,3.8vw);font-weight:600;white-space:nowrap;text-align:center;}
 </style>
-<!-- 2026-10-14 v52 -->
+<!-- 2026-10-14 v53 -->
 </head>
 <body>
 <div class="wrap">
@@ -512,7 +515,7 @@
         <button type="button" class="sp-add" id="spAdd">記一筆</button>
         <div class="sp-msg" id="spMsg"></div>
       </div>
-      <h3 style="margin-top:22px;">記帳簿</h3>
+      <h3 style="margin-top:22px;color:#fff;font-size:17px;">記帳簿</h3>
       <div class="sp-total" id="spTotal"></div>
       <div id="spList"></div>
     </div>
@@ -524,7 +527,7 @@
         <button class="sub-btn psub tab-btn" data-psub="ho" type="button">住宿</button>
         <button class="sub-btn psub tab-btn" data-psub="mi" type="button">雜支</button>
       </div>
-      <div class="sp-info" style="margin:0 18px 10px;"><span>行前開銷總計</span><span><b>NT$116,408</b></span></div>
+      <div class="sp-info" style="margin:0 18px 10px;"><div class="r1"><span>行前開銷總計</span><span><b>NT$116,408</b></span></div></div>
       <div class="receipt-list">
       <div id="psub-tr" style="display:;">
         <div class="confirm-card" style="margin:0 0 12px;padding:2px 14px 14px;">
@@ -1277,7 +1280,8 @@ function spShowInfo(){
   const el = document.getElementById('spInfo'); if(!el) return;
   const n = Math.round((new Date(spDate+'T00:00:00') - new Date(SP_FIRST+'T00:00:00'))/86400000) + 1;
   const tot = spend.reduce((t,e)=>t+e.amt,0);
-  el.innerHTML = '<span>旅行第 <b>'+n+'</b> 天</span><span>已經花費 <b>'+spYen(tot)+'</b></span>';
+  const cash = spend.filter(e=>e.pay==='現金').reduce((t,e)=>t+e.amt,0);
+  el.innerHTML = '<div class="r1"><span>旅行第 <b>'+n+'</b> 天</span><span>已經花費 <b>'+spYen(tot)+'</b></span></div><div class="r2"><span>現金 '+spYen(cash)+'</span><span>刷卡 '+spYen(tot-cash)+'</span></div>';
 }
 function spBuild(){
   const dt = document.getElementById('spDate'); dt.min = SP_FIRST; dt.max = SP_LAST;
@@ -1291,7 +1295,7 @@ function spRenderList(){
   try{ spShowInfo(); }catch(e){}
   const sumAll = spend.reduce((t,e)=>t+e.amt,0);
   const cash = spend.filter(e=>e.pay==='現金').reduce((t,e)=>t+e.amt,0);
-  document.getElementById('spTotal').textContent = spend.length ? ('累計 '+spYen(sumAll)+'　現金 '+spYen(cash)+'　刷卡 '+spYen(sumAll-cash)) : '';
+  document.getElementById('spTotal').innerHTML = '<span class="k">各項小計</span>' + SP_CATS.map(c => '<span>'+c+' '+spYen(spend.filter(e=>e.cat===c).reduce((t,e)=>t+e.amt,0))+'</span>').join('');
   const box = document.getElementById('spList');
   if(!spend.length){ box.innerHTML = '<div class="empty-hint">還沒有記錄，在上面記下第一筆吧</div>'; return; }
   const dates = [...new Set(spend.map(e=>e.d))].sort();
