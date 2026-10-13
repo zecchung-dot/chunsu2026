@@ -333,21 +333,23 @@
 
   /* ---- 每日開銷：記帳 ---- */
   .sp-form{padding:12px;border-radius:10px;background:rgba(36,34,32,.07);}
-  .sp-datebar{display:flex;align-items:stretch;gap:6px;}
-  .sp-arrow{flex:0 0 38px;border:none;border-radius:7px;background:#7a3b26;color:#fff;font-size:22px;line-height:1;cursor:pointer;font-family:inherit;padding:0;}
-  .sp-datebox{position:relative;flex:1;min-width:0;border-radius:7px;background:var(--paper-raised);padding:5px 8px;text-align:center;}
-  .sp-datetext{font-family:"Noto Serif TC",serif;font-weight:600;font-size:17px;line-height:1.3;color:var(--ink);}
-  .sp-datetext small{display:block;font-family:inherit;font-weight:400;font-size:12px;color:var(--ink-soft);}
+  .sp-datebar{display:flex;align-items:stretch;gap:6px;margin-bottom:4px;}
+  .sp-arrow{flex:0 0 34px;border:none;border-radius:7px;background:#7a3b26;color:#fff;font-size:20px;line-height:1;cursor:pointer;font-family:inherit;padding:0;}
+  .sp-datebox{position:relative;flex:1;min-width:0;border-radius:7px;background:var(--paper-raised);padding:5px 8px;text-align:center;display:flex;align-items:center;justify-content:center;}
+  .sp-datetext{font-family:"Noto Serif TC",serif;font-weight:600;font-size:17px;line-height:1.3;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;}
+  .sp-datetext small{font-family:inherit;font-weight:400;font-size:12px;color:var(--ink-soft);margin-left:6px;}
   .sp-datebox input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;}
-  .sp-lbl{font-size:13px;color:var(--ink-soft);margin:11px 0 4px;font-weight:600;}
-  .sp-chips{display:grid;gap:5px;}
+  .sp-line{display:flex;align-items:center;gap:8px;margin-top:8px;}
+  .sp-line>.sp-chips,.sp-line>.sp-amtrow{flex:1;min-width:0;}
+  .sp-lbl{flex:0 0 2.6em;font-size:14px;color:var(--ink-soft);font-weight:600;}
+  .sp-chips{display:grid;gap:4px;}
   .sp-cats{grid-template-columns:repeat(5,1fr);}
   .sp-pays{grid-template-columns:repeat(2,1fr);}
-  .sp-chip{border:none;border-radius:6px;padding:7px 0;font-size:min(15px,4vw);font-family:inherit;cursor:pointer;background:rgba(36,34,32,.10);color:var(--ink);white-space:nowrap;}
+  .sp-chip{border:none;border-radius:6px;padding:6px 0;font-size:min(14px,3.8vw);font-family:inherit;cursor:pointer;background:rgba(36,34,32,.10);color:var(--ink);white-space:nowrap;}
   .sp-chip.on{background:#7a3b26;color:#fff;}
-  .sp-amtrow{display:flex;align-items:center;gap:6px;border-radius:7px;background:var(--paper-raised);padding:2px 10px;}
+  .sp-amtrow{display:flex;align-items:center;gap:6px;border-radius:7px;background:var(--paper-raised);padding:1px 10px;}
   .sp-amtrow span{font-size:17px;color:var(--ink-soft);}
-  .sp-amtrow input{flex:1;min-width:0;border:none;background:none;font-size:20px;font-weight:600;font-family:inherit;color:var(--ink);padding:5px 0;outline:none;}
+  .sp-amtrow input{flex:1;min-width:0;border:none;background:none;font-size:18px;font-weight:600;font-family:inherit;color:var(--ink);padding:5px 0;outline:none;}
   .sp-add{width:100%;margin-top:12px;border:none;border-radius:7px;background:#cc6341;color:#fff;font-size:17px;font-weight:600;padding:9px 0;font-family:inherit;cursor:pointer;letter-spacing:.2em;}
   .sp-add:active{background:#a8432a;}
   .sp-msg{min-height:18px;margin-top:6px;font-size:13px;color:#7a3b26;text-align:center;}
@@ -386,7 +388,7 @@
   .sub-pill{margin:14px 16px 14px !important;display:flex !important;flex-wrap:nowrap;gap:2px;}
   .sub-pill .tab-btn{flex:1 1 auto;padding:6px 2px;font-size:min(14px,3.8vw);font-weight:600;white-space:nowrap;text-align:center;}
 </style>
-<!-- 2026-10-14 v36 -->
+<!-- 2026-10-14 v38 -->
 </head>
 <body>
 <div class="wrap">
@@ -498,12 +500,9 @@
           </div>
           <button type="button" class="sp-arrow" id="spNext" aria-label="後一天">›</button>
         </div>
-        <div class="sp-lbl">項目</div>
-        <div class="sp-chips sp-cats" id="spCats"></div>
-        <div class="sp-lbl">金額（日圓）</div>
-        <div class="sp-amtrow"><span>¥</span><input type="number" inputmode="numeric" id="spAmt" placeholder="0"></div>
-        <div class="sp-lbl">付款方式</div>
-        <div class="sp-chips sp-pays" id="spPays"></div>
+        <div class="sp-line"><div class="sp-lbl">項目</div><div class="sp-chips sp-cats" id="spCats"></div></div>
+        <div class="sp-line"><div class="sp-lbl">金額</div><div class="sp-amtrow"><span>¥</span><input type="number" inputmode="numeric" id="spAmt" placeholder="0"></div></div>
+        <div class="sp-line"><div class="sp-lbl">付款</div><div class="sp-chips sp-pays" id="spPays"></div></div>
         <button type="button" class="sp-add" id="spAdd">記一筆</button>
         <div class="sp-msg" id="spMsg"></div>
       </div>
@@ -1260,7 +1259,7 @@ async function spLoad(){
 async function spSave(){ try{ await store.set('spend:v1', JSON.stringify(spend), false); }catch(e){ console.error(e); } }
 function spShowDate(){
   const el = document.getElementById('spDateText'); if(!el) return;
-  el.innerHTML = spFmtMD(spDate)+'（'+spWk(spDate)+'）<small>'+spLoc(spDate)+'</small>';
+  el.textContent = spFmtMD(spDate)+'（'+spWk(spDate)+'）';
   document.getElementById('spDate').value = spDate;
 }
 function spBuild(){
