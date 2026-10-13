@@ -344,10 +344,11 @@
     cursor:pointer;padding:4px;
   }
   .empty-hint{margin:20px 18px 0;font-size:12.5px;color:var(--ink-soft);text-align:center;padding:20px;}
-  .sub-pill{display:flex !important;flex-wrap:nowrap;gap:2px;}
+  body.on-tickets .masthead{border-bottom:none !important;}
+  .sub-pill{margin:14px 16px 14px !important;display:flex !important;flex-wrap:nowrap;gap:2px;}
   .sub-pill .tab-btn{flex:1 1 auto;padding:10px 2px;font-size:min(15px,4vw);white-space:nowrap;text-align:center;}
 </style>
-<!-- 2026-10-14 v22 -->
+<!-- 2026-10-14 v23 -->
 </head>
 <body>
 <div class="wrap">
@@ -1224,6 +1225,7 @@ document.querySelectorAll('.tab-btn:not(.sub-btn)').forEach(btn => {
     document.querySelectorAll('.tabview').forEach(v => v.classList.remove('active'));
     btn.classList.add('active');
     document.getElementById('view-'+btn.dataset.tab).classList.add('active');
+    document.body.classList.toggle('on-tickets', btn.dataset.tab === 'tickets');
     document.getElementById('sticky-itinerary-extra').style.display = btn.dataset.tab === 'itinerary' ? '' : 'none';
     document.getElementById('sticky-ledger-extra').style.display = btn.dataset.tab === 'ledger' ? '' : 'none';
     if(btn.dataset.tab === 'ledger') refreshLedger();
