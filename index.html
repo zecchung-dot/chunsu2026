@@ -345,7 +345,7 @@
   }
   .empty-hint{margin:20px 18px 0;font-size:12.5px;color:var(--ink-soft);text-align:center;padding:20px;}
 </style>
-<!-- 2026-10-14 v16 -->
+<!-- 2026-10-14 v17 -->
 </head>
 <body>
 <div class="wrap">
@@ -380,7 +380,7 @@
       <div class="tabnav-pill">
         <button class="tab-btn active" data-tab="itinerary">行程</button>
         <button class="tab-btn" data-tab="ledger">記帳</button>
-        <button class="tab-btn" data-tab="tickets">新幹線取票</button>
+        <button class="tab-btn" data-tab="tickets">交通預約</button>
       </div>
     </div>
 
@@ -447,14 +447,31 @@
   </div>
 
   <div id="view-tickets" class="tabview">
-    <div class="scan-area">
-      <button class="scan-btn" id="ticketAddBtn">📎　加入車票 QR code</button>
-      <input type="file" id="ticketInput" accept="image/*" multiple style="display:none">
+    <div class="tabnav-pill" style="margin:0 0 14px;">
+      <button class="sub-btn tab-btn active" data-sub="shinkansen" type="button">新幹線取票</button>
+      <button class="sub-btn tab-btn" data-sub="bus" type="button">上高地巴士</button>
     </div>
-    <div class="ledger-status" id="ticketStatus"></div>
+    <div id="sub-bus" style="display:none;">
+      <div class="receipt-list">
+        <h3>上高地巴士預約（乘車時出示）</h3>
+        <div class="confirm-card" style="margin:0 0 12px;padding:14px;">
+          <div style="font-family:'Noto Serif TC',serif;font-weight:700;color:#cc6341;font-size:18px;line-height:1.3;margin-bottom:8px;">10/31（六）　01號車</div>
+          <div style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:18px;line-height:1.5;margin-bottom:12px;">新島々站 08:40<br>→ 上高地 09:45</div>
+          <div class="hotelbox" style="margin:0;">
+            <div class="hb-row">預約號碼　<strong style="letter-spacing:.04em;">10022065431</strong></div>
+            <div class="hb-row">乘車人　<strong>HUANGCHUNSU</strong></div>
+            <div class="hb-row">運行公司　<strong>阿爾卑斯交通</strong></div>
+            <div class="hb-row">電話　<strong>0263-92-2511</strong></div>
+          </div>
+          <div style="font-size:13px;color:var(--ink-soft);margin-top:8px;line-height:1.5;">上車時請給司機看這個畫面（或列印的電子車票）。</div>
+        </div>
+      </div>
+    </div>
+    <div id="sub-shinkansen">
     <div class="receipt-list">
       <h3>所有車票（點圖片可以放大掃碼）</h3>
       <div id="ticketListInner"></div>
+    </div>
     </div>
   </div>
 
@@ -912,9 +929,9 @@ updateDayCounter();
 
 // 標示目前月份分頁
 // ============ 分頁切換 ============
-document.querySelectorAll('.tab-btn').forEach(btn => {
+document.querySelectorAll('.tab-btn:not(.sub-btn)').forEach(btn => {
   btn.addEventListener('click', () => {
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-btn:not(.sub-btn)').forEach(b => b.classList.remove('active'));
     document.querySelectorAll('.tabview').forEach(v => v.classList.remove('active'));
     btn.classList.add('active');
     document.getElementById('view-'+btn.dataset.tab).classList.add('active');
@@ -1243,26 +1260,13 @@ function resizeImage(file, maxSize){
   });
 }
 
-document.getElementById('ticketAddBtn').addEventListener('click', () => {
-  document.getElementById('ticketInput').click();
-});
-document.getElementById('ticketInput').addEventListener('change', async (e) => {
-  const files = Array.from(e.target.files || []);
-  if(!files.length) return;
-  const status = document.getElementById('ticketStatus');
-  status.textContent = '加入中…';
-  let failCount = 0;
-  for(const file of files){
-    try{
-      const resized = await resizeImage(file, 1100);
-      const id = 'ticket:' + Date.now() + '-' + Math.random().toString(36).slice(2,7);
-      await store.set(id, JSON.stringify({ img: resized, date: '', route: '', code: '', savedAt: new Date().toISOString() }));
-    }catch(err){ console.error(err); failCount++; }
-  }
-  status.textContent = failCount ? `有 ${failCount} 張存失敗，可能是手機空間不足，可以先刪掉舊的車票再試一次` : '';
-  e.target.value = '';
-  renderTicketList();
-});
+document.querySelectorAll('.sub-btn').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('.sub-btn').forEach(x => x.classList.remove('active'));
+  b.classList.add('active');
+  document.getElementById('sub-shinkansen').style.display = b.dataset.sub === 'shinkansen' ? '' : 'none';
+  document.getElementById('sub-bus').style.display = b.dataset.sub === 'bus' ? '' : 'none';
+  if(b.dataset.sub === 'shinkansen') setTimeout(fitTicketHeads, 30);
+}));
 </script>
 </body>
 </html>
