@@ -136,16 +136,16 @@
   .day--special .day__loc{color:#cc6341;}
   .day.is-past .day__loc, .day.is-past .day__date .d{color:var(--ink-soft);}
   .day__row{
-    display:flex;align-items:center;gap:12px;padding:0 14px;height:76px;cursor:pointer;
+    display:flex;align-items:center;gap:10px;padding:0 12px;height:68px;cursor:pointer;
     user-select:none;
   }
   .day__date{flex:none;width:auto;text-align:left;}
-  .day__date .d{font-family:"Noto Serif TC",serif;font-weight:700;font-size:20px;display:block;line-height:1.1;white-space:nowrap;}
-  .day__date .wd{font-size:15px;font-weight:600;margin-left:1px;}
+  .day__date .d{font-family:"Noto Serif TC",serif;font-weight:700;font-size:18px;display:block;line-height:1.1;white-space:nowrap;}
+  .day__date .wd{font-size:14px;font-weight:600;margin-left:1px;}
   .day__date--range{width:auto !important;}
   .day__date--range .d{font-size:18px;white-space:nowrap;}
   .day__date .w{font-size:13px;color:var(--ink-soft);}
-  .day__mid{flex:1;min-width:0;}
+  .day__mid{flex:1;min-width:0;overflow:hidden;}
   .day__loc{font-size:21px;font-weight:700;line-height:1.25;}
   .day__preview{
     font-size:12px;color:var(--ink-soft);white-space:nowrap;overflow:hidden;
@@ -342,7 +342,7 @@
   }
   .empty-hint{margin:20px 18px 0;font-size:12.5px;color:var(--ink-soft);text-align:center;padding:20px;}
 </style>
-<!-- 2026-10-14 v5 -->
+<!-- 2026-10-14 v6 -->
 </head>
 <body>
 <div class="wrap">
@@ -728,16 +728,16 @@ DAYS.forEach((day, i) => {
 });
 
 
-// ---------- 每張卡片同高：地點太長時自動縮小字體，最多兩行 ----------
+// ---------- 所有卡片地點字體一致：找出「最長的地點剛好一行放得下」的字級，全部套用 ----------
 function fitLocs(){
-  document.querySelectorAll('.day__loc').forEach(el => {
-    const sizes = [21,18,16,15,14,13];
-    for(const s of sizes){
-      el.style.fontSize = s+'px';
-      const lines = el.scrollHeight / (s*1.25);
-      if((s === 21 && lines < 1.4) || (s !== 21 && lines < 2.4)) break;
-    }
-  });
+  const els = Array.from(document.querySelectorAll('.day__loc'));
+  els.forEach(el => { el.style.whiteSpace = 'nowrap'; });
+  let chosen = 11;
+  for(let s = 22; s >= 11; s -= 0.5){
+    els.forEach(el => { el.style.fontSize = s+'px'; });
+    if(els.every(el => el.scrollWidth <= el.clientWidth + 0.5)){ chosen = s; break; }
+  }
+  els.forEach(el => { el.style.fontSize = chosen+'px'; });
 }
 fitLocs();
 window.addEventListener('resize', fitLocs);
