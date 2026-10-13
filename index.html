@@ -344,8 +344,10 @@
     cursor:pointer;padding:4px;
   }
   .empty-hint{margin:20px 18px 0;font-size:12.5px;color:var(--ink-soft);text-align:center;padding:20px;}
+  .sub-pill{display:grid !important;grid-template-columns:1fr 1fr;gap:6px;border-radius:22px;}
+  .sub-pill .tab-btn{padding:10px 4px;font-size:15px;white-space:nowrap;}
 </style>
-<!-- 2026-10-14 v20 -->
+<!-- 2026-10-14 v21 -->
 </head>
 <body>
 <div class="wrap">
@@ -447,14 +449,15 @@
   </div>
 
   <div id="view-tickets" class="tabview">
-    <div class="tabnav-pill" style="margin:0 0 14px;">
+    <div class="tabnav-pill sub-pill" style="margin:0 0 14px;">
       <button class="sub-btn tab-btn active" data-sub="shinkansen" type="button">新幹線取票</button>
-      <button class="sub-btn tab-btn" data-sub="bus" type="button">上高地巴士</button>
+      <button class="sub-btn tab-btn" data-sub="bus1" type="button">上高地去程</button>
+      <button class="sub-btn tab-btn" data-sub="bus2" type="button">上高地回程</button>
       <button class="sub-btn tab-btn" data-sub="magome" type="button">馬籠巴士</button>
     </div>
-    <div id="sub-bus" style="display:none;">
+    <div id="sub-bus1" style="display:none;">
       <div class="receipt-list">
-        <h3>上高地巴士預約（乘車時出示）</h3>
+        <h3>上高地巴士（去程）</h3>
         <div class="confirm-card" style="margin:0 0 12px;padding:14px;">
           <div style="font-family:'Noto Serif TC',serif;font-weight:700;color:#cc6341;font-size:18px;line-height:1.3;margin-bottom:8px;">10/31（六）去程　01號車</div>
           <div class="bus-route" style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:min(18px,4.9vw);line-height:1.4;white-space:nowrap;margin-bottom:12px;">新島々站 08:40 → 上高地 09:45</div>
@@ -554,6 +557,11 @@ Contact : JapanBusOnline@mail.j-bus.co.jp
 Business hours : 10:00～16:00(JST)
 Please contact the operating bus company directly for information regarding bus operations( service status, locations of ticket window, boarding locations, loss of your ticket, lost and found and luggage.)</div>
         </div>
+      </div>
+    </div>
+    <div id="sub-bus2" style="display:none;">
+      <div class="receipt-list">
+        <h3>上高地巴士（回程）</h3>
         <div class="confirm-card" style="margin:0 0 12px;padding:14px;">
           <div style="font-family:'Noto Serif TC',serif;font-weight:700;color:#cc6341;font-size:18px;line-height:1.3;margin-bottom:8px;">10/31（六）回程　01號</div>
           <div class="bus-route" style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:min(18px,4.9vw);line-height:1.4;white-space:nowrap;margin-bottom:12px;">上高地 16:00 → 松本 17:51</div>
@@ -1545,7 +1553,7 @@ document.querySelectorAll('.sub-btn').forEach(b => b.addEventListener('click', (
   document.querySelectorAll('.sub-btn').forEach(x => x.classList.remove('active'));
   b.classList.add('active');
   document.getElementById('sub-shinkansen').style.display = b.dataset.sub === 'shinkansen' ? '' : 'none';
-  document.getElementById('sub-bus').style.display = b.dataset.sub === 'bus' ? '' : 'none';
+  ['bus1','bus2'].forEach(k => document.getElementById('sub-'+k).style.display = b.dataset.sub === k ? '' : 'none');
   document.getElementById('sub-magome').style.display = b.dataset.sub === 'magome' ? '' : 'none';
   if(b.dataset.sub === 'shinkansen') setTimeout(fitTicketHeads, 30);
 }));
