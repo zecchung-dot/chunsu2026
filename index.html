@@ -332,38 +332,39 @@
   }
 
   /* ---- 每日開銷：記帳 ---- */
-  .sp-form{padding:14px;border-radius:12px;background:rgba(36,34,32,.07);}
-  .sp-datebar{display:flex;align-items:stretch;gap:8px;}
-  .sp-arrow{flex:0 0 46px;border:none;border-radius:10px;background:#7a3b26;color:#fff;font-size:26px;line-height:1;cursor:pointer;font-family:inherit;}
-  .sp-datebox{position:relative;flex:1;min-width:0;border-radius:10px;background:var(--paper-raised);padding:8px 10px;text-align:center;}
-  .sp-datetext{font-family:"Noto Serif TC",serif;font-weight:700;font-size:20px;line-height:1.3;color:var(--ink);}
-  .sp-datetext small{display:block;font-family:inherit;font-weight:400;font-size:13px;color:var(--ink-soft);}
+  .sp-form{padding:12px;border-radius:10px;background:rgba(36,34,32,.07);}
+  .sp-datebar{display:flex;align-items:stretch;gap:6px;}
+  .sp-arrow{flex:0 0 38px;border:none;border-radius:7px;background:#7a3b26;color:#fff;font-size:22px;line-height:1;cursor:pointer;font-family:inherit;padding:0;}
+  .sp-datebox{position:relative;flex:1;min-width:0;border-radius:7px;background:var(--paper-raised);padding:5px 8px;text-align:center;}
+  .sp-datetext{font-family:"Noto Serif TC",serif;font-weight:600;font-size:17px;line-height:1.3;color:var(--ink);}
+  .sp-datetext small{display:block;font-family:inherit;font-weight:400;font-size:12px;color:var(--ink-soft);}
   .sp-datebox input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;}
-  .sp-lbl{font-size:14px;color:var(--ink-soft);margin:14px 0 6px;font-weight:600;}
-  .sp-chips{display:grid;gap:6px;}
-  .sp-cats{grid-template-columns:repeat(3,1fr);}
+  .sp-lbl{font-size:13px;color:var(--ink-soft);margin:11px 0 4px;font-weight:600;}
+  .sp-chips{display:grid;gap:5px;}
+  .sp-cats{grid-template-columns:repeat(5,1fr);}
   .sp-pays{grid-template-columns:repeat(2,1fr);}
-  .sp-chip{border:none;border-radius:8px;padding:11px 0;font-size:17px;font-family:inherit;cursor:pointer;background:rgba(36,34,32,.10);color:var(--ink);}
+  .sp-chip{border:none;border-radius:6px;padding:7px 0;font-size:min(15px,4vw);font-family:inherit;cursor:pointer;background:rgba(36,34,32,.10);color:var(--ink);white-space:nowrap;}
   .sp-chip.on{background:#7a3b26;color:#fff;}
-  .sp-amtrow{display:flex;align-items:center;gap:8px;border-radius:10px;background:var(--paper-raised);padding:4px 12px;}
-  .sp-amtrow span{font-size:22px;font-weight:700;color:var(--ink-soft);}
-  .sp-amtrow input{flex:1;min-width:0;border:none;background:none;font-size:26px;font-weight:700;font-family:inherit;color:var(--ink);padding:8px 0;outline:none;}
-  .sp-add{width:100%;margin-top:16px;border:none;border-radius:10px;background:#cc6341;color:#fff;font-size:20px;font-weight:700;padding:14px 0;font-family:inherit;cursor:pointer;}
+  .sp-amtrow{display:flex;align-items:center;gap:6px;border-radius:7px;background:var(--paper-raised);padding:2px 10px;}
+  .sp-amtrow span{font-size:17px;color:var(--ink-soft);}
+  .sp-amtrow input{flex:1;min-width:0;border:none;background:none;font-size:20px;font-weight:600;font-family:inherit;color:var(--ink);padding:5px 0;outline:none;}
+  .sp-add{width:100%;margin-top:12px;border:none;border-radius:7px;background:#cc6341;color:#fff;font-size:17px;font-weight:600;padding:9px 0;font-family:inherit;cursor:pointer;letter-spacing:.2em;}
   .sp-add:active{background:#a8432a;}
-  .sp-msg{min-height:20px;margin-top:8px;font-size:14px;color:#7a3b26;text-align:center;}
-  .sp-total{font-size:14px;color:var(--ink-soft);margin:-4px 0 10px;line-height:1.5;}
-  .sp-day{margin-bottom:8px;border:1px solid var(--line);border-radius:10px;background:var(--paper-raised);overflow:hidden;}
-  .sp-dayhead{width:100%;display:flex;justify-content:space-between;align-items:center;gap:8px;padding:12px;border:none;background:none;font-family:inherit;cursor:pointer;text-align:left;}
-  .sp-dayhead .l{min-width:0;font-size:16px;font-weight:700;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-  .sp-dayhead .l b{color:#cc6341;margin-right:6px;}
-  .sp-dayhead .r{flex:none;font-family:"Noto Serif TC",serif;font-weight:700;font-size:17px;color:#cc6341;}
-  .sp-daybody{display:none;padding:0 12px 6px;}
+  .sp-msg{min-height:18px;margin-top:6px;font-size:13px;color:#7a3b26;text-align:center;}
+  .sp-total{font-size:13px;color:var(--ink-soft);margin:-4px 0 10px;line-height:1.5;}
+  .sp-day{margin-bottom:8px;border:1px solid var(--line);border-radius:8px;background:var(--paper-raised);overflow:hidden;}
+  .sp-dayhead{width:100%;display:flex;justify-content:space-between;align-items:center;gap:8px;padding:9px 12px;border:none;background:#7a3b26;font-family:inherit;cursor:pointer;text-align:left;}
+  .sp-dayhead .l{min-width:0;font-size:15px;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .sp-dayhead .l b{color:#ffd9b8;margin-right:6px;font-weight:700;}
+  .sp-dayhead .r{flex:none;font-family:"Noto Serif TC",serif;font-weight:700;font-size:16px;color:#ffd9b8;}
+  .sp-daybody{display:none;padding:0 12px 4px;}
   .sp-day.open .sp-daybody{display:block;}
-  .sp-row{display:flex;align-items:center;gap:8px;padding:10px 0;border-top:1px dashed var(--line);font-size:16px;}
+  .sp-row{display:flex;align-items:center;gap:8px;padding:8px 0;border-top:1px dashed var(--line);font-size:15px;}
+  .sp-row:first-child{border-top:none;}
   .sp-row .c{flex:1;font-weight:600;}
-  .sp-row .p{font-size:13px;padding:2px 8px;border-radius:99px;background:rgba(36,34,32,.10);color:var(--ink-soft);}
+  .sp-row .p{font-size:12px;padding:1px 8px;border-radius:99px;background:rgba(36,34,32,.10);color:var(--ink-soft);}
   .sp-row .a{font-weight:700;min-width:4.5em;text-align:right;}
-  .sp-row .x{border:none;background:rgba(36,34,32,.10);color:var(--ink-soft);border-radius:8px;padding:6px 10px;font-size:14px;font-family:inherit;cursor:pointer;}
+  .sp-row .x{border:none;background:rgba(36,34,32,.10);color:var(--ink-soft);border-radius:6px;padding:4px 8px;font-size:13px;font-family:inherit;cursor:pointer;}
   .sp-row .x.arm{background:#a8432a;color:#fff;}
   .receipt-list h3{font-family:"Noto Serif TC",serif;font-size:14px;color:var(--ink-soft);margin:0 0 10px;}
   .receipt-item{
@@ -385,7 +386,7 @@
   .sub-pill{margin:14px 16px 14px !important;display:flex !important;flex-wrap:nowrap;gap:2px;}
   .sub-pill .tab-btn{flex:1 1 auto;padding:6px 2px;font-size:min(14px,3.8vw);font-weight:600;white-space:nowrap;text-align:center;}
 </style>
-<!-- 2026-10-14 v35 -->
+<!-- 2026-10-14 v36 -->
 </head>
 <body>
 <div class="wrap">
@@ -1244,7 +1245,7 @@ function renderLedgerDays(){ /* 舊版逐日欄位已改為下方記帳簿 */ }
 const SP_CATS = ['餐飲','交通','門票','購物','雜支'];
 const SP_PAYS = ['現金','刷卡'];
 let spend = [];
-let spCat = '', spPay = '現金', spDate = '', spTouched = false;
+let spCat = '', spPay = '現金', spDate = '', spTouched = false, spTouchedOn = '';
 const spOpen = new Set();
 const SP_FIRST = DAYS[0].d, SP_LAST = DAYS[DAYS.length-1].d;
 const spToday = () => { const n=new Date(); return n.getFullYear()+'-'+String(n.getMonth()+1).padStart(2,'0')+'-'+String(n.getDate()).padStart(2,'0'); };
@@ -1301,10 +1302,10 @@ function spRenderList(){
   }));
 }
 function spOnShow(){
-  if(!spTouched) spDate = spClamp(spToday());
+  if(!spTouched || spTouchedOn !== spToday()){ spTouched = false; spDate = spClamp(spToday()); }
   spShowDate();
 }
-function spSetDate(d){ spTouched = true; spDate = spClamp(d); spShowDate(); }
+function spSetDate(d){ spTouched = true; spTouchedOn = spToday(); spDate = spClamp(d); spShowDate(); }
 function spShift(n){
   const x = new Date(spDate+'T00:00:00'); x.setDate(x.getDate()+n);
   spSetDate(x.getFullYear()+'-'+String(x.getMonth()+1).padStart(2,'0')+'-'+String(x.getDate()).padStart(2,'0'));
@@ -1313,6 +1314,7 @@ function spShift(n){
   await spLoad();
   spDate = spClamp(spToday());
   spBuild(); spRenderList();
+  document.addEventListener('visibilitychange', () => { if(document.visibilityState==='visible'){ try{ spOnShow(); }catch(e){} } });
   document.getElementById('spPrev').addEventListener('click', () => spShift(-1));
   document.getElementById('spNext').addEventListener('click', () => spShift(1));
   document.getElementById('spDate').addEventListener('change', e => { if(e.target.value) spSetDate(e.target.value); });
