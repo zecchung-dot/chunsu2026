@@ -349,7 +349,7 @@
   .sub-pill{margin:14px 16px 14px !important;display:flex !important;flex-wrap:nowrap;gap:2px;}
   .sub-pill .tab-btn{flex:1 1 auto;padding:10px 2px;font-size:min(15px,4vw);white-space:nowrap;text-align:center;}
 </style>
-<!-- 2026-10-14 v26 -->
+<!-- 2026-10-14 v27 -->
 </head>
 <body>
 <div class="wrap">
@@ -433,6 +433,7 @@
       <button class="sub-btn lsub tab-btn" data-lsub="pre" type="button">行前開銷</button>
     </div>
     <div id="lsub-daily">
+    <div style="display:none !important;" aria-hidden="true">
     <div class="scan-area">
       <button class="scan-btn" id="scanBtn">📷　掃描收據</button>
       <input type="file" id="receiptInput" accept="image/*" capture="environment" style="display:none">
@@ -446,6 +447,8 @@
     <div class="receipt-list">
       <h3>消費紀錄</h3>
       <div id="receiptListInner"></div>
+    </div>
+
     </div>
 
     <div class="receipt-list">
