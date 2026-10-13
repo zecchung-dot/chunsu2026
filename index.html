@@ -194,6 +194,9 @@
     font-size:14px;line-height:1.6;padding:7px 0;
     border-bottom:1px dashed var(--line);
   }
+  .tr-head{font-size:15px;line-height:1.45;white-space:nowrap;}
+  .tr-sub{font-size:14px;line-height:1.5;color:var(--ink-soft);margin-top:2px;white-space:nowrap;}
+  .tr-head.wrap, .tr-sub.wrap{white-space:normal;}
   .tr-step:last-child{border-bottom:none;padding-bottom:0;}
   .tr-step:first-child{padding-top:0;}
 
@@ -213,7 +216,7 @@
     padding:0 0 3px;border:none;border-bottom:1px solid var(--line);background:none;
   }
   .foliage-link:active, .weather-link:active{color:var(--ink);border-bottom-color:var(--ink-soft);}
-  .day__suggest{white-space:pre-line;font-size:13.5px;margin-bottom:14px;color:#3c3a34;}
+  .day__suggest{white-space:pre-line;font-size:14.5px;line-height:1.7;color:#3c3a34;}
   .field{margin-bottom:10px;}
   .field label{display:block;font-size:11px;color:var(--ink-soft);margin-bottom:4px;}
   .field textarea{
@@ -342,7 +345,7 @@
   }
   .empty-hint{margin:20px 18px 0;font-size:12.5px;color:var(--ink-soft);text-align:center;padding:20px;}
 </style>
-<!-- 2026-10-14 v6 -->
+<!-- 2026-10-14 v7 -->
 </head>
 <body>
 <div class="wrap">
@@ -584,11 +587,11 @@ function renderSteps(text){
   return lines.map(line => {
     const bar = line.indexOf('｜');
     if(bar === -1){
-      return `<div class="tr-step">${moveRe.test(line) ? `<strong>${line}</strong>` : line}</div>`;
+      return `<div class="tr-step"><div class="tr-head">${moveRe.test(line) ? `<strong>${line}</strong>` : line}</div></div>`;
     }
-    const head = line.slice(0, bar);
-    const rest = line.slice(bar);
-    return `<div class="tr-step">${moveRe.test(head) ? `<strong>${head}</strong>` : head}${rest}</div>`;
+    const head = line.slice(0, bar).trim();
+    const rest = line.slice(bar+1).trim();
+    return `<div class="tr-step"><div class="tr-head">${moveRe.test(head) ? `<strong>${head}</strong>` : head}</div><div class="tr-sub">${rest}</div></div>`;
   }).join('');
 }
 
@@ -642,7 +645,7 @@ DAYS.forEach((day, i) => {
       <div class="day__panel">
         <div class="day__panel-inner">
           <div class="section-h section-h--first">行程</div>
-          <div class="day__suggest">這段時間長住滋賀・京都，11/14到1/6共54天，行程比較彈性，可以自己安排想去的地方、慢慢晃。</div>
+          <div class="hotelbox day__suggest">這段時間長住滋賀・京都，11/14到1/6共54天，行程比較彈性，可以自己安排想去的地方、慢慢晃。</div>
           <div class="save-hint" data-hint="${MERGE_START}">已儲存 ✓</div>
         </div>
       </div>
@@ -691,7 +694,7 @@ DAYS.forEach((day, i) => {
             <div class="ff-row"><span>${day.flightInfo.no}・${day.flightInfo.dur}</span><span>訂位代號 ${day.flightInfo.pnr}</span></div>
           </div>
         </div>` : ''}
-        <div class="day__suggest">${day.s}</div>
+        ${day.s ? `<div class="hotelbox day__suggest">${day.s}</div>` : ''}
 
         ${day.transportInfo ? `
         <div class="section-h">交通</div>
@@ -743,6 +746,23 @@ fitLocs();
 window.addEventListener('resize', fitLocs);
 if(document.fonts && document.fonts.ready) document.fonts.ready.then(fitLocs);
 window.addEventListener('load', fitLocs);
+
+// ---------- 交通每一項固定兩行：太長就縮小字體，不斷行 ----------
+function fitSteps(){
+  document.querySelectorAll('.tr-head, .tr-sub').forEach(el => {
+    el.classList.remove('wrap');
+    const base = el.classList.contains('tr-head') ? 15 : 14;
+    let s = base;
+    el.style.fontSize = s+'px';
+    const minS = el.classList.contains("tr-head") ? 13 : 12.5;
+    while(el.scrollWidth > el.clientWidth + 0.5 && s > minS){ s -= 0.5; el.style.fontSize = s+'px'; }
+    if(el.scrollWidth > el.clientWidth + 0.5) el.classList.add('wrap');
+  });
+}
+fitSteps();
+window.addEventListener('resize', fitSteps);
+if(document.fonts && document.fonts.ready) document.fonts.ready.then(fitSteps);
+window.addEventListener('load', fitSteps);
 
 // ---------- badges: jump + auto-expand ----------
 document.querySelectorAll('#badges .badge').forEach(b => {
