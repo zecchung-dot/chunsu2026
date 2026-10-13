@@ -330,6 +330,41 @@
     width:100%;font-family:inherit;font-size:16px;color:var(--ink);
     background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:8px 6px;
   }
+
+  /* ---- 每日開銷：記帳 ---- */
+  .sp-form{padding:14px;border-radius:12px;background:rgba(36,34,32,.07);}
+  .sp-datebar{display:flex;align-items:stretch;gap:8px;}
+  .sp-arrow{flex:0 0 46px;border:none;border-radius:10px;background:#7a3b26;color:#fff;font-size:26px;line-height:1;cursor:pointer;font-family:inherit;}
+  .sp-datebox{position:relative;flex:1;min-width:0;border-radius:10px;background:var(--paper-raised);padding:8px 10px;text-align:center;}
+  .sp-datetext{font-family:"Noto Serif TC",serif;font-weight:700;font-size:20px;line-height:1.3;color:var(--ink);}
+  .sp-datetext small{display:block;font-family:inherit;font-weight:400;font-size:13px;color:var(--ink-soft);}
+  .sp-datebox input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;}
+  .sp-lbl{font-size:14px;color:var(--ink-soft);margin:14px 0 6px;font-weight:600;}
+  .sp-chips{display:grid;gap:6px;}
+  .sp-cats{grid-template-columns:repeat(3,1fr);}
+  .sp-pays{grid-template-columns:repeat(2,1fr);}
+  .sp-chip{border:none;border-radius:8px;padding:11px 0;font-size:17px;font-family:inherit;cursor:pointer;background:rgba(36,34,32,.10);color:var(--ink);}
+  .sp-chip.on{background:#7a3b26;color:#fff;}
+  .sp-amtrow{display:flex;align-items:center;gap:8px;border-radius:10px;background:var(--paper-raised);padding:4px 12px;}
+  .sp-amtrow span{font-size:22px;font-weight:700;color:var(--ink-soft);}
+  .sp-amtrow input{flex:1;min-width:0;border:none;background:none;font-size:26px;font-weight:700;font-family:inherit;color:var(--ink);padding:8px 0;outline:none;}
+  .sp-add{width:100%;margin-top:16px;border:none;border-radius:10px;background:#cc6341;color:#fff;font-size:20px;font-weight:700;padding:14px 0;font-family:inherit;cursor:pointer;}
+  .sp-add:active{background:#a8432a;}
+  .sp-msg{min-height:20px;margin-top:8px;font-size:14px;color:#7a3b26;text-align:center;}
+  .sp-total{font-size:14px;color:var(--ink-soft);margin:-4px 0 10px;line-height:1.5;}
+  .sp-day{margin-bottom:8px;border:1px solid var(--line);border-radius:10px;background:var(--paper-raised);overflow:hidden;}
+  .sp-dayhead{width:100%;display:flex;justify-content:space-between;align-items:center;gap:8px;padding:12px;border:none;background:none;font-family:inherit;cursor:pointer;text-align:left;}
+  .sp-dayhead .l{min-width:0;font-size:16px;font-weight:700;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .sp-dayhead .l b{color:#cc6341;margin-right:6px;}
+  .sp-dayhead .r{flex:none;font-family:"Noto Serif TC",serif;font-weight:700;font-size:17px;color:#cc6341;}
+  .sp-daybody{display:none;padding:0 12px 6px;}
+  .sp-day.open .sp-daybody{display:block;}
+  .sp-row{display:flex;align-items:center;gap:8px;padding:10px 0;border-top:1px dashed var(--line);font-size:16px;}
+  .sp-row .c{flex:1;font-weight:600;}
+  .sp-row .p{font-size:13px;padding:2px 8px;border-radius:99px;background:rgba(36,34,32,.10);color:var(--ink-soft);}
+  .sp-row .a{font-weight:700;min-width:4.5em;text-align:right;}
+  .sp-row .x{border:none;background:rgba(36,34,32,.10);color:var(--ink-soft);border-radius:8px;padding:6px 10px;font-size:14px;font-family:inherit;cursor:pointer;}
+  .sp-row .x.arm{background:#a8432a;color:#fff;}
   .receipt-list h3{font-family:"Noto Serif TC",serif;font-size:14px;color:var(--ink-soft);margin:0 0 10px;}
   .receipt-item{
     display:flex;justify-content:space-between;align-items:center;gap:10px;
@@ -350,7 +385,7 @@
   .sub-pill{margin:14px 16px 14px !important;display:flex !important;flex-wrap:nowrap;gap:2px;}
   .sub-pill .tab-btn{flex:1 1 auto;padding:6px 2px;font-size:min(14px,3.8vw);font-weight:600;white-space:nowrap;text-align:center;}
 </style>
-<!-- 2026-10-14 v34 -->
+<!-- 2026-10-14 v35 -->
 </head>
 <body>
 <div class="wrap">
@@ -452,9 +487,28 @@
 
     </div>
 
-    <div class="receipt-list">
-      <h3>逐日花費</h3>
-      <div id="ledgerDays"></div>
+    <div class="receipt-list" id="spendWrap">
+      <div class="sp-form">
+        <div class="sp-datebar">
+          <button type="button" class="sp-arrow" id="spPrev" aria-label="前一天">‹</button>
+          <div class="sp-datebox">
+            <div class="sp-datetext" id="spDateText"></div>
+            <input type="date" id="spDate" aria-label="選擇日期">
+          </div>
+          <button type="button" class="sp-arrow" id="spNext" aria-label="後一天">›</button>
+        </div>
+        <div class="sp-lbl">項目</div>
+        <div class="sp-chips sp-cats" id="spCats"></div>
+        <div class="sp-lbl">金額（日圓）</div>
+        <div class="sp-amtrow"><span>¥</span><input type="number" inputmode="numeric" id="spAmt" placeholder="0"></div>
+        <div class="sp-lbl">付款方式</div>
+        <div class="sp-chips sp-pays" id="spPays"></div>
+        <button type="button" class="sp-add" id="spAdd">記一筆</button>
+        <div class="sp-msg" id="spMsg"></div>
+      </div>
+      <h3 style="margin-top:22px;">每日花費</h3>
+      <div class="sp-total" id="spTotal"></div>
+      <div id="spList"></div>
     </div>
 
     </div>
@@ -1184,25 +1238,96 @@ function updateLedgerDaySub(id, data){
   const sum = (Number(data.lgFood)||0)+(Number(data.lgTransport)||0)+(Number(data.lgTicket)||0)+(Number(data.lgShop)||0)+(Number(data.lgMisc)||0);
   el.textContent = '¥' + sum.toLocaleString('zh-Hant');
 }
-function renderLedgerDays(){
-  const box = document.getElementById('ledgerDays');
-  box.innerHTML = DAYS.map(day => `
-    <div class="lday">
-      <div class="lday__head">
-        <span><span class="lday__date">${day.d.slice(5).replace('-','/')}</span><span class="lday__loc">${day.loc}</span></span>
-        <span class="lday__sub" id="lsub-${day.d}">¥0</span>
-      </div>
-      <div class="lday__grid">
-        <div><label>餐飲</label><input type="number" inputmode="numeric" data-field="lgFood" data-day="${day.d}" placeholder="0"></div>
-        <div><label>交通</label><input type="number" inputmode="numeric" data-field="lgTransport" data-day="${day.d}" placeholder="0"></div>
-        <div><label>門票</label><input type="number" inputmode="numeric" data-field="lgTicket" data-day="${day.d}" placeholder="0"></div>
-        <div><label>購物</label><input type="number" inputmode="numeric" data-field="lgShop" data-day="${day.d}" placeholder="0"></div>
-        <div><label>雜支</label><input type="number" inputmode="numeric" data-field="lgMisc" data-day="${day.d}" placeholder="0"></div>
-      </div>
-    </div>
-  `).join('');
+function renderLedgerDays(){ /* 舊版逐日欄位已改為下方記帳簿 */ }
+
+// ============ 每日開銷：記帳簿 ============
+const SP_CATS = ['餐飲','交通','門票','購物','雜支'];
+const SP_PAYS = ['現金','刷卡'];
+let spend = [];
+let spCat = '', spPay = '現金', spDate = '', spTouched = false;
+const spOpen = new Set();
+const SP_FIRST = DAYS[0].d, SP_LAST = DAYS[DAYS.length-1].d;
+const spToday = () => { const n=new Date(); return n.getFullYear()+'-'+String(n.getMonth()+1).padStart(2,'0')+'-'+String(n.getDate()).padStart(2,'0'); };
+const spClamp = d => d < SP_FIRST ? SP_FIRST : (d > SP_LAST ? SP_LAST : d);
+const spFmtMD = d => Number(d.slice(5,7))+'/'+Number(d.slice(8,10));
+const spWk = d => WD[new Date(d+'T00:00:00').getDay()];
+const spYen = n => '¥' + (n||0).toLocaleString('zh-Hant');
+const spLoc = d => { const x = DAYS.find(v => v.d === d); return x ? x.loc : ''; };
+async function spLoad(){
+  try{ const r = await store.get('spend:v1', false); spend = JSON.parse(r.value) || []; }catch(e){ spend = []; }
 }
-renderLedgerDays();
+async function spSave(){ try{ await store.set('spend:v1', JSON.stringify(spend), false); }catch(e){ console.error(e); } }
+function spShowDate(){
+  const el = document.getElementById('spDateText'); if(!el) return;
+  el.innerHTML = spFmtMD(spDate)+'（'+spWk(spDate)+'）<small>'+spLoc(spDate)+'</small>';
+  document.getElementById('spDate').value = spDate;
+}
+function spBuild(){
+  const dt = document.getElementById('spDate'); dt.min = SP_FIRST; dt.max = SP_LAST;
+  document.getElementById('spCats').innerHTML = SP_CATS.map(c => `<button type="button" class="sp-chip${c===spCat?' on':''}" data-cat="${c}">${c}</button>`).join('');
+  document.getElementById('spPays').innerHTML = SP_PAYS.map(c => `<button type="button" class="sp-chip${c===spPay?' on':''}" data-pay="${c}">${c}</button>`).join('');
+  document.querySelectorAll('#spCats .sp-chip').forEach(b => b.addEventListener('click', () => { spCat = b.dataset.cat; spBuild(); }));
+  document.querySelectorAll('#spPays .sp-chip').forEach(b => b.addEventListener('click', () => { spPay = b.dataset.pay; spBuild(); }));
+  spShowDate();
+}
+function spRenderList(){
+  const sumAll = spend.reduce((t,e)=>t+e.amt,0);
+  const cash = spend.filter(e=>e.pay==='現金').reduce((t,e)=>t+e.amt,0);
+  document.getElementById('spTotal').textContent = spend.length ? ('累計 '+spYen(sumAll)+'　現金 '+spYen(cash)+'　刷卡 '+spYen(sumAll-cash)) : '';
+  const box = document.getElementById('spList');
+  if(!spend.length){ box.innerHTML = '<div class="empty-hint">還沒有記錄，在上面記下第一筆吧</div>'; return; }
+  const dates = [...new Set(spend.map(e=>e.d))].sort();
+  box.innerHTML = dates.map(d => {
+    const list = spend.filter(e=>e.d===d);
+    const tot = list.reduce((t,e)=>t+e.amt,0);
+    return `<div class="sp-day${spOpen.has(d)?' open':''}" data-d="${d}">
+      <button type="button" class="sp-dayhead"><span class="l"><b>${spFmtMD(d)}（${spWk(d)}）</b>${spLoc(d)}</span><span class="r">${spYen(tot)}</span></button>
+      <div class="sp-daybody">${list.map(e => `<div class="sp-row"><span class="c">${e.cat}</span><span class="p">${e.pay}</span><span class="a">${spYen(e.amt)}</span><button type="button" class="x" data-del="${e.id}">刪除</button></div>`).join('')}</div>
+    </div>`;
+  }).join('');
+  box.querySelectorAll('.sp-dayhead').forEach(h => h.addEventListener('click', () => {
+    const p = h.parentElement, d = p.dataset.d;
+    if(spOpen.has(d)) spOpen.delete(d); else spOpen.add(d);
+    p.classList.toggle('open');
+  }));
+  box.querySelectorAll('.x').forEach(b => b.addEventListener('click', async () => {
+    if(!b.classList.contains('arm')){
+      b.classList.add('arm'); b.textContent = '確定刪除？';
+      setTimeout(() => { if(b.isConnected){ b.classList.remove('arm'); b.textContent = '刪除'; } }, 3000);
+      return;
+    }
+    spend = spend.filter(e => e.id !== b.dataset.del);
+    await spSave(); spRenderList();
+  }));
+}
+function spOnShow(){
+  if(!spTouched) spDate = spClamp(spToday());
+  spShowDate();
+}
+function spSetDate(d){ spTouched = true; spDate = spClamp(d); spShowDate(); }
+function spShift(n){
+  const x = new Date(spDate+'T00:00:00'); x.setDate(x.getDate()+n);
+  spSetDate(x.getFullYear()+'-'+String(x.getMonth()+1).padStart(2,'0')+'-'+String(x.getDate()).padStart(2,'0'));
+}
+(async () => {
+  await spLoad();
+  spDate = spClamp(spToday());
+  spBuild(); spRenderList();
+  document.getElementById('spPrev').addEventListener('click', () => spShift(-1));
+  document.getElementById('spNext').addEventListener('click', () => spShift(1));
+  document.getElementById('spDate').addEventListener('change', e => { if(e.target.value) spSetDate(e.target.value); });
+  document.getElementById('spAdd').addEventListener('click', async () => {
+    const msg = document.getElementById('spMsg'), inp = document.getElementById('spAmt');
+    const amt = Math.round(Number(inp.value));
+    if(!spCat){ msg.textContent = '請先選「項目」'; return; }
+    if(!(amt > 0)){ msg.textContent = '請輸入金額'; return; }
+    spend.push({ id: 'e'+Date.now().toString(36)+Math.random().toString(36).slice(2,5), d: spDate, cat: spCat, amt, pay: spPay });
+    await spSave();
+    spOpen.add(spDate);
+    msg.textContent = '已記入 '+spFmtMD(spDate)+'　'+spCat+'　'+spYen(amt)+'　'+spPay;
+    inp.value = ''; spCat = ''; spBuild(); spRenderList();
+  });
+})();
 
 document.querySelectorAll('[data-day]').forEach(f => {
   f.addEventListener('click', e => e.stopPropagation());
@@ -1402,6 +1527,7 @@ function renderReceiptList(receipts){
 }
 
 async function refreshLedger(){
+  try{ spOnShow(); }catch(e){}
   const receipts = await loadAllReceipts();
   const _n2 = new Date(); const todayISO2 = _n2.getFullYear()+'-'+String(_n2.getMonth()+1).padStart(2,'0')+'-'+String(_n2.getDate()).padStart(2,'0');
   const todayTotal = receipts.filter(r => r.date === todayISO2).reduce((s,r) => s + (r.total||0), 0);
