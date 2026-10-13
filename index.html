@@ -340,7 +340,7 @@
   }
   .empty-hint{margin:20px 18px 0;font-size:12.5px;color:var(--ink-soft);text-align:center;padding:20px;}
 </style>
-<!-- 2026-10-13 依最新填寫表更新 v2 -->
+<!-- 2026-10-13 移除補充行程/交通花費/備註輸入框 -->
 </head>
 <body>
 <div class="wrap">
@@ -641,9 +641,6 @@ DAYS.forEach((day, i) => {
         <div class="day__panel-inner">
           <div class="section-h section-h--first">行程</div>
           <div class="day__suggest">這段時間長住滋賀・京都，11/14到1/6共54天，行程比較彈性，可以自己安排想去的地方、慢慢晃。</div>
-          <div class="field">
-            <textarea data-field="myPlan" data-day="${MERGE_START}" placeholder="想補充的行程、時間、餐廳…"></textarea>
-          </div>
           <div class="section-h">交通</div>
           <div class="field">
             <textarea data-field="transport" data-day="${MERGE_START}" placeholder="車次・時間・預約票券"></textarea>
@@ -656,10 +653,6 @@ DAYS.forEach((day, i) => {
             <label>住宿地址（用來導航）</label>
             <input type="text" data-field="lodgingAddress" data-day="${MERGE_START}" placeholder="貼上地址或飯店名稱">
             <a class="navbtn" data-navday="${MERGE_START}" href="#">📍 導航至住宿</a>
-          </div>
-          <div class="section-h">備註</div>
-          <div class="field">
-            <textarea data-field="notes" data-day="${MERGE_START}" placeholder="想去的地方、費用、提醒事項"></textarea>
           </div>
           <div class="save-hint" data-hint="${MERGE_START}">已儲存 ✓</div>
         </div>
@@ -711,9 +704,6 @@ DAYS.forEach((day, i) => {
           </div>
         </div>` : ''}
         <div class="day__suggest">${day.s}</div>
-        <div class="field">
-          <textarea data-field="myPlan" data-day="${day.d}" placeholder="想補充的行程、時間、餐廳…（點這裡直接打字）"></textarea>
-        </div>
 
         <div class="section-h">交通</div>
         ${day.transportInfo ? `
@@ -723,10 +713,6 @@ DAYS.forEach((day, i) => {
         <div class="field">
           <textarea data-field="transport" data-day="${day.d}" placeholder="車次・時間・預約票券"></textarea>
         </div>`}
-        <div class="field">
-          <label>交通花費 (NT$)</label>
-          <input type="number" inputmode="numeric" data-field="costTransport" data-day="${day.d}" placeholder="0" value="${(day.noteInfo && /^\d+$/.test(day.noteInfo)) ? day.noteInfo : ''}">
-        </div>
 
         <div class="section-h">住宿</div>
         ${day.hotel ? `
@@ -748,10 +734,11 @@ DAYS.forEach((day, i) => {
           <a class="navbtn" data-navday="${day.d}" href="#">📍 導航至住宿</a>
         </div>`}
 
+        ${day.noteInfo ? `
         <div class="section-h">備註</div>
-        <div class="field">
-          <textarea data-field="notes" data-day="${day.d}" placeholder="想去的地方、費用、提醒事項">${(day.noteInfo && !/^\d+$/.test(day.noteInfo)) ? day.noteInfo : ''}</textarea>
-        </div>
+        <div class="hotelbox">
+          ${renderSteps(day.noteInfo)}
+        </div>` : ''}
 
         <div class="save-hint" data-hint="${day.d}">已儲存 ✓</div>
       </div>
