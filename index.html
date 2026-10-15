@@ -360,6 +360,8 @@
   .sp-amtrow{display:flex;align-items:center;gap:6px;border-radius:7px;background:var(--paper-raised);padding:1px 10px;}
   .sp-amtrow span{font-size:17px;color:var(--ink-soft);}
   .sp-amtrow input{flex:1;min-width:0;border:none;background:none;font-size:18px;font-weight:600;font-family:inherit;color:var(--ink);padding:5px 0;outline:none;}
+  .sp-noterow input{font-size:16px;font-weight:400;}
+  .sp-row .c small{display:block;font-weight:400;font-size:13px;color:var(--ink-soft);line-height:1.3;}
   .sp-add{width:100%;margin-top:12px;border:none;border-radius:7px;background:#cc6341;color:#fff;font-size:17px;font-weight:600;padding:9px 0;font-family:inherit;cursor:pointer;letter-spacing:.2em;}
   .sp-add:active{background:#a8432a;}
   .sp-msg:empty{display:none;}
@@ -410,7 +412,7 @@
   .sub-pill .tab-btn.active{background:#cc6341;color:#fff;}
   .sub-pill .tab-btn:active{background:#4a2216;}
 </style>
-<!-- 2026-10-14 v65 -->
+<!-- 2026-10-15 v66 -->
 </head>
 <body>
 <div class="wrap">
@@ -535,6 +537,7 @@
         </div>
         <div class="sp-line"><div class="sp-lbl">項目</div><div class="sp-chips sp-cats" id="spCats"></div></div>
         <div class="sp-line"><div class="sp-lbl">金額</div><div class="sp-amtrow"><span>¥</span><input type="number" inputmode="numeric" id="spAmt" placeholder="0"></div><div class="sp-chips sp-pays" id="spPays"></div></div>
+        <div class="sp-line"><div class="sp-lbl">事由</div><div class="sp-amtrow sp-noterow"><input type="text" id="spNote" maxlength="30" placeholder="選填，例如：新幹線便當" autocomplete="off"></div></div>
         <button type="button" class="sp-add" id="spAdd">記一筆</button>
         <div class="sp-msg" id="spMsg"></div>
       </div>
@@ -1323,7 +1326,7 @@ function spRenderList(){
     const tot = list.reduce((t,e)=>t+e.amt,0);
     return `<div class="sp-day${spOpen.has(d)?' open':''}" data-d="${d}">
       <button type="button" class="sp-dayhead"><span class="l"><b>${spFmtMD(d)}（${spWk(d)}）</b>${spLoc(d)}</span><span class="r">${spYen(tot)}<i class="chev">▾</i></span></button>
-      <div class="sp-daybody">${list.map(e => `<div class="sp-row"><span class="c">${e.cat}</span><span class="p">${e.pay}</span><span class="a">${spYen(e.amt)}</span><button type="button" class="x" data-del="${e.id}">刪除</button></div>`).join('')}</div>
+      <div class="sp-daybody">${list.map(e => `<div class="sp-row"><span class="c">${e.cat}${e.note?'<small>'+String(e.note).replace(/[&<>"]/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch]))+'</small>':''}</span><span class="p">${e.pay}</span><span class="a">${spYen(e.amt)}</span><button type="button" class="x" data-del="${e.id}">刪除</button></div>`).join('')}</div>
     </div>`;
   }).join('');
   box.querySelectorAll('.sp-dayhead .l').forEach(l => { let z = 15; l.style.fontSize = z+'px'; while(l.scrollWidth > l.clientWidth && z > 10){ z -= 0.5; l.style.fontSize = z+'px'; } });
@@ -1365,10 +1368,10 @@ function spShift(n){
     const amt = Math.round(Number(inp.value));
     if(!spCat){ msg.textContent = '請先選「項目」'; return; }
     if(!(amt > 0)){ msg.textContent = '請輸入金額'; return; }
-    spend.push({ id: 'e'+Date.now().toString(36)+Math.random().toString(36).slice(2,5), d: spDate, cat: spCat, amt, pay: spPay });
+    spend.push({ id: 'e'+Date.now().toString(36)+Math.random().toString(36).slice(2,5), d: spDate, cat: spCat, amt, pay: spPay, note: (document.getElementById('spNote').value||'').trim() });
     await spSave();
     msg.textContent = '已記入 '+spFmtMD(spDate)+'　'+spCat+'　'+spYen(amt)+'　'+spPay;
-    inp.value = ''; spCat = ''; spBuild(); spRenderList();
+    inp.value = ''; document.getElementById('spNote').value = ''; spCat = ''; spBuild(); spRenderList();
   });
 })();
 
