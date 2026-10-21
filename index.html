@@ -90,6 +90,8 @@
     grid-column:1 / -1;grid-row:3;font-size:11px;color:var(--paper-raised);white-space:nowrap;
   }
 
+  a.tel-viber{color:#7360f2;font-weight:700;text-decoration:underline;}
+  a.tel-alt{font-size:12px;color:var(--ink-soft);margin-left:2px;text-decoration:underline;white-space:nowrap;}
   .skype-btn{grid-column:1 / -1;display:block;text-align:center;margin-top:8px;padding:7px 0;border-radius:7px;background:#7a3b26;color:#fff;font-size:min(15px,4.2vw);font-weight:600;text-decoration:none;letter-spacing:.04em;}
   .skype-btn:active{background:#4a2216;}
   .masthead__seam{
@@ -414,7 +416,7 @@
   .sub-pill .tab-btn.active{background:#cc6341;color:#fff;}
   .sub-pill .tab-btn:active{background:#4a2216;}
 </style>
-<!-- 2026-10-21 v78 -->
+<!-- 2026-10-21 v79 -->
 </head>
 <body>
 <div class="wrap">
@@ -1136,7 +1138,7 @@ DAYS.forEach((day, i) => {
           <div class="hb-name">${day.hotel.name}</div>
           <div class="hb-row">📍 ${day.hotel.address}</div>
           <div class="hb-sub">${day.hotel.transport}</div>
-          <div class="hb-row">📞 ${/\d/.test(day.hotel.phone) ? `<a href="tel:${day.hotel.phone.replace(/-/g,'')}">${day.hotel.phone}</a>（點一下可直接撥打）` : day.hotel.phone}</div>
+          <div class="hb-row">📞 ${day.hotel.phone}</div>
           ${day.hotel.amenities.length ? `<div class="hb-amenities">${day.hotel.amenities.map(a=>`<span class="hb-chip">${a==='溫泉'?'♨️':a==='早餐'?'🍳':'🍽'} ${a}</span>`).join('')}</div>` : ''}
           ${day.hotel.price ? `<div class="hb-row">💰 房價：${day.hotel.price}</div>` : ''}
           <a class="navbtn" href="https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(day.hotel.address)}" target="_blank" rel="noopener">📍 導航到這間飯店</a>
@@ -1789,6 +1791,42 @@ document.querySelectorAll('#subnav-tickets .sub-btn').forEach(b => b.addEventLis
   document.getElementById('sub-magome').style.display = b.dataset.sub === 'magome' ? '' : 'none';
   if(b.dataset.sub === 'shinkansen') setTimeout(fitTicketHeads, 30);
 }));
+
+// ---------- 電話：+81 國際格式，點一下用 Viber 撥號 ----------
+(function(){
+  const RE = /(?<![\d-])0(?!570)(\d{1,4})-(\d{1,4})-(\d{3,4})(?![\d-])/g;
+  function phonify(root){
+    const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {acceptNode(n){
+      if(!n.nodeValue || !/\d-\d/.test(n.nodeValue)) return NodeFilter.FILTER_REJECT;
+      for(let e=n.parentElement; e && e!==root.parentElement; e=e.parentElement){
+        if(/^(A|TEXTAREA|INPUT|SCRIPT|STYLE)$/.test(e.tagName)) return NodeFilter.FILTER_REJECT;
+        const st = e.getAttribute && e.getAttribute('style');
+        if(st && st.indexOf('pre-wrap') > -1) return NodeFilter.FILTER_REJECT;
+      }
+      RE.lastIndex = 0;
+      return RE.test(n.nodeValue) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+    }});
+    const nodes = []; while(w.nextNode()) nodes.push(w.currentNode);
+    nodes.forEach(n => {
+      const frag = document.createDocumentFragment(); let last = 0, t = n.nodeValue; RE.lastIndex = 0; let m;
+      while((m = RE.exec(t))){
+        frag.appendChild(document.createTextNode(t.slice(last, m.index)));
+        const intl = '+81-' + m[1] + '-' + m[2] + '-' + m[3];
+        const digits = '%2B81' + m[1] + m[2] + m[3];
+        const a = document.createElement('a'); a.className = 'tel-viber'; a.href = 'viber://call?number=' + digits; a.textContent = intl;
+        const b = document.createElement('a'); b.className = 'tel-alt'; b.href = 'tel:+81' + m[1] + m[2] + m[3]; b.textContent = '備用撥號';
+        frag.appendChild(a); frag.appendChild(document.createTextNode(' ')); frag.appendChild(b);
+        last = m.index + m[0].length;
+      }
+      frag.appendChild(document.createTextNode(t.slice(last)));
+      n.parentNode.replaceChild(frag, n);
+    });
+  }
+  window.phonify = phonify;
+  let tm; const run = () => { clearTimeout(tm); tm = setTimeout(() => { try{ phonify(document.body); }catch(e){} }, 60); };
+  new MutationObserver(run).observe(document.body, {childList:true, subtree:true});
+  run();
+})();
 </script>
 </body>
 </html>
