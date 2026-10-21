@@ -416,7 +416,7 @@
   .sub-pill .tab-btn.active{background:#cc6341;color:#fff;}
   .sub-pill .tab-btn:active{background:#4a2216;}
 </style>
-<!-- 2026-10-21 v79 -->
+<!-- 2026-10-21 v80 -->
 </head>
 <body>
 <div class="wrap">
@@ -1813,7 +1813,7 @@ document.querySelectorAll('#subnav-tickets .sub-btn').forEach(b => b.addEventLis
         frag.appendChild(document.createTextNode(t.slice(last, m.index)));
         const intl = '+81-' + m[1] + '-' + m[2] + '-' + m[3];
         const digits = '%2B81' + m[1] + m[2] + m[3];
-        const a = document.createElement('a'); a.className = 'tel-viber'; a.href = 'viber://call?number=' + digits; a.textContent = intl;
+        const a = document.createElement('a'); a.className = 'tel-viber'; a.href = 'intent://call?number=' + digits + '#Intent;scheme=viber;package=com.viber.voip;end'; a.dataset.num = '+81' + m[1] + m[2] + m[3]; a.textContent = intl;
         const b = document.createElement('a'); b.className = 'tel-alt'; b.href = 'tel:+81' + m[1] + m[2] + m[3]; b.textContent = '備用撥號';
         frag.appendChild(a); frag.appendChild(document.createTextNode(' ')); frag.appendChild(b);
         last = m.index + m[0].length;
@@ -1827,6 +1827,16 @@ document.querySelectorAll('#subnav-tickets .sub-btn').forEach(b => b.addEventLis
   new MutationObserver(run).observe(document.body, {childList:true, subtree:true});
   run();
 })();
+
+// 點電話：先複製號碼（保險），再交給 Viber 開啟
+document.addEventListener('click', function(e){
+  const a = e.target.closest && e.target.closest('a.tel-viber'); if(!a) return;
+  try{ if(navigator.clipboard) navigator.clipboard.writeText(a.dataset.num); }catch(x){}
+  let t = document.getElementById('telToast');
+  if(!t){ t = document.createElement('div'); t.id = 'telToast'; t.style.cssText = 'position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#4a2216;color:#fff;padding:10px 16px;border-radius:10px;font-size:15px;z-index:200;max-width:88vw;text-align:center;line-height:1.4;'; document.body.appendChild(t); }
+  t.textContent = '號碼已複製：' + a.dataset.num + '　若 Viber 沒自動撥號，請貼到 Viber 撥號';
+  t.style.display = 'block'; clearTimeout(t._h); t._h = setTimeout(() => { t.style.display = 'none'; }, 6000);
+});
 </script>
 </body>
 </html>
