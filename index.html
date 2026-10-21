@@ -91,9 +91,6 @@
   }
 
   a.tel-viber{color:#7360f2;font-weight:700;text-decoration:underline;}
-  a.tel-alt{font-size:12px;color:var(--ink-soft);margin-left:2px;text-decoration:underline;white-space:nowrap;}
-  .skype-btn{grid-column:1 / -1;display:block;text-align:center;margin-top:8px;padding:7px 0;border-radius:7px;background:#7a3b26;color:#fff;font-size:min(15px,4.2vw);font-weight:600;text-decoration:none;letter-spacing:.04em;}
-  .skype-btn:active{background:#4a2216;}
   .masthead__seam{
     display:flex;align-items:center;margin:12px -20px 0;padding:0 20px;
   }
@@ -416,7 +413,7 @@
   .sub-pill .tab-btn.active{background:#cc6341;color:#fff;}
   .sub-pill .tab-btn:active{background:#4a2216;}
 </style>
-<!-- 2026-10-21 v80 -->
+<!-- 2026-10-21 v81 -->
 </head>
 <body>
 <div class="wrap">
@@ -443,7 +440,6 @@
         <h1 class="masthead__title">春淑秋冬賞楓跨年85日郊遊行</h1>
       </div>
       <div class="masthead__range">旅行期間：2026/10/15 – 2027/01/07</div>
-      <a class="skype-btn" href="https://calling.web.skype.com/" target="_blank" rel="noopener">📞 點這裡　開啟 Skype 網頁版</a>
     </div>
 
   </div>
@@ -1813,9 +1809,8 @@ document.querySelectorAll('#subnav-tickets .sub-btn').forEach(b => b.addEventLis
         frag.appendChild(document.createTextNode(t.slice(last, m.index)));
         const intl = '+81-' + m[1] + '-' + m[2] + '-' + m[3];
         const digits = '%2B81' + m[1] + m[2] + m[3];
-        const a = document.createElement('a'); a.className = 'tel-viber'; a.href = 'intent://call?number=' + digits + '#Intent;scheme=viber;package=com.viber.voip;end'; a.dataset.num = '+81' + m[1] + m[2] + m[3]; a.textContent = intl;
-        const b = document.createElement('a'); b.className = 'tel-alt'; b.href = 'tel:+81' + m[1] + m[2] + m[3]; b.textContent = '備用撥號';
-        frag.appendChild(a); frag.appendChild(document.createTextNode(' ')); frag.appendChild(b);
+        const a = document.createElement('a'); a.className = 'tel-viber'; a.href = '#'; a.dataset.num = '+81' + m[1] + m[2] + m[3]; a.textContent = intl;
+                frag.appendChild(a);
         last = m.index + m[0].length;
       }
       frag.appendChild(document.createTextNode(t.slice(last)));
@@ -1831,12 +1826,16 @@ document.querySelectorAll('#subnav-tickets .sub-btn').forEach(b => b.addEventLis
 // 點電話：先複製號碼（保險），再交給 Viber 開啟
 document.addEventListener('click', function(e){
   const a = e.target.closest && e.target.closest('a.tel-viber'); if(!a) return;
-  try{ if(navigator.clipboard) navigator.clipboard.writeText(a.dataset.num); }catch(x){}
+  e.preventDefault(); e.stopPropagation();
+  const num = a.dataset.num;
+  let ok = false;
+  try{ if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(num); ok = true; } }catch(x){}
+  if(!ok){ try{ const ta = document.createElement('textarea'); ta.value = num; ta.style.cssText = 'position:fixed;opacity:0;'; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove(); }catch(x){} }
   let t = document.getElementById('telToast');
-  if(!t){ t = document.createElement('div'); t.id = 'telToast'; t.style.cssText = 'position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#4a2216;color:#fff;padding:10px 16px;border-radius:10px;font-size:15px;z-index:200;max-width:88vw;text-align:center;line-height:1.4;'; document.body.appendChild(t); }
-  t.textContent = '號碼已複製：' + a.dataset.num + '　若 Viber 沒自動撥號，請貼到 Viber 撥號';
-  t.style.display = 'block'; clearTimeout(t._h); t._h = setTimeout(() => { t.style.display = 'none'; }, 6000);
-});
+  if(!t){ t = document.createElement('div'); t.id = 'telToast'; t.style.cssText = 'position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#4a2216;color:#fff;padding:12px 18px;border-radius:10px;font-size:17px;font-weight:600;z-index:200;max-width:88vw;text-align:center;line-height:1.4;'; document.body.appendChild(t); }
+  t.textContent = '已複製，請打開Viber貼上通話';
+  t.style.display = 'block'; clearTimeout(t._h); t._h = setTimeout(() => { t.style.display = 'none'; }, 5000);
+}, true);
 </script>
 </body>
 </html>
